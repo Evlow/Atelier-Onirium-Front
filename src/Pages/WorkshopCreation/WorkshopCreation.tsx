@@ -1,6 +1,7 @@
 import Banners from "../../Components/Banners/banners";
 import NavBar from "../../Components/NavBar/navbar";
 import imgBanners from "../../Assets/Creations.png"
+import Footer from "../../Components/Footer/footer";
 
 
 export default function WorkshopCreation() {
@@ -8,6 +9,7 @@ export default function WorkshopCreation() {
       <div>
       <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />
+      <Footer></Footer>
 
       </div>
     );
