@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import ExpoGallery from "../Pages/ExpoGallery/expoGallery";
 import HomePage from "../Pages/HomePage/homePage";
 import WorkshopCreation from "../Pages/WorkshopCreation/WorkshopCreation";
+import Locations from "../Pages/Locations/Locations";
 
 export const Router = createBrowserRouter([
     {
@@ -13,6 +14,8 @@ export const Router = createBrowserRouter([
         { path: "accueil", element: <HomePage /> },
         { path: "creations-entreprise", element: <ExpoGallery /> },
         { path: "galerie-exposition", element: <WorkshopCreation /> },
+        { path: "locations", element: <Locations /> },
+
       ],
     },
   ]);

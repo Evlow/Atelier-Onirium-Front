@@ -1,7 +1,9 @@
+import NavBar from "../../Components/NavBar/navbar";
+
 export default function ExpoGallery() {
     return (
       <div>
-        <h1>Welcome to the HomePage</h1>
+      <NavBar></NavBar>
       </div>
     );
   }
