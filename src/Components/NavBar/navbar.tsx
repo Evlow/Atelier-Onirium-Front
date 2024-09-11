@@ -19,6 +19,8 @@ const nav = [
       <><div>
         <Title></Title> 
       </div>
+      <div className="nav">
+
           <nav className="navbar">
             <ul className="item-button">
               {/* Afficher les liens de navigation */}
@@ -29,6 +31,8 @@ const nav = [
               ))}
             </ul>
           </nav>
+          </div>
+
         </>
     );
   }

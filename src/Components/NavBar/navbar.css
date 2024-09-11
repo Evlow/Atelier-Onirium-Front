@@ -1,19 +1,22 @@
 
 .navbar {
-  justify-content: center;
   display: flex;
-  padding: 30px 0 30px 0;
-  background-color: #E7E2E1;}
+  justify-content: space-around;
+  background-color: #E7E2E1;
+  height: 80px;
 
+}
 .item-button {
   display: flex;
   align-items: center;
+  background-color: #E7E2E1;
 
 }
 
 .item-button a {
   font-size: 1.3rem;
-color:black;  padding: 7px 15px; 
+color:black;
+padding : 0 50px 0 50px;
   text-decoration: none;
   background-color: #E7E2E1;
 }

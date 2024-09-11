@@ -7,7 +7,6 @@ export default function HomePage() {
       <div>
       <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />
-
       </div>
     );
   }

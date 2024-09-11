@@ -1,6 +1,6 @@
 import Banners from "../../Components/Banners/banners";
 import NavBar from "../../Components/NavBar/navbar";
-import imgBanners from "../../Assets/Creations.png";
+import imgBanners from "../../Assets/Creations.png"
 
 
 export default function WorkshopCreation() {
