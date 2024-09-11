@@ -18,20 +18,24 @@ time, mark, audio, video {
     box-sizing: border-box;
     vertical-align: baseline;
     background-color: black;
-    color: white;
-
 }
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
 body {
     line-height: 1;
-}
-ol, ul {
+    margin: 0px auto;
+  
+  }
+  a,
+  ol,
+  ul 
+  li{
     list-style: none;
-}
+    list-style-type: none;
+    color: black;
+  }
 blockquote, q {
     quotes: none;
 }

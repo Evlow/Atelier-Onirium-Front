@@ -1,0 +1,10 @@
+.banner img {
+    width: 100%; /* L'image prend toute la largeur de l'écran */
+    object-fit: cover; /* Optionnel : adapte l'image au conteneur en rognant si nécessaire */
+    height: 700px;  
+  }
+.banner {
+    height: 700px;  
+
+}
+

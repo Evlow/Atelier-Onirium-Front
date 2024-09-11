@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Love Light';
+    src: url('/public/Fonts/LoveLight-Regular.ttf') format('truetype');
+  }
+  
+
+.title {
+  text-align: center;
+  font-family: 'Love Light', cursive;
+  font-weight:lighter;
+  padding: 30px;
+  background-color: #E7E2E1;
+  color: black;
+  font-size: 7rem;
+  height: 150px;
+
+}
