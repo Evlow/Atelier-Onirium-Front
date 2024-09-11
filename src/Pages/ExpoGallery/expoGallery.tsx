@@ -1,9 +1,12 @@
+import Banners from "../../Components/Banners/banners";
 import NavBar from "../../Components/NavBar/navbar";
+import imgBanners from "../../Assets/Galerie.png";
 
 export default function ExpoGallery() {
-    return (
-      <div>
+  return (
+    <div>
       <NavBar></NavBar>
-      </div>
-    );
-  }
+      <Banners imgBanner={imgBanners} />
+    </div>
+  );
+}
