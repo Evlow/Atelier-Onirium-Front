@@ -2,8 +2,9 @@ import App from "../App";
 import { createBrowserRouter } from "react-router-dom";
 import ExpoGallery from "../Pages/ExpoGallery/expoGallery";
 import HomePage from "../Pages/HomePage/homePage";
-import WorkshopCreation from "../Pages/WorkshopCreation/WorkshopCreation";
-import Locations from "../Pages/Locations/Locations";
+import Locations from "../Pages/Locations/locations";
+import WorkshopCreation from "../Pages/WorkshopCreation/workshopCreation";
+
 
 export const Router = createBrowserRouter([
     {
