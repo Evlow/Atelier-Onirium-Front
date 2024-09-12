@@ -35,6 +35,7 @@ body {
     list-style: none;
     list-style-type: none;
     color: black;
+    text-decoration: none;
   }
 blockquote, q {
     quotes: none;
