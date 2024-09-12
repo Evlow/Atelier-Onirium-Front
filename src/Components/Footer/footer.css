@@ -1,15 +1,57 @@
-footer {
-    font-size: 1em;
-    background-color: #E7E2E1;
-    height: 200px;
-  }
-  .footer-left{
-    background-color: #E7E2E1;
-    color: black
+@font-face {
+  font-family: 'Love Light';
+  src: url('/public/Fonts/LoveLight-Regular.ttf') format('truetype');
+}
 
-  }
-  .footer-atelier-onirium {    background-color: #E7E2E1;
-    
-  }
-  .social-network-footer li{    background-color: #E7E2E1;
-  }
+
+footer {
+  background-color: #E7E2E1;
+padding: 20px 0 20px 0;
+width: 100%;            
+bottom: 0;             
+left: 0;  }
+
+.footer-container {
+  display: flex;
+  justify-content: space-around; 
+  background-color: #E7E2E1;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     
+  background-color: #E7E2E1;
+}
+
+.social-network-footer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;  
+}
+
+.social-network-footer li a img {
+  display: block;
+  height: 40px;
+  width: 40px;
+}
+
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-align: center; 
+  padding-bottom: 10px;
+  font-family: 'Love Light', cursive;
+  font-weight:lighter;
+  font-size: 3rem;
+
+
+}
+
+.footer-column ul, li, a, img, h2 {
+  background-color: #E7E2E1;
+
+}
