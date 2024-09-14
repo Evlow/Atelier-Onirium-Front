@@ -1,5 +1,6 @@
 import Footer from "../../Components/Footer/footer";
 import NavBar from "../../Components/NavBar/navbar";
+import "privatePolicy.css"
 
 export default function PrivatePolicy() {
   return (
