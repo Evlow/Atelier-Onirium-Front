@@ -4,14 +4,27 @@
   }
   
 
-.title {
+ .title {
+  background-color: #E7E2E1;
+
+} 
+
+.title h1{
   text-align: center;
   font-family: 'Love Light', cursive;
   font-weight:lighter;
   padding: 30px;
   background-color: #E7E2E1;
   color: black;
-  font-size: 7rem;
+  font-size: 9rem;
   height: 150px;
 
+
+}
+hr {
+  margin: 0 auto;
+  background-color: #640A02;
+  border: 0;
+  height: 4px;
+  width: 80%;
 }
