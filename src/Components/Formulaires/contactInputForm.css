@@ -1,0 +1,34 @@
+.contact-input-container {
+    padding-top: 20px;
+    border-bottom: 2px solid rgb(20, 20, 20);
+  margin-right: 40px;  justify-content: center;
+    
+  }
+  
+  .contact-form-input {
+    display: flex;
+    border: none;
+    outline: none;
+    width: 250px;
+    margin: 0 auto;
+  }
+  
+  .contact-form-label {
+    color: gray;
+  }
+  
+  .contact-button-form {
+    background-color: #ff7f50;
+    height: 30px;
+    width: 120px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin: auto;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  
