@@ -41,7 +41,7 @@ left: 0;  }
   margin-bottom: 10px;
 }
 
-h2 {
+.h2-footer {
   text-align: center; 
   padding-bottom: 10px;
   font-family: 'Love Light', cursive;
@@ -51,7 +51,7 @@ h2 {
 
 }
 
-.footer-column ul, li, a, img, h2 {
+.footer-column ul, li, a, img, .h2-footer {
   background-color: #E7E2E1;
 
 }

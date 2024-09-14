@@ -19,7 +19,7 @@ export default function Footer() {
     <footer>
       <div className="footer-container">
         <div className="footer-column">
-          <h2>L'Atelier d'Onirium</h2>
+          <h2 className="h2-footer">L'Atelier d'Onirium</h2>
           <ul className="social-network-footer">
             <li className="social-network-facebook">
               <a href="https://www.facebook.com/latelierdonirium">
