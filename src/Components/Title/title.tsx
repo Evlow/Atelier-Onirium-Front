@@ -1,10 +1,12 @@
 import "./title.css";
 export default function Title() {
   return (
-    <>
-      <h1 className="title">
+    <><div className="title">
+      <h1>
         L'Atelier d'Onirium
       </h1>
+      <hr></hr>
+      </div>
     </>
   );
 }
