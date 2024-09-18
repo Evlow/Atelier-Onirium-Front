@@ -127,7 +127,6 @@ export default function PrivatePolicy() {
           Si vous souhaitez supprimer votre espace personnel, vous pouvez le
           faire en envoyant une demande par email à contact@latelierdonirium.fr
         </p>
-        apportés.
         <h3 className="h3-private">
           PRINCIPES FONDAMENTAUX DU RÈGLEMENT EUROPÉEN 2016/679 SUR LA
           PROTECTION DES DONNÉES
