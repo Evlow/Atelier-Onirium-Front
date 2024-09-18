@@ -7,7 +7,7 @@ import Title from "../Title/title";
 
 const nav = [
     { title: "ACCUEIL", path: "/accueil" },
-    { title: "CRÉATIONS DE L'ENTREPRISE", path: "/creations-entreprise" },
+    { title: "CRÉATIONS DE L'ATELIER", path: "/creations-atelier" },
     { title: "GALERIE D'EXPOSITION", path: "/galerie-exposition" },
     { title: "LOCATIONS", path: "/locations" },
 

@@ -9,7 +9,7 @@ interface FooterLink {
 
 const footerLinks: FooterLink[] = [
   { title: "Me contacter", path: "/me-contacter" },
-  { title: "Politique de confidentialité", path: "politique-de-confidentialite" },
+  { title: "Politique de confidentialité", path: "/politique-de-confidentialite" },
   { title: "CGU", path: "/cgu" },
   { title: "Livraison", path: "/delivery" },
 ];

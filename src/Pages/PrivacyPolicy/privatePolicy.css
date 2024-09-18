@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Love Light';
+    src: url('/public/Fonts/LoversQuarrel-Regular.ttf') format('truetype');
+  }
+  
+
+
+.h2-private{
+    font-size: 5rem;
+    color:white;
+    text-align: center;
+    font-family: 'Lovers Quarrel', cursive;
+    font-weight: lighter;
+}
+
+.h3-private{
+    color: white;
+    font-size:1.2em;
+}
+.section-private {
+    color:white;
+    width: 80%;
+margin: 0 auto;
+}
