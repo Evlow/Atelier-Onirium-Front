@@ -81,9 +81,9 @@ export default function PrivatePolicy() {
         <h3 className="h3-private">HÉBERGEMENT DU SITE INTERNET</h3>
         <p>
           Le site www.latelierdonirium.fr est hébergé par 1 & 1 IONOS, dont le
-          siège est situé à l'adresse ci-dessous : 7 Place de la Gare
-          <br />
-          5720 SARREGUEMINES
+          siège est situé à l'adresse ci-dessous :
+      <ul><li>7 Place de la Gare </li>
+      <li>5720 SARREGUEMINES</li></ul>
         </p>
         <h3 className="h3-private">
           RESPONSABLE DU TRAITEMENT DES RENSEIGNEMENTS PERSONNELS
@@ -127,22 +127,7 @@ export default function PrivatePolicy() {
           Si vous souhaitez supprimer votre espace personnel, vous pouvez le
           faire en envoyant une demande par email à contact@latelierdonirium.fr
         </p>
-        <h3 className="h3-private">
-          CONDITIONS DE MODIFICATION DE LA POLITIQUE DE CONFIDENTIALITÉ
-        </h3>
-        <p>
-          La présente politique de confidentialité peut être consultée à tout
-          moment à l'adresse ci-après :
-          https://latelierdonirium.fr/politique-de-confidentialite
-        </p>
-        <p>
-          {" "}
-          L'atelier d'onirium se réserve le droit de la modifier afin de
-          garantir sa conformité avec le droit en vigueur. Par conséquent, vous
-          êtes invité.e à venir consulter régulièrement cette politique de
-          confidentialité afin de vous tenir informé.e des derniers changements
-          qui lui seront apportés.
-        </p>
+       apportés.
         <h3 className="h3-private">
           PRINCIPES FONDAMENTAUX DU RÈGLEMENT EUROPÉEN 2016/679 SUR LA
           PROTECTION DES DONNÉES
@@ -152,9 +137,8 @@ export default function PrivatePolicy() {
           (UE) 2016/679, la collecte et le traitement de vos renseignements
           personnels respectent les principes suivants :
         </p>
-        <h3 className="h3-private">LÉGISLATION</h3>
         <p>
-          L'atelier d'onirium s'engage à respecter les dispositions législatives
+          L'entreprise s'engage à respecter les dispositions législatives
           mentionnées ci-dessus ainsi que le Règlement Général sur la Protection
           des Données (RGPD), Règlement (UE) 2016/679 du Parlement européen et
           du Conseil du 27 avril 2016, relatif à la protection des personnes
@@ -164,10 +148,10 @@ export default function PrivatePolicy() {
         </p>
         <ul className="ul-private">
           <li>
-            <strong>Licéité, loyauté et transparence :</strong> Vos renseignements personnels
-            sont collectés et traités uniquement avec votre consentement. Chaque
-            collecte est clairement indiquée, en expliquant pourquoi vos données
-            sont recueillies.
+            <strong>Licéité, loyauté et transparence :</strong> Vos
+            renseignements personnels sont collectés et traités uniquement avec
+            votre consentement. Chaque collecte est clairement indiquée, en
+            expliquant pourquoi vos données sont recueillies.
           </li>
           <li>
             <strong>Finalités limitées :</strong>Les renseignements personnels
@@ -217,8 +201,8 @@ export default function PrivatePolicy() {
           <li>
             <strong>Droit à la portabilité :</strong> Vous pouvez demander la
             portabilité de vos données vers un autre site.
-            <br /> Faites la demande par
-            mail à l'adresse suivante : contact@latelierdonirium.fr
+            <br /> Faites la demande par mail à l'adresse suivante :
+            contact@latelierdonirium.fr
           </li>
           <li>
             <strong>
@@ -234,6 +218,110 @@ export default function PrivatePolicy() {
             vos droits ont été violés, vous pouvez saisir l'autorité compétente.
           </li>
         </ul>
+
+        <h3 className="h3-private">
+          DROITS ADDITIONNELS EN VERTU DU REGLEMENT EUROPEEN 2016/679
+        </h3>
+        <p>
+          Conformément à la réglementation européenne concernant le traitement
+          des renseignements personnels vous possédez également les droits
+          ci-après énumérés.
+        </p>
+        <p>
+          Afin que la responsable du traitement des renseignements fasse droit à
+          votre demande, vous êtes tenus de lui communiquer vos prénom et nom
+          ainsi que votre adresse email, et si cela est pertinent, votre numéro
+          de compte ou d'espace personnel ou d'abonné.
+        </p>
+        <p>
+          Le responsable du traitement des renseignements personnels est tenu de
+          vous répondre dans un délai de trente jours maximum.
+        </p>
+        <p>
+          Vous avez le droit de demander la portabilité de vos renseignements
+          personnels, détenus par le site, vers en autre site, en envoyant une
+          demande par mail via contact@latelierdonirium.fr
+        </p>
+        <p>
+          Conformément aux dispositions du règlement européen 2019/679, vous
+          avez le droit de ne pas faire l'objet d'une décision fondée
+          exclusivement sur un procédé automatisé si la décision produit des
+          effets juridiques vous concernant ou affecte de manière significative
+          de façon similaire.
+        </p>
+        <p>
+          Dans le cas où le responsable du traitement des renseignements
+          personnels décide de ne pas répondre à votre demande et que vous
+          souhaitez contester cette décision ou, si vous pensez qu'il est porté
+          atteinte à l'un de vos droits énumérés ci-dessus, vous êtes en droit
+          de saisir toute cour compétente
+        </p>
+
+        <h3 className="h3-private">SÉCURITÉ</h3>
+        <p>
+          Les informations personnelles qui sont collectés sont conservées dans
+          un environnement sécurisé.
+          <br />
+          Pour assurer la sécurité de vos informations personnelles, nous avons
+          recours aux mesures suivantes :
+        </p>
+        <ul className="ul-private">
+          <li>Protocole SSL (Secure Sockets Layer)</li>
+          <li>Sauvegarde automatique</li>
+          <li>Identifiant / mot de passe</li>
+        </ul>
+        <p>
+          Nous nous engageons à maintenir un haut degré de confidentialité en
+          intégrant les dernières innovations technologiques permettant
+          d'assurer la confidentialité de vos transactions. <br />
+          Toutefois, comme aucun mécanisme n'offre une sécurité maximale, une
+          part de risque est toujours présente lorsqu'on utilise internet pour
+          transmettre des informations personnelles.
+        </p>
+        <h3 className="h3-private">
+          RENSEIGNEMENTS PERSONNELS DES PERSONNES MINEURES EN VERTU DU REGLEMENT
+          2016/679
+        </h3>
+        <p>
+          Conformément aux dispositions de l'article 8 du règlement 2016/679,
+          seuls les mineurs âgés de 15 ans ou plus peuvent consentir au
+          traitement de leurs renseignements personnels.
+        </p>
+        <p>
+          Si vous êtes un mineur de moins de 15 ans, l'accord d'un représentant
+          légal sera requis afin que des renseignements personnels puissent être
+          collectés et traités.
+        </p>
+        <p>
+          L'entreprise se réserve le droit de vérifier par tout moyen que vous
+          êtes agé de plus de 15 ans, ou que vous avez obtenu l'accord d'un
+          représentant légal avant de naviguer sur le site.
+        </p>
+        <h3 className="h3-private">
+          CONDITIONS DE MODIFICATION DE LA POLITIQUE DE CONFIDENTIALITÉ
+        </h3>
+        <p>
+          La présente politique de confidentialité peut être consultée à tout
+          moment à l'adresse ci-après indiquée :
+          https://latelierdonirium.fr/politique-de-confidentialite
+        </p>
+        <p>
+          L'entreprise se réserve le droit de la modifier afin de garantir sa
+          conformité avec le droit en vigueur. Par conséquent, vous êtes invité
+          (e) à venir consulter régulièrement cette politique de confidentialité
+          afin de vous tenir informé (e) des derniers changements qui lui seront
+          apportés.
+        </p>
+        <h3 className="h3-private">LÉGISLATION</h3>
+        <p>
+          L'entreprise s'engage à respecter les dispositions législatives
+          énonces ci-dessus et le Réglement Général sur la protection des
+          données, Règlement (UE) 2016/679 du Parlement européen et du Conseil
+          du 27 Avril 2016 relatif à la protection des personnes physiques à
+          l'égard du traitement des données à caractère personnel et à la libre
+          circulation de ces données et abrogeant la directive 95/46ECE
+          (règlement général sur la protection des données) 2016/279
+        </p>
       </section>
       <Footer></Footer>
     </div>
