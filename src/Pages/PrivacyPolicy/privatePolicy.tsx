@@ -7,14 +7,12 @@ export default function PrivatePolicy() {
     <div>
       <NavBar></NavBar>
       <h2 className="h2-private">Politique de confidentialité</h2>
-
       <section className="section-private">
         <h3 className="h3-private">QUI SUIS-JE ?</h3>
         <p>
           Marion DUIZABO responsable du site www.latelierdonirium.fr où cette
           politique de confidentialité s'applique.
         </p>
-
         <h3 className="h3-private">RESPECT DE LA VIE PRIVÉE</h3>
         <p>
           La présente politique de confidentialité a pour but de vous exposer
@@ -82,8 +80,10 @@ export default function PrivatePolicy() {
         <p>
           Le site www.latelierdonirium.fr est hébergé par 1 & 1 IONOS, dont le
           siège est situé à l'adresse ci-dessous :
-      <ul><li>7 Place de la Gare </li>
-      <li>5720 SARREGUEMINES</li></ul>
+          <ul>
+            <li>7 Place de la Gare </li>
+            <li>5720 SARREGUEMINES</li>
+          </ul>
         </p>
         <h3 className="h3-private">
           RESPONSABLE DU TRAITEMENT DES RENSEIGNEMENTS PERSONNELS
@@ -127,7 +127,7 @@ export default function PrivatePolicy() {
           Si vous souhaitez supprimer votre espace personnel, vous pouvez le
           faire en envoyant une demande par email à contact@latelierdonirium.fr
         </p>
-       apportés.
+        apportés.
         <h3 className="h3-private">
           PRINCIPES FONDAMENTAUX DU RÈGLEMENT EUROPÉEN 2016/679 SUR LA
           PROTECTION DES DONNÉES
@@ -218,7 +218,6 @@ export default function PrivatePolicy() {
             vos droits ont été violés, vous pouvez saisir l'autorité compétente.
           </li>
         </ul>
-
         <h3 className="h3-private">
           DROITS ADDITIONNELS EN VERTU DU REGLEMENT EUROPEEN 2016/679
         </h3>
@@ -256,7 +255,6 @@ export default function PrivatePolicy() {
           atteinte à l'un de vos droits énumérés ci-dessus, vous êtes en droit
           de saisir toute cour compétente
         </p>
-
         <h3 className="h3-private">SÉCURITÉ</h3>
         <p>
           Les informations personnelles qui sont collectés sont conservées dans
