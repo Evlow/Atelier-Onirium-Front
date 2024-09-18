@@ -1,24 +1,40 @@
 @font-face {
-    font-family: 'Love Light';
-    src: url('/public/Fonts/LoversQuarrel-Regular.ttf') format('truetype');
-  }
-  
-
-
-.h2-private{
-    font-size: 5rem;
-    color:white;
-    text-align: center;
-    font-family: 'Lovers Quarrel', cursive;
-    font-weight: lighter;
+  font-family: "Love Light";
+  src: url("/public/Fonts/LoversQuarrel-Regular.ttf") format("truetype");
 }
 
-.h3-private{
-    color: white;
-    font-size:1.2em;
+.h2-private {
+  font-size: 5rem;
+  color: white;
+  text-align: center;
+  font-family: "Lovers Quarrel", cursive;
+  font-weight: lighter;
+ padding-top: 50px;
+}
+
+.h3-private {
+  color: white;
+  font-size: 1.2em;
+  padding: 30px 0 30px 0;
 }
 .section-private {
-    color:white;
-    width: 80%;
-margin: 0 auto;
+  color: white;
+  width: 75%;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.section-private p {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.section-private li {
+  background-color: black;
+  color: white;
+}
+
+.ul-private {
+  margin: 20px;
+  text-align: justify;
 }
