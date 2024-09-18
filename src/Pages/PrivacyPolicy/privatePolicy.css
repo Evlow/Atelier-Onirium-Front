@@ -20,6 +20,16 @@
 }
 .section-private {
     color:white;
-    width: 80%;
+    width: 75%;
 margin: 0 auto;
+}
+
+.section-private p{
+    text-align: justify;
+margin-bottom: 20px;
+}
+
+.section-private li {
+background-color: black;
+color:white
 }

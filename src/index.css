@@ -24,7 +24,6 @@ footer, header, hgroup, menu, nav, section {
     display: block;
 }
 body {
-    line-height: 1.2=3;
     margin: 0px auto;
   
   }
@@ -52,4 +51,5 @@ table {
 
 p{
     font-size: 1.1em;
+    /* line-height: 1.5; */
 }
