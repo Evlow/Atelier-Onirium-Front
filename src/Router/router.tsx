@@ -5,7 +5,7 @@ import HomePage from "../Pages/HomePage/homePage";
 import Locations from "../Pages/Locations/locations";
 import WorkshopCreation from "../Pages/WorkshopCreation/workshopCreation";
 import Contact from "../Pages/Contact/contact";
-import PrivatePolicy from "../Pages/Privacy Policy/privatePolicy";
+import PrivatePolicy from "../Pages/PrivacyPolicy/privatePolicy";
 
 
 export const Router = createBrowserRouter([
@@ -15,7 +15,7 @@ export const Router = createBrowserRouter([
       children: [
         { path: "/", element: <HomePage /> },
         { path: "accueil", element: <HomePage /> },
-        { path: "creations-entreprise", element: <WorkshopCreation/> },
+        { path: "creations-atelier", element: <WorkshopCreation/> },
         { path: "galerie-exposition", element: <ExpoGallery /> },
         { path: "locations", element: <Locations /> },
         { path: "me-contacter", element: <Contact /> },
