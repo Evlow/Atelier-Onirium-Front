@@ -20,10 +20,8 @@ const nav = [
         <Title></Title> 
       </div>
       <div className="nav">
-
           <nav className="navbar">
             <ul className="item-button">
-              {/* Afficher les liens de navigation */}
               {nav.map((item) => (
                 <li key={item.path}>
                   <NavLink to={item.path}>{item.title}</NavLink>
@@ -32,7 +30,6 @@ const nav = [
             </ul>
           </nav>
           </div>
-
         </>
     );
   }
