@@ -13,10 +13,10 @@
 
 }
 
-.item-button a {
-  font-size: 1.3rem;
+ .item-button a {
+ font-size: 1.3rem;
 color:black;
 padding : 0 50px 0 50px;
   text-decoration: none;
   background-color: #E7E2E1;
-}
+ }
