@@ -3,55 +3,57 @@
   src: url('/public/Fonts/LoveLight-Regular.ttf') format('truetype');
 }
 
-
 footer {
   background-color: #E7E2E1;
-padding: 20px 0 20px 0;
-width: 100%;            
-bottom: 0;             
-left: 0;  }
+  padding: 20px 0;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .footer-container {
   display: flex;
-  justify-content: space-around; 
+  justify-content: space-around;
+  width: 100%;
   background-color: #E7E2E1;
+
 }
 
 .footer-column {
   display: flex;
   flex-direction: column;
-  align-items: center;     
+  align-items: center;
   background-color: #E7E2E1;
+
+
 }
 
 .social-network-footer {
   display: flex;
   gap: 20px;
-  justify-content: center;  
+  justify-content: center;
 }
 
 .social-network-footer li a img {
-  display: block;
   height: 40px;
   width: 40px;
 }
-
 
 .footer-column ul li {
   margin-bottom: 10px;
 }
 
 .h2-footer {
-  text-align: center; 
+  text-align: center;
   padding-bottom: 10px;
   font-family: 'Love Light', cursive;
-  font-weight:lighter;
-  font-size: 3rem;
-
-
+  font-weight: lighter;
+  font-size: 4rem;
 }
 
-.footer-column ul, li, a, img, .h2-footer {
+footer ul, footer li, footer a, footer img, footer .h2-footer {
   background-color: #E7E2E1;
-
+  text-align: center;
 }
