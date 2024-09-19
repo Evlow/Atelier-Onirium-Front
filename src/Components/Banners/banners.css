@@ -1,10 +1,28 @@
-.banner img {
-    width: 100%; /* L'image prend toute la largeur de l'écran */
-    object-fit: cover; /* Optionnel : adapte l'image au conteneur en rognant si nécessaire */
-    height: 700px;  
-  }
-.banner {
-    height: 700px;  
+@font-face {
+  font-family: 'Love Light';
+  src: url('/public/Fonts/LoversQuarrel-Regular.ttf') format('truetype');
+}
 
+.h2-banner{
+  position: absolute;
+  bottom: 100px;
+  width: 100%;
+background: transparent;
+color:white;
+font-family: 'Lovers Quarrel', cursive;
+font-weight: lighter;
+font-size: 8rem;
+}
+
+.banner {
+  position: relative;
+  height: 700px;  
+margin-bottom: 50px;
+}
+
+.banner img {
+  width: 100%;
+  object-fit: cover;
+  height: 700px;  
 }
 

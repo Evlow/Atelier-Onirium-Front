@@ -2,16 +2,30 @@ import React from "react";
 import "./footer.css";
 import { NavLink } from "react-router-dom";
 
-interface FooterLink {
-  title: string;
-  path: string;
-}
 
-const footerLinks: FooterLink[] = [
+const footerLinks = [
   { title: "Me contacter", path: "/me-contacter" },
   { title: "Politique de confidentialité", path: "/politique-de-confidentialite" },
-  { title: "CGU", path: "/cgu" },
+  { title: "CGV", path: "/CGV" },
   { title: "Livraison", path: "/delivery" },
+];
+
+const socialLinks = [
+  {
+    name: "facebook",
+    url: "https://www.facebook.com/latelierdonirium",
+    icon: process.env.PUBLIC_URL + "/Images/facebook.svg",
+  },
+  {
+    name: "instagram",
+    url: "https://www.instagram.com/latelierdonirium?igsh=MWF3Z2dyNzR5N2l0Yw==",
+    icon: process.env.PUBLIC_URL + "/Images/instagram.svg",
+  },
+  {
+    name: "tikTok",
+    url: "https://www.tiktok.com/@latelierdonirium?_t=8pf3S8fZJab&_r=1",
+    icon: process.env.PUBLIC_URL + "/Images/tiktok.svg",
+  },
 ];
 
 export default function Footer() {
@@ -21,30 +35,13 @@ export default function Footer() {
         <div className="footer-column">
           <h2 className="h2-footer">L'Atelier d'Onirium</h2>
           <ul className="social-network-footer">
-            <li className="social-network-facebook">
-              <a href="https://www.facebook.com/latelierdonirium">
-                <img
-                  src={process.env.PUBLIC_URL + "/Images/facebook.svg"}
-                  alt="Facebook"
-                />
-              </a>
-            </li>
-            <li className="social-network-instagram">
-              <a href="https://www.instagram.com/latelierdonirium?igsh=MWF3Z2dyNzR5N2l0Yw==">
-                <img
-                  src={process.env.PUBLIC_URL + "/Images/instagram.svg"}
-                  alt="Instagram"
-                />
-              </a>
-            </li>
-            <li className="social-network-tiktok">
-              <a href="https://www.tiktok.com/@latelierdonirium?_t=8pf3S8fZJab&_r=1">
-                <img
-                  src={process.env.PUBLIC_URL + "/Images/tiktok.svg"}
-                  alt="TikTok"
-                />
-              </a>
-            </li>
+            {socialLinks.map((link) => (
+              <li key={link.name} className={`social-network-${link.name}`}>
+                <a href={link.url}>
+                  <img src={link.icon} alt={link.name} />
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="footer-column">

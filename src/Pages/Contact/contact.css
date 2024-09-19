@@ -6,11 +6,12 @@
 
 
 .h2-contact{
-    font-size: 5rem;
+    font-size: 7rem;
     color:white;
     text-align: center;
     font-family: 'Lovers Quarrel', cursive;
     font-weight: lighter;
+    padding-top: 50px;
 }
 
 .article-contact{

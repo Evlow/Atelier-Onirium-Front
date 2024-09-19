@@ -1,14 +1,22 @@
+import Banners from "../../Components/Banners/banners";
 import Footer from "../../Components/Footer/footer";
 import NavBar from "../../Components/NavBar/navbar";
+import imgBanners from"../../Assets/coffre.webp"
+
 import "./privatePolicy.css";
+
 
 export default function PrivatePolicy() {
   return (
     <div>
       <NavBar></NavBar>
-      <h2 className="h2-private">Politique de confidentialité</h2>
+      <Banners
+        positionText="center"
+        imgBanner={imgBanners}
+        textBanner="Politique de confidentialité"
+      />
       <section className="section-private">
-        <h3 className="h3-private">QUI SUIS-JE ?</h3>
+        <h4 className="h3-private">QUI SUIS-JE ?</h4>
         <p>
           Marion DUIZABO responsable du site www.latelierdonirium.fr où cette
           politique de confidentialité s'applique.
