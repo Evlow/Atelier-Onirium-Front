@@ -56,4 +56,5 @@ footer {
 footer ul, footer li, footer a, footer img, footer .h2-footer {
   background-color: #E7E2E1;
   text-align: center;
+  text-decoration: none;
 }

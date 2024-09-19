@@ -2,10 +2,6 @@ import React from "react";
 import "./footer.css";
 import { NavLink } from "react-router-dom";
 
-interface FooterLink {
-  title: string;
-  path: string;
-}
 
 const footerLinks = [
   { title: "Me contacter", path: "/me-contacter" },
