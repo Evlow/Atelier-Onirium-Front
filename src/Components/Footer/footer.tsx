@@ -54,6 +54,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
+      <div>  <p>&copy; Mathilde PEAUGER. Tous droits réservés.</p></div>
     </footer>
   );
 }
