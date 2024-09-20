@@ -1,15 +1,9 @@
-@font-face {
-    font-family: 'Love Light';
-    src: url('/public/Fonts/LoversQuarrel-Regular.ttf') format('truetype');
-  }
-  
 
 
 .h2-contact{
     font-size: 7rem;
     color:white;
     text-align: center;
-    font-family: 'Lovers Quarrel', cursive;
     font-weight: lighter;
     padding-top: 50px;
 }
