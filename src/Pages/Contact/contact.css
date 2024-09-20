@@ -47,6 +47,7 @@ h5 {
 
 .contact-image img {
   width: 60%;
+  object-fit: cover;
 }
 
 .contact-image {
@@ -94,7 +95,6 @@ font-size: 1.1rem;  }
   /* Styles pour les smartphones et petites tablettes */
   .contact-image-form {
     flex-direction: column;
-    display: flex;
 
      }
    
@@ -103,7 +103,10 @@ font-size: 1.1rem;  }
   /* Styles pour les tablettes */
   .contact-image-form {
     flex-direction: column;
-    display: flex;
 
      }
+     .contact-image img {
+      width: 50%; 
+    }
 }
+
