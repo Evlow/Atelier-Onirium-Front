@@ -76,7 +76,7 @@ export default function Contact() {
               <p>
                 Besoin d'un devis pour votre projet ? <br></br>Des informations
                 complémentaires ?<br></br> Rien de plus simple, remplissez ce
-                formulaire !
+                formulaire :
               </p>
             </article>
             <div className="contact-form-row">
