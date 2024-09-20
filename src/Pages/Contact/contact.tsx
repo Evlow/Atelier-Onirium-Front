@@ -71,6 +71,8 @@ export default function Contact() {
           formulaire !
         </p>
       </article>
+      <article>
+<h5>patate crue</h5>      </article>
       <form onSubmit={submitForm}>
   <div className="contact-form-container">
     <div className="contact-form-row">

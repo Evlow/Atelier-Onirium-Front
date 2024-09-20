@@ -25,6 +25,7 @@
 
 .contact-form-textarea {
   height: 200px;
+  width: 100%;
 }
 
 .contact-form-input {
@@ -36,7 +37,6 @@
 }
 .contact-form-area{
 margin:20px;
-
 }
 .contact-form-row{
 gap:25px;
@@ -46,4 +46,8 @@ margin:20px;
 .contact-form-container {
   width: 30%;
   margin: auto;
+}
+
+h5{
+  color: white;
 }

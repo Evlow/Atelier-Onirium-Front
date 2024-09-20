@@ -1,22 +1,29 @@
-
+@font-face {
+  font-family: 'Alice';
+  src: url('/public/Fonts/Alice-Regular.ttf') format('truetype');
+}
 .navbar {
   display: flex;
   justify-content: space-around;
   background-color: #E7E2E1;
   height: 100px;
 
+
 }
-.item-button {
+.item-navbar {
   display: flex;
   align-items: center;
   background-color: #E7E2E1;
 
 }
 
- .item-button a {
- font-size: 1.3rem;
+ .item-navbar a  {
+ font-size: 1.5rem;
 color:black;
 padding : 0 50px 0 50px;
   text-decoration: none;
   background-color: #E7E2E1;
+  font-family: 'Alice', cursive;
+font-weight: lighter
  }
+
