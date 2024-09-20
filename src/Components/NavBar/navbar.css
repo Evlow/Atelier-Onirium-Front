@@ -1,22 +1,25 @@
-
+@font-face {
+  font-family: "Alice";
+  src: url("/public/Fonts/Alice-Regular.ttf") format("truetype");
+}
 .navbar {
   display: flex;
   justify-content: space-around;
-  background-color: #E7E2E1;
-  height: 100px;
-
+  background-color: #e7e2e1;
+  height: 120px;
 }
-.item-button {
+.item-navbar {
   display: flex;
   align-items: center;
-  background-color: #E7E2E1;
-
+  background-color: #e7e2e1;
 }
 
- .item-button a {
- font-size: 1.3rem;
-color:black;
-padding : 0 50px 0 50px;
+.item-navbar a {
+  font-size: 1.5rem;
+  color: black;
   text-decoration: none;
-  background-color: #E7E2E1;
- }
+  background-color: #e7e2e1;
+  font-family: "Alice", cursive;
+  font-weight: lighter;
+  padding: 0 40px 0 40px;
+}

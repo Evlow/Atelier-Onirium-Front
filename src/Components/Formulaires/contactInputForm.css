@@ -1,22 +1,16 @@
 
   
   .contact-form-input,   .contact-form-textarea {
-    display: flex;
-    outline: none;
     width: 250px;
     background-color: black;
     height: 50px;
     border-radius: 10px;
     border-color: #AD8A3D;
-    box-sizing: border-box;
     color: white;
     gap:30px;
-  }
+}
   
-  .contact-form-label {
-    color: white;
-    
-  }
+
   
   .contact-button-form {
     background-color: #640A02;
@@ -28,13 +22,10 @@
     display: flex;
     align-items: center;
     color: white;
-    margin: auto;
+    margin:0  auto;
     margin-top: 20px;
+    margin-bottom: 20px;
     justify-content: center;
   }
   
-  
-  .contact-form-input::placeholder,
-  .contact-form-textarea::placeholder {
-    color: white;
-  }
+

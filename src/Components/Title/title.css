@@ -1,29 +1,17 @@
-@font-face {
-    font-family: 'Love Light';
-    src: url('/public/Fonts/LoveLight-Regular.ttf') format('truetype');
-  }
-  
+.title {
+  background-color: #e7e2e1;
+}
 
- .title {
-  background-color: #E7E2E1;
-
-} 
-
-.title h1{
+.title h1 {
   text-align: center;
-  font-family: 'Love Light', cursive;
-  font-weight:lighter;
-  padding: 30px;
-  background-color: #E7E2E1;
-  color: black;
+  background-color: #e7e2e1;
   font-size: 9rem;
-  height: 150px;
-padding-top: 10px;
 
+  padding-top: 20px;
 }
 hr {
   margin: 0 auto;
-  background-color: #640A02;
+  background-color: #640a02;
   border: 0;
   height: 4px;
   width: 80%;

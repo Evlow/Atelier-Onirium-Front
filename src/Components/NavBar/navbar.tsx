@@ -21,7 +21,7 @@ const nav = [
       </div>
       <div className="nav">
           <nav className="navbar">
-            <ul className="item-button">
+            <ul className="item-navbar">
               {nav.map((item) => (
                 <li key={item.path}>
                   <NavLink to={item.path}>{item.title}</NavLink>

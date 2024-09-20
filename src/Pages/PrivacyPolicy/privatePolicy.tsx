@@ -1,10 +1,9 @@
 import Banners from "../../Components/Banners/banners";
 import Footer from "../../Components/Footer/footer";
 import NavBar from "../../Components/NavBar/navbar";
-import imgBanners from"../../Assets/coffre.webp"
+import imgBanners from "../../Assets/coffre.webp";
 
 import "./privatePolicy.css";
-
 
 export default function PrivatePolicy() {
   return (
@@ -16,12 +15,12 @@ export default function PrivatePolicy() {
         textBanner="Politique de confidentialité"
       />
       <section className="section-private">
-        <h4 className="h3-private">QUI SUIS-JE ?</h4>
+        <h3 className="h3-private">Qui suis-je ?</h3>
         <p>
           Marion DUIZABO responsable du site www.latelierdonirium.fr où cette
           politique de confidentialité s'applique.
         </p>
-        <h3 className="h3-private">RESPECT DE LA VIE PRIVÉE</h3>
+        <h3 className="h3-private">Respect de la vie privée</h3>
         <p>
           La présente politique de confidentialité a pour but de vous exposer
           dont la manière sont collectés et traités.
@@ -46,7 +45,7 @@ export default function PrivatePolicy() {
           Cette politique de confidentialité complète les Conditions Générales
           de Vente que vous pouvez consulter ici.
         </p>
-        <h3 className="h3-private">COLLECTE DES RENSEIGNEMENTS PERSONNELS</h3>
+        <h3 className="h3-private"> Collecte des renseignements personnels</h3>
         <p>
           Les renseignements personnels suivants seront collectés :
           <ul className="ul-private">
@@ -65,10 +64,12 @@ export default function PrivatePolicy() {
           décrites dans les sections « Formulaires et modes de collecte » et les
           suivantes.
         </p>
-        <h3 className="h3-private">FORMULAIRES ET MODE DE COLLECTE</h3>
+        <h3 className="h3-private">
+          Formulaires et mode de collecte des données
+        </h3>
         <p>
           Vos renseignements personnels sont collectés par les méthodes
-          suivantes :{" "}
+          suivantes :
         </p>
         <ul className="ul-private">
           <li>Formulaire d'inscription au site internet</li>
@@ -79,12 +80,12 @@ export default function PrivatePolicy() {
           <li>Informations et offres promotionnelles</li>
           <li>Statistiques</li>
         </ul>
-        <h3 className="h3-private">PARTAGE DES RENSEIGNEMENTS PERSONNELS</h3>
+        <h3 className="h3-private">Partage des renseignements personnels</h3>
         <p>
           Les renseignements personnels collectés par le site ne sont transmis à
           aucun tiers et ne sont traités que par l'atelier d'Onirium
         </p>
-        <h3 className="h3-private">HÉBERGEMENT DU SITE INTERNET</h3>
+        <h3 className="h3-private">Hébergement du site internet</h3>
         <p>
           Le site www.latelierdonirium.fr est hébergé par 1 & 1 IONOS, dont le
           siège est situé à l'adresse ci-dessous :
@@ -94,7 +95,7 @@ export default function PrivatePolicy() {
           </ul>
         </p>
         <h3 className="h3-private">
-          RESPONSABLE DU TRAITEMENT DES RENSEIGNEMENTS PERSONNELS
+          Responsables des traitements renseignements personnels
         </h3>
         <p>
           La responsable du traitement des renseignements personnels est :
@@ -113,7 +114,7 @@ export default function PrivatePolicy() {
           renseignements personnels est compromise, la responsable du traitement
           s'engage à vous en informer par tout moyen.
         </p>
-        <h3 className="h3-private">DROIT D'OPPOSITION ET DE RETRAIT</h3>
+        <h3 className="h3-private">Droit d'opposition et de retrait</h3>
         <p>
           Vous avez le droit de vous opposer au traitement de vos renseignements
           personnels par le site (droit d'opposition). <br />
@@ -126,7 +127,7 @@ export default function PrivatePolicy() {
           contact@latelierdonirium.fr
         </p>
         <h3 className="h3-private">
-          DROIT D'ACCES, DE RÉCTIFICATION ET DE SUPPRESSION
+          Droit d'accès, de rectification et de suppression
         </h3>
         <p>
           Vous pouvez consulter, mettre à jour, modifier ou demander la
@@ -136,8 +137,8 @@ export default function PrivatePolicy() {
           faire en envoyant une demande par email à contact@latelierdonirium.fr
         </p>
         <h3 className="h3-private">
-          PRINCIPES FONDAMENTAUX DU RÈGLEMENT EUROPÉEN 2016/679 SUR LA
-          PROTECTION DES DONNÉES
+          Principes fondamentaux du Règlement Européen 2016/679 sur la
+          Protection des Données
         </h3>
         <p>
           Conformément aux dispositions de l'article 5 du Règlement Européen
@@ -226,7 +227,7 @@ export default function PrivatePolicy() {
           </li>
         </ul>
         <h3 className="h3-private">
-          DROITS ADDITIONNELS EN VERTU DU REGLEMENT EUROPEEN 2016/679
+          Droits additionnels en vertu du réglement européen 2016/679
         </h3>
         <p>
           Conformément à la réglementation européenne concernant le traitement
@@ -262,7 +263,7 @@ export default function PrivatePolicy() {
           atteinte à l'un de vos droits énumérés ci-dessus, vous êtes en droit
           de saisir toute cour compétente
         </p>
-        <h3 className="h3-private">SÉCURITÉ</h3>
+        <h3 className="h3-private">Sécurité</h3>
         <p>
           Les informations personnelles qui sont collectés sont conservées dans
           un environnement sécurisé.
@@ -284,8 +285,7 @@ export default function PrivatePolicy() {
           transmettre des informations personnelles.
         </p>
         <h3 className="h3-private">
-          RENSEIGNEMENTS PERSONNELS DES PERSONNES MINEURES EN VERTU DU REGLEMENT
-          2016/679
+          Renseignements personnels des mineurs en vertu du réglement 2016/679{" "}
         </h3>
         <p>
           Conformément aux dispositions de l'article 8 du règlement 2016/679,
@@ -303,7 +303,7 @@ export default function PrivatePolicy() {
           représentant légal avant de naviguer sur le site.
         </p>
         <h3 className="h3-private">
-          CONDITIONS DE MODIFICATION DE LA POLITIQUE DE CONFIDENTIALITÉ
+          Conditions de modification de la politique de confidentialité
         </h3>
         <p>
           La présente politique de confidentialité peut être consultée à tout
@@ -317,7 +317,7 @@ export default function PrivatePolicy() {
           afin de vous tenir informé (e) des derniers changements qui lui seront
           apportés.
         </p>
-        <h3 className="h3-private">LÉGISLATION</h3>
+        <h3 className="h3-private">Législation</h3>
         <p>
           L'entreprise s'engage à respecter les dispositions législatives
           énonces ci-dessus et le Réglement Général sur la protection des

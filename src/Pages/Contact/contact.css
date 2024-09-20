@@ -1,35 +1,53 @@
-@font-face {
-    font-family: 'Love Light';
-    src: url('/public/Fonts/LoversQuarrel-Regular.ttf') format('truetype');
-  }
-  
-
-
-.h2-contact{
-    font-size: 7rem;
-    color:white;
-    text-align: center;
-    font-family: 'Lovers Quarrel', cursive;
-    font-weight: lighter;
-    padding-top: 50px;
+.h2-contact {
+  font-size: 7rem;
+  color: white;
+  text-align: center;
+  padding-top: 50px;
 }
 
-.article-contact{
-    color: white;
-    text-align: center;
-    width: 25%;
-    margin: 0 auto;
-    font-size: 1.2rem;
-    border: solid #AD8A3D 2px;
-    padding: 15px;
+.article-contact {
+  color: white;
+  text-align: center;
+  width: 25%;
+  margin:30px  auto;
+  font-size: 1.2rem;
+  border: solid #ad8a3d 2px;
+  padding: 15px;
 
-} 
+}
+
+
+.contact-form-textarea,
+.contact-form-input {
+  font-size: 1.1em;
+  font-family: "Gowun";
+}
+
+.contact-form-textarea {
+  height: 200px;
+  width: 100%;
+}
+
+.contact-form-input {
+  align-items: center;
+}
+.contact-form-row{
+  display: flex;
+  justify-content: center;
+}
+.contact-form-area{
+margin:20px;
+}
+.contact-form-row{
+gap:25px;
+margin:20px;
+}
 
 .contact-form-container {
-    display: flex;
-    flex-direction: column; /* Empile les éléments verticalement */
-    align-items: center; /* Centre les éléments horizontalement */
-    justify-content: center; /* Centre les éléments verticalement */
-    margin: 0 auto; /* Centre le conteneur du formulaire */
-    max-width: 600px; /* Définit une largeur maximale */
-  }
+  width: 30%;
+  margin: auto;
+}
+
+h5{
+  color: white;
+}

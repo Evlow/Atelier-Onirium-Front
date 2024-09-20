@@ -71,57 +71,52 @@ export default function Contact() {
           formulaire !
         </p>
       </article>
+      <article>
+<h5>patate crue</h5>      </article>
       <form onSubmit={submitForm}>
-        <div className="contact-form-container">
-          <div className="contact-form-input">
-            <ContactInputForm
-              type="text"
-              value={userFirstName}
-              // label="*Prénom"
-              onChange={changeFirstName}
-              placeholder="Prénom"
-            />
-            <ContactInputForm
-              type="text"
-              value={userLastName}
-              // label="Nom"
-              onChange={changeLastName}
-              placeholder="Nom"
-            />
-          </div>
-          <div className="contact-form-input">
-            <ContactInputForm
-              type="text"
-              value={userPhone}
-              // label="*Téléphone"
-              onChange={changePhone}
-              placeholder="Téléphone"
-            />
-          <div className="contact-form-input">
-            <ContactInputForm
-              type="email"
-              value={userEmail}
-              // label="*Email"
-              onChange={changeEmail}
-              placeholder="Email"
-            />{" "}
-          </div>
-          </div>
+  <div className="contact-form-container">
+    <div className="contact-form-row">
+      <ContactInputForm
+        type="text"
+        value={userFirstName}
+        onChange={changeFirstName}
+        placeholder="Prénom"
+      />
+      <ContactInputForm
+        type="text"
+        value={userLastName}
+        onChange={changeLastName}
+        placeholder="Nom"
+      />
+    </div>
+    <div className="contact-form-row">
+      <ContactInputForm
+        type="text"
+        value={userPhone}
+        onChange={changePhone}
+        placeholder="Téléphone"
+      />
+      <ContactInputForm
+        type="email"
+        value={userEmail}
+        onChange={changeEmail}
+        placeholder="E-mail"
+      />
+    </div>
+    <div className="contact-form-area">
+      <ContactInputForm
+        type="area"
+        value={userMessage}
+        onChange={changeMessage}
+        placeholder="Message"
+      />
+    </div>
+    <button className="contact-button-form" type="submit">
+      Envoyer
+    </button>
+  </div>
+</form>
 
-          <div className="contact-form-input-message">
-            <ContactInputForm
-              type="area"
-              value={userMessage}
-              // label="*Message"
-              onChange={changeMessage}
-              placeholder="Ecrivez votre message"
-            />
-          </div>
-        </div>
-        <button name="button" className="contact-button-form" type="submit">
-          Envoyer
-        </button>
-      </form>
       <Footer />
     </div>
   );
