@@ -1,7 +1,6 @@
 
   
   .contact-form-input,   .contact-form-textarea {
-    width: 250px;
     background-color: black;
     height: 50px;
     border-radius: 10px;
@@ -12,20 +11,6 @@
   
 
   
-  .contact-button-form {
-    background-color: #640A02;
-    height: 30px;
-    width: 120px;
-    border-radius: 10px;
-    border: none;
-    font-size: 1em;
-    display: flex;
-    align-items: center;
-    color: white;
-    margin:0  auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    justify-content: center;
-  }
+
   
 

@@ -2,10 +2,12 @@ import React from "react";
 import "./footer.css";
 import { NavLink } from "react-router-dom";
 
-
 const footerLinks = [
   { title: "Me contacter", path: "/me-contacter" },
-  { title: "Politique de confidentialité", path: "/politique-de-confidentialite" },
+  {
+    title: "Politique de confidentialité",
+    path: "/politique-de-confidentialite",
+  },
   { title: "CGV", path: "/CGV" },
   { title: "Livraison", path: "/delivery" },
 ];
@@ -53,6 +55,9 @@ export default function Footer() {
             ))}
           </ul>
         </div>
+      </div>
+      <div className="copyright-container">
+        <p className="p-copyright">&copy; Mathilde PEAUGER | Tous droits réservés.</p>
       </div>
     </footer>
   );

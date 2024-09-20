@@ -2,25 +2,22 @@
   font-size: 7rem;
   color: white;
   text-align: center;
-  padding-top: 50px;
+  padding: 50px;
 }
 
 .article-contact {
   color: white;
   text-align: center;
-  width: 25%;
-  margin:30px  auto;
+  margin: 30px auto;
   font-size: 1.2rem;
-  border: solid #ad8a3d 2px;
   padding: 15px;
-
 }
-
 
 .contact-form-textarea,
 .contact-form-input {
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-family: "Gowun";
+  padding-left: 10px;
 }
 
 .contact-form-textarea {
@@ -31,23 +28,52 @@
 .contact-form-input {
   align-items: center;
 }
-.contact-form-row{
+.contact-form-row {
   display: flex;
   justify-content: center;
 }
-.contact-form-area{
-margin:20px;
+.contact-form-area {
+  margin: 20px;
 }
-.contact-form-row{
-gap:25px;
-margin:20px;
+.contact-form-row {
+  gap: 25px;
+  margin: 20px;
+}
+
+h5 {
+  color: white;
+}
+
+.contact-image img {
+  width: 60%;
+}
+
+.contact-image {
+  width: 50%;
+  text-align: center;
+}
+
+.contact-image-form {
+  display: flex;
+  padding: 20px 0 80px 0;
 }
 
 .contact-form-container {
-  width: 30%;
-  margin: auto;
+  align-content: center;
 }
-
-h5{
+.contact-button-form {
+  background-color: #640a02;
+  height: 40px;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
   color: white;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  font-size: 1.2rem;
 }
