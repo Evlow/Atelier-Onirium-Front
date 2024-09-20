@@ -10,7 +10,7 @@ interface Props {
 
 const ContactInputForm: React.FC<Props> = ({ type, value, placeholder, onChange }) => {
   return (
-    <div className="contact-input-container">
+    <div>
       {type === 'area' ? (
         <textarea
           className="contact-form-textarea"
