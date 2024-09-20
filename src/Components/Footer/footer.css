@@ -67,3 +67,27 @@ footer ul, footer li, footer a, footer img, footer .h2-footer{
   text-align: center;
   font-weight: bolder;
 }
+
+/* Styles pour les petits smartphones */
+@media only screen and (max-width: 480px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+   padding: 20px 0 20px;
+  }
+
+  .p-copyright {
+    background-color: #E7E2E1;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 0.8rem;
+  }
+  .h2-footer {
+
+    font-size: 3rem;
+  }
+
+  .footer-column ul li {
+    margin-bottom: 5px;
+  }
+}
