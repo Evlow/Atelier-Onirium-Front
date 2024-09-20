@@ -4,6 +4,7 @@ import { useState } from "react";
 import ContactInputForm from "../../Components/Formulaires/contactInputForm";
 import emailjs from "emailjs-com";
 import "./contact.css";
+import contactImage from "../../Assets/contact.jpg";
 
 export default function Contact() {
   const [userEmail, setEmail] = useState("");
@@ -63,65 +64,63 @@ export default function Contact() {
   return (
     <div>
       <NavBar />
-      <h2 className="h2-contact">Contactez-moi</h2>
-      <article className="article-contact">
-        <p>
-          Besoin d'un devis pour votre projet ? <br></br>Des informations
-          complémentaires ?<br></br> Rien de plus simple, remplissez ce
-          formulaire !
-        </p>
-      </article>
-      <form onSubmit={submitForm}>
-        <div className="contact-form-container">
-          <div className="contact-form-input">
-            <ContactInputForm
-              type="text"
-              value={userFirstName}
-              // label="*Prénom"
-              onChange={changeFirstName}
-              placeholder="Prénom"
-            />
-            <ContactInputForm
-              type="text"
-              value={userLastName}
-              // label="Nom"
-              onChange={changeLastName}
-              placeholder="Nom"
-            />
-          </div>
-          <div className="contact-form-input">
-            <ContactInputForm
-              type="text"
-              value={userPhone}
-              // label="*Téléphone"
-              onChange={changePhone}
-              placeholder="Téléphone"
-            />
-          <div className="contact-form-input">
-            <ContactInputForm
-              type="email"
-              value={userEmail}
-              // label="*Email"
-              onChange={changeEmail}
-              placeholder="Email"
-            />{" "}
-          </div>
-          </div>
+      <h2 className="h2-contact">Contact</h2>
 
-          <div className="contact-form-input-message">
-            <ContactInputForm
-              type="area"
-              value={userMessage}
-              // label="*Message"
-              onChange={changeMessage}
-              placeholder="Ecrivez votre message"
-            />
-          </div>
+      <article className="contact-image-form">
+        <div className="contact-image">
+          <img src={contactImage} alt="Photo de contact" />
         </div>
-        <button name="button" className="contact-button-form" type="submit">
-          Envoyer
-        </button>
-      </form>
+        <form onSubmit={submitForm}>
+          <div className="contact-form-container">
+            <article className="article-contact">
+              <p>
+                Besoin d'un devis pour votre projet ? <br></br>Des informations
+                complémentaires ?<br></br> Rien de plus simple, remplissez ce
+                formulaire :
+              </p>
+            </article>
+            <div className="contact-form-row">
+              <ContactInputForm
+                type="text"
+                value={userFirstName}
+                onChange={changeFirstName}
+                placeholder="Prénom"
+              />
+              <ContactInputForm
+                type="text"
+                value={userLastName}
+                onChange={changeLastName}
+                placeholder="Nom"
+              />
+            </div>
+            <div className="contact-form-row">
+              <ContactInputForm
+                type="text"
+                value={userPhone}
+                onChange={changePhone}
+                placeholder="Téléphone"
+              />
+              <ContactInputForm
+                type="email"
+                value={userEmail}
+                onChange={changeEmail}
+                placeholder="E-mail"
+              />
+            </div>
+            <div className="contact-form-area">
+              <ContactInputForm
+                type="area"
+                value={userMessage}
+                onChange={changeMessage}
+                placeholder="Message"
+              />
+            </div>
+            <button className="contact-button-form" type="submit">
+              Envoyer
+            </button>
+          </div>
+        </form>
+      </article>
       <Footer />
     </div>
   );

@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "Love Light";
+  font-family: "Lovers";
   src: url("/public/Fonts/LoversQuarrel-Regular.ttf") format("truetype");
 }
 
@@ -7,15 +7,17 @@
   font-size: 5rem;
   color: white;
   text-align: center;
-  font-family: "Lovers Quarrel", cursive;
-  font-weight: lighter;
  padding-top: 50px;
 }
 
 .h3-private {
   color: white;
-  font-size: 1.2em;
+  font-size: 3em;
   padding: 30px 0 30px 0;
+  font-family: "Lovers", cursive;
+  color:#AD8A3D;
+
+
 }
 .section-private {
   color: white;
@@ -38,3 +40,4 @@
   margin: 20px;
   text-align: justify;
 }
+ 
