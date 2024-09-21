@@ -1,23 +1,60 @@
-
-.h2-banner{
+.h2-banner {
   position: absolute;
-  bottom: 100px;
-  width: 100%;
-background: transparent;
-color:white;
-font-weight: lighter;
-font-size: 8rem;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  background: transparent;
+  color: white;
+  font-weight: lighter;
+  font-size: 8rem;
+  z-index: 1;
 }
 
 .banner {
   position: relative;
-  height: 700px;  
-margin-bottom: 50px;
+  height: 700px;
+  margin-bottom: 50px;
 }
 
 .banner img {
   width: 100%;
-  object-fit: cover;
-  height: 700px;  
+  object-fit: cover; /* Assure que l'image garde ses proportions sans être déformée */
 }
 
+/* Styles pour les petits smartphones */
+@media only screen and (max-width: 480px) {
+  .banner {
+    height: 400px; /* Réduire la hauteur de la bannière */
+  }
+
+  .h2-banner {
+    font-size: 3rem;
+    bottom: 5%;
+  }
+}
+
+/* Styles pour les smartphones et petites tablettes */
+@media only screen and (min-width: 481px) and (max-width: 900px) {
+  .banner {
+    height: 500px;
+  }
+
+  .h2-banner {
+    font-size: 5rem;
+    bottom: 7%;
+  }
+}
+
+/* Styles pour les tablettes */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .banner {
+    height: 600px;
+  }
+
+  .h2-banner {
+    font-size: 6rem;
+    bottom: 8%;
+  }
+}
