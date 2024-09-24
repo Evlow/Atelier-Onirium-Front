@@ -1,37 +1,38 @@
 .h2-banner {
   position: absolute;
-  bottom: 10%;
+  bottom: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
+  transform: translateX(-50% -50%);
   text-align: center;
   background: transparent;
   color: white;
   font-weight: lighter;
   font-size: 8rem;
-  z-index: 1;
 }
 
 .banner {
   position: relative;
+  width: 100%;
   height: 700px;
-  margin-bottom: 50px;
+  overflow: hidden;
 }
 
 .banner img {
   width: 100%;
-  object-fit: cover; /* Assure que l'image garde ses proportions sans être déformée */
+  height: 100%;
+  object-fit: cover;
+
 }
 
 /* Styles pour les petits smartphones */
 @media only screen and (max-width: 480px) {
   .banner {
-    height: 400px; /* Réduire la hauteur de la bannière */
+    height: 400px; 
   }
 
   .h2-banner {
     font-size: 3rem;
-    bottom: 5%;
+    bottom: 50%;
   }
 }
 
@@ -43,7 +44,6 @@
 
   .h2-banner {
     font-size: 5rem;
-    bottom: 7%;
   }
 }
 
@@ -55,6 +55,5 @@
 
   .h2-banner {
     font-size: 6rem;
-    bottom: 8%;
   }
 }
