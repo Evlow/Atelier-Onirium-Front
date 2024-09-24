@@ -1,5 +1,10 @@
+
+
 .title {
+  z-index: 5; /* Place le titre en dessous de la navbar et du burger */
+  position: relative;
   background-color: #e7e2e1;
+
 }
 
 .title h1 {
@@ -20,19 +25,20 @@ hr {
 @media only screen and (max-width: 480px) {
   .title h1 {
   
-    font-size: 4rem;
+    font-size: 3rem;
   
-    padding-top: 10px;
   }
-  
+  hr{
+    display: none;
+
+  }
 }
 
 @media only screen and (min-width: 481px) and (max-width: 900px) {
   .title h1 {
   
-    font-size: 4rem;
+    font-size: 3rem;
   
-    padding-top: 10px;
   }
  
 }
@@ -42,6 +48,5 @@ hr {
   
   font-size: 5rem;
 
-  padding-top: 10px;
 }
 }
