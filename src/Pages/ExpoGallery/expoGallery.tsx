@@ -1,6 +1,6 @@
 import Banners from "../../Components/Banners/banners";
 import NavBar from "../../Components/NavBar/navbar";
-import imgBanners from "../../Assets/gallery.webp"
+import imgBanners from "../../Assets/galerie.jpg"
 import Footer from "../../Components/Footer/footer";
 
 export default function ExpoGallery() {
@@ -9,8 +9,6 @@ export default function ExpoGallery() {
       <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />
       <Footer></Footer>
-
-
     </div>
   );
 }
