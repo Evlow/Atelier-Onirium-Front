@@ -8,10 +8,11 @@
 .article-contact {
   color: white;
   text-align: center;
-  margin: 30px auto;
+  margin: 30px;
   font-size: 1.2rem;
   padding: 15px;
 }
+
 
 .contact-form-textarea,
 .contact-form-input {
@@ -45,11 +46,11 @@ h5 {
 }
 
 .contact-image img {
-  width: 60%;
+  width: 65%;
+  object-fit: cover;
 }
 
 .contact-image {
-  width: 50%;
   text-align: center;
 }
 
@@ -77,3 +78,35 @@ h5 {
   justify-content: center;
   font-size: 1.2rem;
 }
+
+
+/* Styles pour les petits smartphones */
+@media only screen and (max-width: 480px) {
+  .contact-image-form {
+ display: flex;
+ flex-direction: column;
+  }
+  .article-contact {
+font-size: 1.1rem;  }
+  
+  }
+
+@media only screen and (min-width: 481px) and (max-width: 900px) {
+  /* Styles pour les smartphones et petites tablettes */
+  .contact-image-form {
+    flex-direction: column;
+
+     }
+   
+}
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Styles pour les tablettes */
+  .contact-image-form {
+    flex-direction: column;
+
+     }
+     .contact-image img {
+      width: 50%; 
+    }
+}
+
