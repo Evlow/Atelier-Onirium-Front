@@ -1,25 +1,22 @@
 .h2-banner {
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform: translateX(-50% -50%);
-  text-align: center;
+  position: absolute; 
+  top: 90%; left: 50%;
+  transform: translate(-50%, -50%);
   background: transparent;
   color: white;
   font-weight: lighter;
   font-size: 8rem;
+  width: max-content;
 }
 
 .banner {
   position: relative;
   width: 100%;
   height: 700px;
-  overflow: hidden;
 }
 
 .banner img {
   width: 100%;
-  height: 100%;
   object-fit: cover;
 
 }
@@ -27,19 +24,20 @@
 /* Styles pour les petits smartphones */
 @media only screen and (max-width: 480px) {
   .banner {
-    height: 400px; 
+    height: 250px; 
+
   }
 
   .h2-banner {
-    font-size: 3rem;
-    bottom: 50%;
-  }
+    font-size: 3rem; 
+  top:65% }
 }
 
 /* Styles pour les smartphones et petites tablettes */
 @media only screen and (min-width: 481px) and (max-width: 900px) {
   .banner {
-    height: 500px;
+    height: 400px;
+    
   }
 
   .h2-banner {
