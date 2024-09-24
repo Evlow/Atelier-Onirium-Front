@@ -12,8 +12,12 @@ const nav = [
   { title: "LOCATIONS", path: "/locations" }, 
   {
     path: "", 
-    icon: process.env.PUBLIC_URL + "/Images/compte.png", 
+    icon: process.env.PUBLIC_URL + "/Images/panier.webp", 
   },
+  {
+  path: "", 
+  icon: process.env.PUBLIC_URL + "/Images/profil.webp", 
+},
 ];
 
 export default function NavBar() {

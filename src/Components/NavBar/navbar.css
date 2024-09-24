@@ -21,14 +21,9 @@
   background-color: #e7e2e1;
   font-family: "Alice", cursive;
   font-weight: lighter;
-  padding: 0 40px 0 40px;
+  padding: 0 20px 0 20px;
 }
 
-.icon {
-  width: 100px; /* Ajuste la taille selon tes besoins */
-  height: auto;
-  margin-left: 5px; /* Pour espacer l'icône du texte */
-}
 
 
 /* Styles pour les petits smartphones */
