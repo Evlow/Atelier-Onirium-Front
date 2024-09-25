@@ -9,8 +9,6 @@ const nav = [
   { title: "CRÉATIONS DE L'ATELIER", path: "/creations-atelier" },
   { title: "GALERIE D'EXPOSITION", path: "/galerie-exposition" },
   { title: "LOCATIONS", path: "/locations" },
-  { path: "", icon: process.env.PUBLIC_URL + "/Images/panier.webp" },
-  { path: "", icon: process.env.PUBLIC_URL + "/Images/profil.webp" },
 ];
 
 export default function NavBar() {
@@ -22,31 +20,24 @@ export default function NavBar() {
 
   return (
     <>
-      <div>
+      <div className="title-burger">
         <Title />
-      </div>
-      <div className="nav">
-        <div className={`burger ${isOpen ? "open" : ""}`} onClick={toggleMenu}>
-          <div></div>
-          <div></div>
-          <div></div>
+        <div className="nav">
+          <div
+            className={`burger ${isOpen ? "open" : ""}`}
+            onClick={toggleMenu}
+          >
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
         <nav className={`navbar ${isOpen ? "active" : ""}`}>
           <ul className="item-navbar">
             {/* Boucle sur chaque élément du tableau nav pour créer les liens de navigation */}
             {nav.map((item) => (
               <li key={item.path || item.title}>
-                <NavLink to={item.path}>
-                  {item.title}
-                  {/* Si une icône est définie, elle est affichée à côté du texte */}
-                  {item.icon && (
-                    <img
-                      src={item.icon}
-                      alt={item.title || "Icone"}
-                      className="icon"
-                    />
-                  )}
-                </NavLink>
+                <NavLink to={item.path}>{item.title}</NavLink>
               </li>
             ))}
           </ul>

@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-around;
   background-color: #e7e2e1;
-  height: 120px;
+  height: 100px;
 }
 .item-navbar {
   display: flex;
@@ -21,70 +21,72 @@
   background-color: #e7e2e1;
   font-family: "Alice", cursive;
   font-weight: lighter;
-  padding: 0 20px 0 20px;
+  padding: 0 40px 0 40px;
 }
 
-
-
+.title-burger {
+  background-color: #e7e2e1;
+}
 /* Styles pour les petits smartphones */
 @media only screen and (max-width: 480px) {
-/* Masquer la navbar par défaut sur mobile */
-.navbar {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  background-color: #e7e2e1;
+  /* Masquer la navbar par défaut sur mobile */
+  .navbar {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e7e2e1;
+  }
+  .title-burger {
+    display: flex;
+    align-items: center;
+    background-color: #e7e2e1;
+  }
+  .nav {
+    background-color: #e7e2e1;
+  }
 
-}
-.nav{
-  background-color: #e7e2e1;
+  .navbar.active {
+    display: flex; /* Afficher le menu lorsque le burger est activé */
+  }
 
+  .item-navbar {
+    flex-direction: column;
+  }
 
-}
+  .item-navbar ul li a {
+    flex-direction: column;
+  }
 
-.navbar.active {
-  display: flex; /* Afficher le menu lorsque le burger est activé */
-}
+  .icon {
+    width: 20px;
+    margin-left: 5px;
+  }
+  .burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+    background-color: #e7e2e1;
+  }
 
-.item-navbar {
-  flex-direction: column;
-
-}
-
-.item-navbar ul li a {
-  flex-direction: column;
-}
-
-.icon {
-  width: 20px;
-  margin-left: 5px;
-}
-.burger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 25px;
-  height: 20px;
-  cursor: pointer;
-  background-color: #e7e2e1;
-}
-
-.burger div {
-  width: 100%;
-  height: 3px;
-  background-color: black;
-}
+  .burger div {
+    width: 100%;
+    height: 3px;
+    background-color: black;
+  }
   /* Transformation en croix lors de l'ouverture du menu */
   .burger.open div:nth-child(1) {
     transform: rotate(45deg);
     position: relative;
     top: 8px;
   }
-  
+
   .burger.open div:nth-child(2) {
     opacity: 0;
   }
-  
+
   .burger.open div:nth-child(3) {
     transform: rotate(-45deg);
     position: relative;
@@ -93,15 +95,11 @@
   .item-navbar a {
     font-size: 1rem;
     color: black;
- 
   }
-  }
+}
 
 @media only screen and (min-width: 481px) and (max-width: 900px) {
-
-   
 }
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
   /* Styles pour les tablettes */
-
 }
