@@ -2,12 +2,16 @@
   font-family: "Alice";
   src: url("/public/Fonts/Alice-Regular.ttf") format("truetype");
 }
+
 .navbar {
-  display: flex;
+  display: flex; /* Afficher la navbar par défaut sur les écrans larges */
   justify-content: space-around;
   background-color: #e7e2e1;
-  height: 100px;
+  height: 100px; /* Ajustez la hauteur si nécessaire */
+  position: relative; /* Assurez-vous que la navbar est dans le flux normal */
+  z-index: 10; /* Assurez-vous que la navbar est au-dessus des autres éléments */
 }
+
 .item-navbar {
   display: flex;
   align-items: center;
@@ -27,40 +31,30 @@
 .title-burger {
   background-color: #e7e2e1;
 }
+
 /* Styles pour les petits smartphones */
 @media only screen and (max-width: 480px) {
-  /* Masquer la navbar par défaut sur mobile */
   .navbar {
-    display: none;
+    display: none; /* Masquer la navbar par défaut sur mobile */
     flex-direction: column;
     align-items: center;
     background-color: #e7e2e1;
   }
+
   .title-burger {
     display: flex;
     align-items: center;
     background-color: #e7e2e1;
   }
-  .nav {
-    background-color: #e7e2e1;
-  }
 
   .navbar.active {
-    display: flex; /* Afficher le menu lorsque le burger est activé */
+    display: flex; /* Afficher la navbar lorsque le burger est activé */
   }
 
   .item-navbar {
     flex-direction: column;
   }
 
-  .item-navbar ul li a {
-    flex-direction: column;
-  }
-
-  .icon {
-    width: 20px;
-    margin-left: 5px;
-  }
   .burger {
     display: flex;
     flex-direction: column;
@@ -68,7 +62,8 @@
     width: 25px;
     height: 20px;
     cursor: pointer;
-    background-color: #e7e2e1;
+    margin-right: 20px;
+    margin-top: 15px; 
   }
 
   .burger div {
@@ -76,6 +71,7 @@
     height: 3px;
     background-color: black;
   }
+
   /* Transformation en croix lors de l'ouverture du menu */
   .burger.open div:nth-child(1) {
     transform: rotate(45deg);
@@ -92,14 +88,19 @@
     position: relative;
     top: -8px;
   }
+
   .item-navbar a {
     font-size: 1rem;
     color: black;
+    display: flex;
+    flex-direction: column;
+    position: relative;
   }
 }
 
 @media only screen and (min-width: 481px) and (max-width: 900px) {
 }
+
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
   /* Styles pour les tablettes */
 }

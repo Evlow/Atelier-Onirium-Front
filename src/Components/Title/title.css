@@ -1,8 +1,10 @@
 .title {
   background-color: #e7e2e1;
   display: flex;
-  justify-content: space-around; /* Séparer le titre à gauche et les icônes à droite */
+  justify-content: space-evenly; 
   align-items: center;
+  padding-top: 20px;
+
 }
 
 .icon-compte {
@@ -12,10 +14,8 @@
 }
 
 .title h1 {
-  text-align: left;
   background-color: #e7e2e1;
   font-size: 7rem;
-  padding-left: 50px;
 }
 
 hr {
@@ -30,19 +30,23 @@ hr {
 @media only screen and (max-width: 480px) {
   .title {
     padding-left: 10px;
-    padding-right: 10px; /* Ajouter un peu d'espace à droite */
+    padding-right: 10px; 
   }
-
+.icon {
+  width: 60px;
+}
   .title h1 {
-    font-size: 2.5rem;
-    padding-left: 0; /* Supprimer le padding excessif sur mobile */
+    font-size: 2.7rem;
   }
 
   hr {
     display: none;
   }
 }
+.icon-compte {
 
+  gap: 15px;
+}
 /* Styles pour les tailles intermédiaires */
 @media only screen and (min-width: 481px) and (max-width: 900px) {
   .title h1 {
