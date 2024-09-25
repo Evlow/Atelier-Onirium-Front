@@ -1,19 +1,23 @@
-
-
 .title {
-  z-index: 5; /* Place le titre en dessous de la navbar et du burger */
-  position: relative;
   background-color: #e7e2e1;
+  display: flex;
+  justify-content: space-around; /* Séparer le titre à gauche et les icônes à droite */
+  align-items: center;
+}
 
+.icon-compte {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
 .title h1 {
-  text-align: center;
+  text-align: left;
   background-color: #e7e2e1;
-  font-size: 9rem;
-
-  padding-top: 20px;
+  font-size: 7rem;
+  padding-left: 50px;
 }
+
 hr {
   margin: 0 auto;
   background-color: #640a02;
@@ -21,32 +25,33 @@ hr {
   height: 4px;
   width: 80%;
 }
+
 /* Styles pour les petits smartphones */
 @media only screen and (max-width: 480px) {
-  .title h1 {
-  
-    font-size: 3rem;
-  
+  .title {
+    padding-left: 10px;
+    padding-right: 10px; /* Ajouter un peu d'espace à droite */
   }
-  hr{
-    display: none;
 
+  .title h1 {
+    font-size: 2.5rem;
+    padding-left: 0; /* Supprimer le padding excessif sur mobile */
+  }
+
+  hr {
+    display: none;
   }
 }
 
+/* Styles pour les tailles intermédiaires */
 @media only screen and (min-width: 481px) and (max-width: 900px) {
   .title h1 {
-  
     font-size: 3rem;
-  
   }
- 
 }
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
-/* Styles pour les tablettes */
-.title h1 {
-  
-  font-size: 5rem;
 
-}
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .title h1 {
+    font-size: 5rem;
+  }
 }
