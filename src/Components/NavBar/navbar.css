@@ -25,9 +25,11 @@
   background-color: #e7e2e1;
   font-family: "Alice", cursive;
   font-weight: lighter;
-  padding: 0 40px 0 40px;
 }
 
+.item-navbar li {
+  padding: 0 40px 0 40px;
+}
 .title-burger {
   background-color: #e7e2e1;
 }
@@ -120,22 +122,17 @@
     font-size: 1.2rem;
   }
 
-  /* Media query pour mobiles */
-  @media only screen and (max-width: 480px) {
-    .navbar {
-      display: none;
-    }
-
-    .title-burger {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      background-color: #e7e2e1;
-    }
-
-    .navbar.active {
-      display: flex;
-    }
+  /* Styles pour les tailles intermédiaires */
+@media only screen and (min-width: 481px) and (max-width: 900px) {
+  .item-navbar a {
+    font-size: 1rem;
   }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .item-navbar a {
+    font-size: 1rem;
+    
+  }
+}
 }
