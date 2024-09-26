@@ -21,28 +21,23 @@ export default function NavBar() {
   return (
     <>
       <div className="title-burger">
-        <Title />
-        <div className="nav">
-          <div
-            className={`burger ${isOpen ? "open" : ""}`}
-            onClick={toggleMenu}
-          >
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-        <nav className={`navbar ${isOpen ? "active" : ""}`}>
-          <ul className="item-navbar">
-            {/* Boucle sur chaque élément du tableau nav pour créer les liens de navigation */}
-            {nav.map((item) => (
-              <li key={item.path || item.title}>
-                <NavLink to={item.path}>{item.title}</NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+  <Title />
+  <div className={`burger ${isOpen ? "open" : ""}`} onClick={toggleMenu}>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <nav className={`navbar ${isOpen ? "active" : ""}`}>
+    <ul className="item-navbar">
+      {nav.map((item) => (
+        <li key={item.path || item.title}>
+          <NavLink to={item.path}>{item.title}</NavLink>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
     </>
   );
 }
