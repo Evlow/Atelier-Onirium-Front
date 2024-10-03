@@ -10,9 +10,9 @@ export default function HomePage() {
   const [creations, setCreations] = useState<Creation[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5247/api/Creation/GetCreations")
+    fetch("http://localhost:5000/api/Creation/GetCreations")
       .then((response) => {
-        console.log(response); // Ajouter ce log pour voir la réponse complète
+        console.log(response); 
         if (!response.ok) {
           throw new Error("Erreur dans la réponse de l'API");
         }
@@ -26,8 +26,9 @@ export default function HomePage() {
 
       <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />
-      <Footer></Footer>
       <ListCreations creations={creations} />
+
+      <Footer></Footer>
 
     </div>
   );
