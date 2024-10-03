@@ -4,7 +4,7 @@ import imgBanners from "../../Assets/Banniere.jpg";
 import Footer from "../../Components/Footer/footer";
 import { useEffect, useState } from "react";
 import { Creation } from "../../Models/Creations";
-import ListCreations from "../../Components/Creations/ListCreations";
+import CreationList from "../../Components/Creations/CreationList";
 
 export default function HomePage() {
   const [creations, setCreations] = useState<Creation[]>([]);
@@ -12,7 +12,7 @@ export default function HomePage() {
   useEffect(() => {
     fetch("http://localhost:5000/api/Creation/GetCreations")
       .then((response) => {
-        console.log(response); 
+        console.log(response);
         if (!response.ok) {
           throw new Error("Erreur dans la réponse de l'API");
         }
@@ -23,13 +23,11 @@ export default function HomePage() {
   }, []);
   return (
     <div>
-
       <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />
-      <ListCreations creations={creations} />
+      <CreationList creations={creations} />
 
       <Footer></Footer>
-
     </div>
   );
 }
