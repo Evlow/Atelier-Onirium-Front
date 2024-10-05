@@ -6,7 +6,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Creation } from "../../Models/Creations";
-import "./CreationCard.css";
 
 // Définition de l'interface Props
 interface Props {
@@ -22,14 +21,14 @@ const CreationCard: React.FC<Props> = ({ creation }) => {
           height="300"
           image={creation.pictureUrl}
           alt={creation.name}
-          sx={{ objectFit: "cover" }} // Pour que l'image reste bien ajustée
+          sx={{ objectFit: "cover" }} 
         />
         <CardContent>
           <Typography
             gutterBottom
             variant="h5"
             component="div"
-            textAlign="center" // Texte centré
+            textAlign="center" 
           >
             {creation.name}
           </Typography>
