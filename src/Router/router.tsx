@@ -6,6 +6,7 @@ import Locations from "../Pages/Locations/locations";
 import WorkshopCreation from "../Pages/WorkshopCreation/workshopCreation";
 import Contact from "../Pages/Contact/contact";
 import PrivatePolicy from "../Pages/PrivacyPolicy/privatePolicy";
+import CreationDetails from "../Components/Creations/CreationDetails";
 
 
 export const Router = createBrowserRouter([
@@ -20,7 +21,7 @@ export const Router = createBrowserRouter([
         { path: "locations", element: <Locations /> },
         { path: "me-contacter", element: <Contact /> },
         { path: "politique-de-confidentialite", element: <PrivatePolicy /> },
-
+        {path:":id", element:<CreationDetails />}
 
 
       ],
