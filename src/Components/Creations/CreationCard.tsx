@@ -21,14 +21,14 @@ const CreationCard: React.FC<Props> = ({ creation }) => {
           height="300"
           image={creation.pictureUrl}
           alt={creation.name}
-          sx={{ objectFit: "cover" }} 
+          sx={{ objectFit: "cover" }}
         />
         <CardContent>
           <Typography
             gutterBottom
             variant="h5"
             component="div"
-            textAlign="center" 
+            textAlign="center"
           >
             {creation.name}
           </Typography>
@@ -37,7 +37,7 @@ const CreationCard: React.FC<Props> = ({ creation }) => {
             component="div"
             textAlign="center" // Texte centré
           >
-            {creation.price}€
+            {(creation.price).toFixed(2)}€
           </Typography>
         </CardContent>
       </CardActionArea>
