@@ -6,6 +6,7 @@ import { Creation } from "../../Models/Creations";
 import WorkshopCreation from '../../Pages/WorkshopCreation/workshopCreation';
 import NavBar from "../NavBar/navbar";
 import Footer from "../Footer/footer";
+import agent from "../../App/Api/agent";
 
 export default function CreationDetails() {
   const { id } = useParams<{ id: string }>();
@@ -13,8 +14,8 @@ export default function CreationDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/Creation/CreationId/${id}`)
+    id &&
+agent.Creations.details(parseInt(id))
       .then((response) => {
         setCreation(response.data);
       })
