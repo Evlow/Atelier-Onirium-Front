@@ -8,23 +8,19 @@ import PrivatePolicy from "../Pages/PrivacyPolicy/privatePolicy";
 import CreationDetails from "../Components/Creations/CreationDetails";
 import Locations from "../Pages/Locations/locations";
 
-
 export const Router = createBrowserRouter([
-    {
-      path: "/",
-      element: <App />,
-      children: [
-        { path: "/", element: <HomePage /> },
-        { path: "accueil", element: <HomePage /> },
-        { path: "creations-atelier", element: <WorkshopCreation/> },
-        { path: "galerie-exposition", element: <ExpoGallery /> },
-        { path: "locations", element: <Locations /> },
-        { path: "me-contacter", element: <Contact /> },
-        { path: "politique-de-confidentialite", element: <PrivatePolicy /> },
-        {path:":id", element:<CreationDetails />}
-
-
-      ],
-    },
-  ]);
-  
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "accueil", element: <HomePage /> },
+      { path: "creations-atelier", element: <WorkshopCreation /> },
+      { path: "galerie-exposition", element: <ExpoGallery /> },
+      { path: "locations", element: <Locations /> },
+      { path: "me-contacter", element: <Contact /> },
+      { path: "politique-de-confidentialite", element: <PrivatePolicy /> },
+      { path: ":id", element: <CreationDetails /> },
+    ],
+  },
+]);
