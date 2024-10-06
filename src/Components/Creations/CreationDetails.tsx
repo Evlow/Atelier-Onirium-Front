@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Divider, Grid2, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
+import { Grid2, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Creation } from "../../Models/Creations";
@@ -17,8 +17,7 @@ export default function CreationDetails() {
     id &&
 agent.Creations.details(parseInt(id))
       .then((response) => {
-        setCreation(response.data);
-      })
+        setCreation(response)      })
       .catch((error) => {
         console.log(error);
       })
