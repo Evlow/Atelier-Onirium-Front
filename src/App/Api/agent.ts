@@ -17,7 +17,8 @@ const requests = {
 // Objet pour gérer les créations (Atelier)
 const Creations = {
     list: () => requests.get('Creation/GetCreations'), // Récupère la liste des créations
-    details: (id: number) => requests.get(`Creation/CreationId/${id}`) // Récupère les détails d'une création spécifique par ID
+    details: (id: number) => requests.get(`Creation/CreationId/${id}`), // Récupère les détails d'une création spécifique par ID
+    detail: (name: string) => requests.get(`Creation/CreationByName/${name}`) // Récupère les détails d'une création par nom
 }
 
 // Objet pour tester la gestion des erreurs

@@ -17,8 +17,7 @@ export default function CreationDetails() {
     id &&
 agent.Creations.details(parseInt(id))
       .then((response) => {
-        setCreation(response);
-      })
+        setCreation(response)      })
       .catch((error) => {
         console.log(error);
       })
