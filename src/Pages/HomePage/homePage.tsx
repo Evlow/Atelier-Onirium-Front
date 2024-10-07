@@ -6,20 +6,22 @@ import { useEffect, useState } from "react";
 import { Creation } from "../../Models/Creations";
 import CreationList from "../../Components/Creations/CreationList";
 import agent from "../../App/Api/agent";
+import Aside from '../../Admin/Aside/aside';
 
 export default function HomePage() {
-  const [creations, setCreations] = useState<Creation[]>([]);
+  // const [creations, setCreations] = useState<Creation[]>([]);
 
-  useEffect(() => {
-    agent.Creations.list().then(creations =>setCreations(creations))
-  }, [])
+  // useEffect(() => {
+  //   agent.Creations.list().then(creations =>setCreations(creations))
+  // }, [])
   return (
     <div>
-      <NavBar></NavBar>
+      <Aside></Aside>
+      {/* <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />
       <CreationList creations={creations} />
 
-      <Footer></Footer>
+      <Footer></Footer> */}
     </div>
   );
 }
