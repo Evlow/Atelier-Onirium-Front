@@ -5,7 +5,7 @@ import Title from "../Title/title";
 
 // Déclaration d'un tableau d'objets représentant les liens de navigation
 const nav = [
-  { title: "ACCUEIL", path: "/accueil" },
+  { title: "dashboard", path: "/dashboard" },
   { title: "CRÉATIONS DE L'ATELIER", path: "/creations-atelier" },
   { title: "GALERIE D'EXPOSITION", path: "/galerie-exposition" },
   { title: "LOCATIONS", path: "/locations" },
