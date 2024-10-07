@@ -3,7 +3,6 @@ import { Grid2, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Creation } from "../../Models/Creations";
-import WorkshopCreation from '../../Pages/WorkshopCreation/workshopCreation';
 import NavBar from "../NavBar/navbar";
 import Footer from "../Footer/footer";
 import agent from "../../App/Api/agent";
