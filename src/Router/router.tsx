@@ -7,6 +7,7 @@ import Contact from "../Pages/Contact/contact";
 import PrivatePolicy from "../Pages/PrivacyPolicy/privatePolicy";
 import CreationDetails from "../Components/Creations/CreationDetails";
 import Locations from "../Pages/Locations/locations";
+import Aside from "../Admin/Aside/aside";
 
 export const Router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ export const Router = createBrowserRouter([
       { path: "me-contacter", element: <Contact /> },
       { path: "politique-de-confidentialite", element: <PrivatePolicy /> },
       { path: ":id", element: <CreationDetails /> },
+      {path : "admin", element : <Aside></Aside>}
     ],
   },
 ]);
