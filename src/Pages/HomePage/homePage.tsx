@@ -7,6 +7,7 @@ import { Creation } from "../../Models/Creations";
 import CreationList from "../../Components/Creations/CreationList";
 import agent from "../../App/Api/agent";
 import Aside from '../../Admin/Aside/aside';
+import NavBarAdmin from '../../Admin/NavBarAdmin/NavBarAdmin';
 
 export default function HomePage() {
   // const [creations, setCreations] = useState<Creation[]>([]);
@@ -16,6 +17,7 @@ export default function HomePage() {
   // }, [])
   return (
     <div>
+      <NavBarAdmin></NavBarAdmin>
       <Aside></Aside>
       {/* <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />

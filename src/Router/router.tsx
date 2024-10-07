@@ -8,6 +8,7 @@ import CreationDetails from "../Components/Creations/CreationDetails";
 import Locations from "../Pages/Locations/locations";
 import Aside from "../Admin/Aside/aside";
 import WorkshopCreation from "../Pages/WorkshopCreation/workshopCreation";
+import NavBarAdmin from "../Admin/NavBarAdmin/NavBarAdmin";
 
 export const Router = createBrowserRouter([
   {
@@ -22,7 +23,9 @@ export const Router = createBrowserRouter([
       { path: "me-contacter", element: <Contact /> },
       { path: "politique-de-confidentialite", element: <PrivatePolicy /> },
       { path: ":id", element: <CreationDetails /> },
-      {path : "admin", element : <Aside></Aside>}
+      {path : "admin", element : <Aside></Aside>},
+      {path : "navBarAdmin", element : <NavBarAdmin></NavBarAdmin>}
+
     ],
   },
 ]);
