@@ -31,7 +31,7 @@ export default function Aside() {
           alignItems: 'center', 
           justifyContent: 'center', 
           marginBottom: '20px', 
-          border: "2px solid black", 
+          border: "2px solid #640a02", 
           borderRadius: "20px", 
           height: "85px", 
           padding: '10px' 
