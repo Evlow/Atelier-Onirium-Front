@@ -8,6 +8,8 @@ import CreationList from "../../Components/Creations/CreationList";
 import agent from "../../App/Api/agent";
 import Aside from '../../Admin/Aside/aside';
 import NavBarAdmin from '../../Admin/NavBarAdmin/NavBarAdmin';
+import ServerError from "../../App/Errors/serverError";
+import AboutPage from "../../Components/AboutPage/aboutPage";
 
 export default function HomePage() {
   // const [creations, setCreations] = useState<Creation[]>([]);
@@ -19,6 +21,7 @@ export default function HomePage() {
     <div>
       <NavBarAdmin></NavBarAdmin>
       <Aside></Aside>
+      <AboutPage></AboutPage>
       {/* <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />
       <CreationList creations={creations} />
