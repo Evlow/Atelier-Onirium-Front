@@ -4,14 +4,15 @@ import { createBrowserHistory } from 'history';
 
 // Configuration de la base URL pour toutes les requêtes Axios
 axios.defaults.baseURL = "http://localhost:5000/api/";
-
+ const sleep =() => new Promise (resolve => setTimeout(resolve, 1000))
 // Fonction utilitaire pour extraire les données de la réponse Axios
 const responseBody = (response: AxiosResponse) => response.data;
 
 const history = createBrowserHistory(); // Utiliser history pour la navigation
 
 axios.interceptors.response.use(
-    (response) => {
+async response=> {
+    await sleep();
         return response;
     },
     (error: AxiosError) => {

@@ -6,27 +6,27 @@ import { useEffect, useState } from "react";
 import { Creation } from "../../Models/Creations";
 import CreationList from "../../Components/Creations/CreationList";
 import agent from "../../App/Api/agent";
-import Aside from '../../Admin/Aside/aside';
-import NavBarAdmin from '../../Admin/NavBarAdmin/NavBarAdmin';
-import ServerError from "../../App/Errors/serverError";
-import AboutPage from "../../Components/AboutPage/aboutPage";
+import LoadingComponent from '../../Components/Laoding/laodingComponent';
 
 export default function HomePage() {
-  // const [creations, setCreations] = useState<Creation[]>([]);
+  const [creations, setCreations] = useState<Creation[]>([]);
+const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    agent.Creations.list().then(creations =>setCreations(creations))
+    .catch(error=>console.log(error))
+    .finally(() =>setLoading(false))
+  }, [])
 
-  // useEffect(() => {
-  //   agent.Creations.list().then(creations =>setCreations(creations))
-  // }, [])
+  if (loading) return <LoadingComponent message= "Chargement de la page en cours, veuillez patienter..."></LoadingComponent>
   return (
     <div>
-      <NavBarAdmin></NavBarAdmin>
+      {/* <NavBarAdmin></NavBarAdmin>
       <Aside></Aside>
-      <AboutPage></AboutPage>
-      {/* <NavBar></NavBar>
+      <AboutPage></AboutPage> */}
+      <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />
       <CreationList creations={creations} />
-
-      <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 }
