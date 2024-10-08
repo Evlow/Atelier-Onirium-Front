@@ -6,6 +6,8 @@ import { Creation } from "../../Models/Creations";
 import NavBar from "../NavBar/navbar";
 import Footer from "../Footer/footer";
 import agent from "../../App/Api/agent";
+import LoadingComponent from "../Laoding/laodingComponent";
+import NotFound from "../../App/Errors/notFound";
 
 export default function CreationDetails() {
   const { id } = useParams<{ id: string }>();
@@ -26,13 +28,12 @@ agent.Creations.details(parseInt(id))
   }, [id]);
 
   if (loading) {
-    return <Typography>Patience, les créations arrivent...</Typography>;
+    if (loading) return <LoadingComponent message= "Chargement du détails des créations, veuillez patienter..."></LoadingComponent>
   }
 
   if (!creation) {
-    return <Typography>Désolée, aucune création n'a été trouvée...</Typography>;
+    return <NotFound></NotFound>
   }
-
   return (
     <div>
 <NavBar/>

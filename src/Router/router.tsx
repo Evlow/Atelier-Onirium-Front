@@ -1,5 +1,5 @@
 import App from "../App";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import ExpoGallery from "../Pages/ExpoGallery/expoGallery";
 import HomePage from "../Pages/HomePage/homePage";
 import Contact from "../Pages/Contact/contact";
@@ -9,6 +9,8 @@ import Locations from "../Pages/Locations/locations";
 import Aside from "../Admin/Aside/aside";
 import WorkshopCreation from "../Pages/WorkshopCreation/workshopCreation";
 import NavBarAdmin from "../Admin/NavBarAdmin/NavBarAdmin";
+import ServerError from "../App/Errors/serverError";
+import NotFound from "../App/Errors/notFound";
 
 export const Router = createBrowserRouter([
   {
@@ -24,7 +26,12 @@ export const Router = createBrowserRouter([
       { path: "politique-de-confidentialite", element: <PrivatePolicy /> },
       { path: ":id", element: <CreationDetails /> },
       {path : "admin", element : <Aside></Aside>},
-      {path : "navBarAdmin", element : <NavBarAdmin></NavBarAdmin>}
+      {path : "navBarAdmin", element : <NavBarAdmin></NavBarAdmin>},
+      {path : "server-error", element : <ServerError></ServerError>},
+      {path : "not-found", element : <NotFound></NotFound>},
+      {path : "*", element : <Navigate replace to="not-found"/>},
+
+
 
     ],
   },
