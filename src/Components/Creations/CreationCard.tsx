@@ -1,11 +1,16 @@
 import {
+  Button,
   Card,
   CardActionArea,
+  CardActions,
   CardContent,
   CardMedia,
   Typography,
 } from "@mui/material";
 import { Creation } from "../../Models/Creations";
+import { useState } from "react";
+import agent from "../../App/Api/agent";
+import { LoadingButton } from "@mui/lab";
 
 // Définition de l'interface Props
 interface Props {
@@ -13,6 +18,13 @@ interface Props {
 }
 
 const CreationCard: React.FC<Props> = ({ creation }) => {
+  const [loading, setLoading] = useState(false);
+  function handleAddItem(creationId: number) {
+    setLoading(true);
+    agent.Basket.addItem(creationId,)
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  }
   return (
     <Card sx={{ maxWidth: 300, margin: "auto", backgroundSize: "contain" }}>
       <CardActionArea>
@@ -37,10 +49,13 @@ const CreationCard: React.FC<Props> = ({ creation }) => {
             component="div"
             textAlign="center" // Texte centré
           >
-            {(creation.price).toFixed(2)}€
+            {creation.price.toFixed(2)}€
           </Typography>
         </CardContent>
       </CardActionArea>
+      <CardActions>
+        <LoadingButton loading={loading} onClick={() =>handleAddItem(creation.id)}size="small">Ajouter au panier</LoadingButton>
+      </CardActions>
     </Card>
   );
 };
