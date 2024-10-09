@@ -4,15 +4,16 @@ import { createBrowserHistory } from 'history';
 
 // Configuration de la base URL pour toutes les requêtes Axios
 axios.defaults.baseURL = "http://localhost:5000/api/";
- const sleep =() => new Promise (resolve => setTimeout(resolve, 1000))
+axios.defaults.withCredentials =true;
+const sleep = () => new Promise(resolve => setTimeout(resolve, 1000))
 // Fonction utilitaire pour extraire les données de la réponse Axios
 const responseBody = (response: AxiosResponse) => response.data;
 
 const history = createBrowserHistory(); // Utiliser history pour la navigation
 
 axios.interceptors.response.use(
-async response=> {
-    await sleep();
+    async response => {
+        await sleep();
         return response;
     },
     (error: AxiosError) => {
@@ -50,10 +51,13 @@ async response=> {
 // Objets contenant les méthodes de requêtes HTTP (GET, POST, PUT, DELETE)
 const requests = {
     get: (url: string) => axios.get(url).then(responseBody), // Effectue une requête GET
-    post: (url: string, body: {}) => axios.post(url, body).then(responseBody), // Effectue une requête POST
-    put: (url: string, body: {}) => axios.put(url, body).then(responseBody), // Effectue une requête PUT
-    delete: (url: string) => axios.delete(url).then(responseBody), // Effectue une requête DELETE
+    post: (url: string, body: object) => axios.post(url, body).then(responseBody), // Effectue une requête POST
+    put: (url: string, body: object) => axios.put(url, body).then(responseBody), // Effectue une requête PUT
+    delete: (url: string, p0: {}) => axios.delete(url).then(responseBody), // Effectue une requête DELETE
 };
+
+
+
 
 // Objet pour gérer les créations (Atelier)
 const Creations = {
@@ -61,6 +65,13 @@ const Creations = {
     details: (id: number) => requests.get(`Creation/CreationId/${id}`), // Récupère les détails d'une création spécifique par ID
     detail: (name: string) => requests.get(`Creation/CreationByName/${name}`) // Récupère les détails d'une création par nom
 };
+
+const Basket = {
+    get: () => requests.get(`Basket/GetBasket`),
+    addItem: (productId: number, quantity = 1) => requests.post(`Basket/${productId}/${quantity}`, {}),
+    removeItem: (productId: number, quantity = 1) => requests.delete(`Basket/${productId}/${quantity}`, {}),
+
+}
 
 // Objet pour tester la gestion des erreurs
 const TestErrors = {
@@ -74,7 +85,8 @@ const TestErrors = {
 // Agrégation des agents pour l'exportation
 const agent = {
     Creations,
-    TestErrors
+    TestErrors,
+    Basket
 };
 
 export default agent; // Exportation de l'objet agent pour une utilisation dans d'autres parties de l'application
