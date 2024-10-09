@@ -11,6 +11,7 @@ import WorkshopCreation from "../Pages/WorkshopCreation/workshopCreation";
 import NavBarAdmin from "../Admin/NavBarAdmin/NavBarAdmin";
 import ServerError from "../App/Errors/serverError";
 import NotFound from "../App/Errors/notFound";
+import BasketPage from "../Components/Basket/BasketPage";
 
 export const Router = createBrowserRouter([
   {
@@ -24,11 +25,13 @@ export const Router = createBrowserRouter([
       { path: "locations", element: <Locations /> },
       { path: "me-contacter", element: <Contact /> },
       { path: "politique-de-confidentialite", element: <PrivatePolicy /> },
-      { path: ":id", element: <CreationDetails /> },
+{ path:"/creations/:id", element:<CreationDetails />},
       {path : "admin", element : <Aside></Aside>},
       {path : "navBarAdmin", element : <NavBarAdmin></NavBarAdmin>},
       {path : "server-error", element : <ServerError></ServerError>},
       {path : "not-found", element : <NotFound></NotFound>},
+      {path : "Basket/GetBasket", element : <BasketPage></BasketPage>},
+
       {path : "*", element : <Navigate replace to="not-found"/>},
 
 

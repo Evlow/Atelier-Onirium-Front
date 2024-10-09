@@ -11,6 +11,7 @@ import LoadingComponent from '../../Components/Laoding/laodingComponent';
 export default function HomePage() {
   const [creations, setCreations] = useState<Creation[]>([]);
 const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     agent.Creations.list().then(creations =>setCreations(creations))
     .catch(error=>console.log(error))

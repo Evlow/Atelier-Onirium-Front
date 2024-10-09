@@ -3,7 +3,7 @@ import "./title.css";
 const icon = [
   {
     title: " Mon panier",
-    path: "",
+    path: "/Basket/GetBasket",
     icon: process.env.PUBLIC_URL + "/Images/panier.webp",
   },
   {
