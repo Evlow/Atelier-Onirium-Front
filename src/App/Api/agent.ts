@@ -69,7 +69,7 @@ const Creations = {
 const Basket = {
     get: () => requests.get(`Basket/GetBasket`),
     addItem: (creationId: number, quantity = 1) => requests.post(`Basket/AddItemToBasket/AddItemToBasket/${creationId}/${quantity}`, {}),
-    removeItem: (creationId: number, quantity = 1) => requests.delete(`Basket/RemoveBasketItem/RemoveBasketItem/${creationId}/${quantity}`, {}),
+    removeItem: (creationId: number, quantity = 1) => requests.delete(`Basket/RemoveBasketItem/DeleteItem/${creationId}/${quantity}`, {}),
 
 }
 
