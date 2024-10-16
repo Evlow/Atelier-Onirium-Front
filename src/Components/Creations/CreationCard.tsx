@@ -11,17 +11,21 @@ import { Creation } from "../../Models/Creations";
 import { useState } from "react";
 import agent from "../../App/Api/agent";
 import { LoadingButton } from "@mui/lab";
+import { useAtelierContext } from "../../App/Context/context";
 
 // Définition de l'interface Props
 interface Props {
   creation: Creation;
 }
 
-const CreationCard: React.FC<Props> = ({ creation }) => {
+ export default function CreationCard({ creation } :Props){
   const [loading, setLoading] = useState(false);
+  const {setBasket} =useAtelierContext();
+
   function handleAddItem(creationId: number) {
     setLoading(true);
     agent.Basket.addItem(creationId,)
+    .then(basket =>setBasket(basket))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   }
@@ -60,4 +64,3 @@ const CreationCard: React.FC<Props> = ({ creation }) => {
   );
 };
 
-export default CreationCard;
