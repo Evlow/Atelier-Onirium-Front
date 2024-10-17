@@ -32,7 +32,7 @@ export default function HomePage() {
       <NavBar></NavBar>
       <Banners imgBanner={imgBanners} />
       <Typography component="div" variant="body1" color="white" fontFamily="Gowun"   sx={{
-    margin: { xs: '10px', sm: '20px', md: '30px', lg: '40px' },
+    margin: { xs: '10px', sm: '20px', md: '30px', lg: '40px', border: "solid  #AD8A3D 2px" },
     padding: { xs: '5px', sm: '10px', md: '15px', lg: '20px' },
   }}>
         L'Atelier d'Onirium est avant tout un lieu où l'imagination prend vie à
