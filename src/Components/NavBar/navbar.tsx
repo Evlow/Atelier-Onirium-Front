@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import "./navbar.css";
+import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
 import Title from "../Title/title";
+import "./navbar.css";
 
-// Déclaration d'un tableau d'objets représentant les liens de navigation
+// Tableau d'objets représentant les liens de navigation
 const nav = [
   { title: "ACCUEIL", path: "/accueil" },
   { title: "CRÉATIONS DE L'ATELIER", path: "/creations-atelier" },
@@ -20,24 +22,40 @@ export default function NavBar() {
 
   return (
     <>
-      <div className="title-burger">
-  <Title />
-  <div className={`burger ${isOpen ? "open" : ""}`} onClick={toggleMenu}>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <nav className={`navbar ${isOpen ? "active" : ""}`}>
-    <ul className="item-navbar">
-      {nav.map((item) => (
-        <li key={item.path || item.title}>
-          <NavLink to={item.path}>{item.title}</NavLink>
-        </li>
-      ))}
-    </ul>
-  </nav>
-</div>
+      <AppBar position="static" className="app-bar">
+        <Toolbar className="toolbar">
+          {/* Titre */}
+          <Title />
 
+          {/* Menu burger */}
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={toggleMenu}
+            className="burger-button"
+          >
+            <MenuIcon />
+          </IconButton>
+
+          {/* Drawer pour le menu mobile */}
+          <Drawer anchor="right" open={isOpen} onClose={toggleMenu}>
+            <List className="drawer-list">
+              {nav.map((item) => (
+                <ListItem
+                  key={item.path}
+                  component={NavLink}
+                  to={item.path}
+                  onClick={toggleMenu}
+                  className="nav-link"
+                >
+                  <ListItemText primary={item.title} />
+                </ListItem>
+              ))}
+            </List>
+          </Drawer>
+        </Toolbar>
+      </AppBar>
     </>
   );
 }
