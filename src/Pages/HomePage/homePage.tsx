@@ -11,6 +11,8 @@ import { Box, Stack, Typography } from "@mui/material";
 import Home from "../../Assets/home.jpg";
 import Arabesque1 from "../../Assets/Arabesque1.svg";
 import Arabesque2 from "../../Assets/Arabesque2.svg";
+import creation from "../../Assets/creation.jpg";
+
 
 export default function HomePage() {
   const [creations, setCreations] = useState<Creation[]>([]);
@@ -25,38 +27,44 @@ export default function HomePage() {
 
   if (loading)
     return (
-      <LoadingComponent message="Chargement de la page en cours, veuillez patienter..."></LoadingComponent>
+      <LoadingComponent message="Chargement de la page en cours, veuillez patienter..." />
     );
 
   return (
     <div>
       <NavBar />
       <Banners imgBanner={imgBanners} />
+
+      {/* Section principale */}
       <Box width="80%" margin="0 auto">
+        {/* Titre principal */}
         <Typography
           variant="h2"
           color="white"
           fontFamily="Lovers"
           sx={{
-            margin: { xs: "10px", sm: "15px", md: "25px", lg: "25px" },
+            textAlign: "left",
+            fontSize: { xs: "3em", md: "6em" },
           }}
         >
           L'Atelier d'Onirium
         </Typography>
+
+        {/* Section de présentation */}
         <Stack
-          direction="row"
-          spacing={2}
-          sx={{
-            margin: { xs: "10px", sm: "15px", md: "25px", lg: "25px" },
-          }}
+          direction={{ xs: "column", md: "row" }}
+          spacing={4}
+          alignItems="center"
+          justifyContent="space-between"
         >
+          {/* Texte présentation */}
           <Typography
             component="div"
             variant="body1"
             sx={{
               color: "white",
               fontFamily: "Gowun",
-              flexBasis: "50%",
+              flex: 1,
               textAlign: "justify",
             }}
           >
@@ -85,27 +93,38 @@ export default function HomePage() {
             nouveaux, tout en redéfinissant les codes de la créativité et de
             l'innovation.
           </Typography>
+
+          {/* Image présentation */}
           <Box
             sx={{
-              flexBasis: "50%",
+              flex: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <img
               src={Home}
               alt="L'Atelier d'Onirium"
               style={{
-                maxWidth: "100%",
-                height: "75%",
-                marginLeft: "50px",
+                maxWidth: "80%",
+                height: "auto",
               }}
             />
           </Box>
         </Stack>
-
       </Box>
-      <Stack justifyContent="center" direction="row" spacing="2">
+
+      {/* Citation */}
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        direction="row"
+        spacing={2}
+        sx={{ marginTop: "70px", marginBottom: "70px" }}
+      >
         <Box>
-          <img src={Arabesque1} alt="Arabesque1" height="50px" />
+          <img src={Arabesque1} alt="Arabesque 1" height="40px" />
         </Box>
         <Typography
           component="div"
@@ -113,19 +132,88 @@ export default function HomePage() {
           sx={{
             color: "white",
             fontFamily: "Lovers",
-            textAlign: "justify",
-            margin: "0 auto",
+            textAlign: "center",
+            fontSize: { xs: "2.5em", md: "3.5em" },
           }}
         >
           Créer quelque chose d'unique, c'est donner vie à une idée qui
           n'existait nulle part ailleurs.
         </Typography>
         <Box>
-          <img src={Arabesque2} alt="Arabesque2" height="50px" />
+          <img src={Arabesque2} alt="Arabesque 2" height="50px" />
         </Box>
       </Stack>
+
+      {/* Liste des créations */}
+      <CreationList creations={creations.slice(0, 4)} />
+
       <Box width="80%" margin="0 auto">
-      <CreationList creations={creations} />
+        {/* Section création unique */}
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          spacing={4}
+          alignItems="flex-start"
+          justifyContent="space-between"
+          sx={{ marginTop: "50px" }}
+        >
+          {/* Image création unique */}
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={creation}
+              alt="Création unique"
+              style={{
+                maxWidth: "100%",
+                height: "auto",
+              }}
+            />
+          </Box>
+
+          {/* Conteneur pour le titre et la description */}
+          <Box flex={1}>
+            {/* Titre "Création Atelier" */}
+            <Typography
+              variant="h2"
+              color="white"
+              fontFamily="Lovers"
+              sx={{
+                textAlign: "left",
+                fontSize: { xs: "3em", md: "6em" },
+                marginBottom: "20px", 
+              }}
+            >
+              Les Créations de l'Atelier
+            </Typography>
+
+            {/* Texte création atelier */}
+            <Typography
+              component="div"
+              variant="body1"
+              sx={{
+                color: "white",
+                fontFamily: "Gowun",
+                textAlign: "justify",
+              }}
+            >
+              Mon univers est atypique, influencé par le fantastique, et j'aime
+              repousser les limites de ce qui est possible. Chaque création, qu'il
+              s'agisse de décors grandeur nature, d'impressions 3D, ou d'éléments
+              sur mesure comme des mugs personnalisés, est conçue pour sortir de
+              l'ordinaire et offrir une expérience visuelle et sensorielle unique.
+              <br />
+              <br />
+              Mon objectif est de vous inviter à rêver, à explorer des mondes
+              nouveaux, tout en redéfinissant les codes de la créativité et de
+              l'innovation.
+            </Typography>
+          </Box>
+        </Stack>
       </Box>
 
       <Footer />
