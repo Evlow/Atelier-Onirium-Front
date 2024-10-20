@@ -12,23 +12,16 @@ import Home from "../../Assets/home.jpg";
 import Arabesque1 from "../../Assets/Arabesque1.svg";
 import Arabesque2 from "../../Assets/Arabesque2.svg";
 import creation from "../../Assets/creation.jpg";
-
+import HomePageCarrousel from "../../Components/Carrousel/HomePageCarrousel";
 
 export default function HomePage() {
   const [creations, setCreations] = useState<Creation[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     agent.Creations.list()
       .then((creations) => setCreations(creations))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
+      .catch((error) => console.log(error));
   }, []);
-
-  if (loading)
-    return (
-      <LoadingComponent message="Chargement de la page en cours, veuillez patienter..." />
-    );
 
   return (
     <div>
@@ -144,9 +137,7 @@ export default function HomePage() {
         </Box>
       </Stack>
 
-      {/* Liste des créations */}
-      <CreationList creations={creations.slice(0, 4)} />
-
+      <HomePageCarrousel></HomePageCarrousel>
       <Box width="80%" margin="0 auto">
         {/* Section création unique */}
         <Stack
@@ -185,7 +176,7 @@ export default function HomePage() {
               sx={{
                 textAlign: "left",
                 fontSize: { xs: "3em", md: "6em" },
-                marginBottom: "20px", 
+                marginBottom: "20px",
               }}
             >
               Les Créations de l'Atelier
@@ -198,14 +189,15 @@ export default function HomePage() {
               sx={{
                 color: "white",
                 fontFamily: "Gowun",
-                textAlign: "justify",
+                textAlign: "center",
               }}
             >
               Mon univers est atypique, influencé par le fantastique, et j'aime
-              repousser les limites de ce qui est possible. Chaque création, qu'il
-              s'agisse de décors grandeur nature, d'impressions 3D, ou d'éléments
-              sur mesure comme des mugs personnalisés, est conçue pour sortir de
-              l'ordinaire et offrir une expérience visuelle et sensorielle unique.
+              repousser les limites de ce qui est possible. Chaque création,
+              qu'il s'agisse de décors grandeur nature, d'impressions 3D, ou
+              d'éléments sur mesure comme des mugs personnalisés, est conçue
+              pour sortir de l'ordinaire et offrir une expérience visuelle et
+              sensorielle unique.
               <br />
               <br />
               Mon objectif est de vous inviter à rêver, à explorer des mondes
@@ -214,8 +206,73 @@ export default function HomePage() {
             </Typography>
           </Box>
         </Stack>
-      </Box>
+        {/* Section gallerie expo */}
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          spacing={4}
+          alignItems="flex-start"
+          justifyContent="space-between"
+          sx={{ marginTop: "50px" }}
+        >
+          {/* Conteneur pour le titre et la description */}
+          <Box flex={1}>
+            {/* Titre "Galerie Expo" */}
+            <Typography
+              variant="h2"
+              color="white"
+              fontFamily="Lovers"
+              sx={{
+                textAlign: "left",
+                fontSize: { xs: "3em", md: "6em" },
+                marginBottom: "20px",
+              }}
+            >
+              La Galerie d'Exposition
+            </Typography>
 
+            {/* Texte galerie exposition */}
+            <Typography
+              component="div"
+              variant="body1"
+              sx={{
+                color: "white",
+                fontFamily: "Gowun",
+                textAlign: "center",
+              }}
+            >
+              Mon univers est atypique, influencé par le fantastique, et j'aime
+              repousser les limites de ce qui est possible. Chaque création,
+              qu'il s'agisse de décors grandeur nature, d'impressions 3D, ou
+              d'éléments sur mesure comme des mugs personnalisés, est conçue
+              pour sortir de l'ordinaire et offrir une expérience visuelle et
+              sensorielle unique.
+              <br />
+              <br />
+              Mon objectif est de vous inviter à rêver, à explorer des mondes
+              nouveaux, tout en redéfinissant les codes de la créativité et de
+              l'innovation.
+            </Typography>
+          </Box>
+          {/* Image galerie expo */}
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={creation}
+              alt="Galerie Exposition"
+              style={{
+                maxWidth: "100%",
+                height: "auto",
+              }}
+            />
+          </Box>
+        </Stack>
+      </Box>
       <Footer />
     </div>
   );

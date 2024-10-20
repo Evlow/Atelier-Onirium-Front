@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@better-scroll/mouse-wheel": "^2.5.1",
     "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.2",
     "@mui/lab": "^6.0.0-beta.11",
-    "@mui/material": "^6.1.2",
+    "@mui/material": "^6.1.4",
     "@mui/styled-engine-sc": "^6.1.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -23,8 +24,11 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.30.2",
+    "react-swiper": "^0.1.5",
     "react-toastify": "^10.0.5",
     "styled-components": "^6.1.13",
+    "swiper": "^11.1.14",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -53,6 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@types/history": "^4.7.11"
+    "@types/history": "^4.7.11",
+    "@types/swiper": "^5.4.3"
   }
 }
