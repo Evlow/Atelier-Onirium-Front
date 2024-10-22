@@ -1,10 +1,8 @@
-.swiper-pagination-bullet {
-    background-color: grey ; 
-  }
-  
-  .swiper-pagination-bullet-active {
-    background-color: #AD8A3D;
-  }
 
-  .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet{    background-color: #AD8A3D;
-  }
+
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+  background-color: #AD8A3D;
+}
+.swiper-pagination{
+  position:static !important;
+}
