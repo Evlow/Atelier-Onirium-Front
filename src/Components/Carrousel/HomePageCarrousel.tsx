@@ -11,11 +11,10 @@ import CreationCardCarrousel from "./CreationCardCarrousel"; // Assurez-vous d'i
 import { Typography } from "@mui/material";
 import "swiper/css";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 export default function HomePageCarrousel() {
   const [creations, setCreations] = useState<Creation[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null); // Pour gérer les erreurs
 
   useEffect(() => {
     const fetchCreations = async () => {
@@ -24,26 +23,11 @@ export default function HomePageCarrousel() {
         setCreations(creationsData);
       } catch (error) {
         console.error("Erreur lors de la récupération des créations:", error);
-        setError("Une erreur s'est produite lors du chargement des créations."); // Gérer les erreurs
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
 
     fetchCreations();
   }, []);
-
-  // Si le chargement est en cours
-  if (loading) {
-    return (
-      <LoadingComponent message="Chargement des créations, veuillez patienter..." />
-    );
-  }
-
-  // Si une erreur est survenue
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <div style={{ padding: "20px" }}>
@@ -67,7 +51,12 @@ export default function HomePageCarrousel() {
       >
         {creations.map((creation) => (
           <SwiperSlide key={creation.id}>
-            <CreationCardCarrousel creation={creation} />
+            <Link
+              to={`/creations/${creation.id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <CreationCardCarrousel creation={creation} />
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
