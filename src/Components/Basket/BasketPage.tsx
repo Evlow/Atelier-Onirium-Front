@@ -1,22 +1,15 @@
-import { Box, IconButton } from "@mui/material";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Box, Grid2, Paper, Stack, Typography } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import { useAtelierContext } from "../../App/Context/context";
 import { useState } from "react";
 import agent from "../../App/Api/agent";
 import { LoadingButton } from "@mui/lab";
 import NavBar from "../NavBar/navbar";
+import "./BasketPage.css";
+import Footer from "../Footer/footer";
+
 export default function BasketPage() {
-  const { basket, setBasket, removeItem } = useAtelierContext();
+  const { basket, setBasket } = useAtelierContext();
   const [loading, setLoading] = useState(false);
 
   function handleAddItem(productId: number) {
@@ -34,67 +27,90 @@ export default function BasketPage() {
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   }
-  //TODO : PROBLEME PANIER
-  if (!basket)
+
+  if (!basket) {
     return (
-      <Typography variant="h3" color="white" fontFamily={"alice"}>
+      <Typography variant="h3" color="white" fontFamily={"Alice"}>
         Votre panier est vide
       </Typography>
     );
+  }
+
+  // Calculer le total
+  const total = basket.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <>
-      <NavBar></NavBar>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell align="right">Créations</TableCell>
-              <TableCell align="right">Prix</TableCell>
-              <TableCell align="right">Quantité</TableCell>
-              <TableCell align="right">Total</TableCell>
-              <TableCell align="right"></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {basket.items.map((item) => (
-              <TableRow
-                key={item.creationId}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <Box display="flex" alignItems="center">
+      <NavBar />
+
+      <Box width="80%" margin="0 auto" marginTop={"20px"}>
+        <Typography
+          fontFamily={"Gowun"}
+          fontSize={"1.5rem"}
+          color="white"
+          textAlign={"center"}
+        >
+          Récapitulatif de mon panier
+        </Typography>
+        <Grid2 display="flex" spacing={2}>
+          {/* Section du panier */}
+          <Box flex={2} marginRight={2}>
+            <Stack component={Paper} bgcolor={"#E7E2E1"}>
+              {basket.items.map((item) => (
+                <Box
+                  key={item.creationId}
+                  sx={{
+                    padding: "10px",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    borderBottom: "1px solid #ccc",
+                  }}
+                >
+                  <Box>
                     <img
                       src={item.pictureUrl}
                       alt={item.name}
-                      style={{ height: 50, marginRight: 20 }}
+                      style={{ width: 150 }}
                     />
-                    <span>{item.name}</span>
                   </Box>
-                </TableCell>
-                <TableCell align="right">{item.price}€</TableCell>
-                <TableCell align="right">{item.quantity}</TableCell>
-                <TableCell align="right">
-                  {item.price * item.quantity}€
-                </TableCell>
-                <TableCell align="right">
-                  <LoadingButton
-                    loading={loading}
-                    onClick={() => handleRemoveItem(item.creationId)}
-                    color="error"
+                  <Box sx={{ paddingLeft: "10px" }}>
+                    <Typography fontFamily={"Gowun"} color="black">
+                      {item.name}
+                    </Typography>
+                    <Typography fontFamily={"Gowun"} color="black">
+                      {item.price}€
+                    </Typography>
+                  </Box>
+                  <Box display="flex" alignItems="center" marginLeft="auto">
+                    <LoadingButton
+                      loading={loading}
+                      onClick={() => handleRemoveItem(item.creationId)}
+                      sx={{ minWidth: "30px", marginRight: "5px" }}
+                    >
+                      <Remove />
+                    </LoadingButton>
+                    <Typography
+                      padding={"0 10px"}
+                      fontFamily={"Gowun"}
+                      color="black"
+                    >
+                      {item.quantity}
+                    </Typography>
+                    <LoadingButton
+                      loading={loading}
+                      onClick={() => handleAddItem(item.creationId)}
+                      sx={{ minWidth: "20px", marginLeft: "5px" }}
+                    >
+                      <Add />
+                    </LoadingButton>
+                  </Box>
+                  <Typography
+                    fontFamily={"Gowun"}
+                    color="black"
+                    padding={"10px"}
                   >
-                    <Remove />
-                  </LoadingButton>
-                  {item.quantity}
-                  <LoadingButton
-                    loading={loading}
-                    onClick={() => handleAddItem(item.creationId)}
-                    color="primary"
-                  >
-                    <Add />
-                  </LoadingButton>
-                </TableCell>
-                <TableCell align="right">
+                    {item.quantity * item.price}€
+                  </Typography>
                   <LoadingButton
                     loading={loading}
                     onClick={() =>
@@ -104,12 +120,25 @@ export default function BasketPage() {
                   >
                     <Delete />
                   </LoadingButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                </Box>
+              ))}
+            </Stack>
+          </Box>
+
+          {/* Section Total */}
+          <Box flex={1}>
+            <Stack component={Paper} bgcolor={"#E7E2E1"}>
+              <Typography fontFamily={"Gowun"} fontSize={"1.5rem"} color="red">
+                Total
+              </Typography>
+              <Typography color="red" marginTop={2} fontSize={"1.2rem"}>
+                {total}€
+              </Typography>
+            </Stack>
+          </Box>
+        </Grid2>
+      </Box>
+      <Footer />
     </>
   );
 }
