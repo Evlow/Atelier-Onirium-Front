@@ -58,7 +58,7 @@ const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0) ||
       </IconButton>
     ))}
   </Toolbar>
-  <hr />
+  <hr className="hr-title"/>
 </AppBar>
 
     
