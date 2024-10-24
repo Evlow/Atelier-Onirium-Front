@@ -7,6 +7,7 @@ import { LoadingButton } from "@mui/lab";
 import NavBar from "../NavBar/navbar";
 import "./BasketPage.css";
 import Footer from "../Footer/footer";
+import { Link } from "react-router-dom"; // Correct import
 
 export default function BasketPage() {
   const { basket, setBasket } = useAtelierContext();
@@ -37,60 +38,87 @@ export default function BasketPage() {
   }
 
   // Calculer le total
-  const total = basket.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const total = basket.items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   return (
     <>
       <NavBar />
-
-      <Box width="80%" margin="0 auto" marginTop={"20px"}>
+      <Box width="80%" margin="20px auto">
         <Typography
           fontFamily={"Gowun"}
           fontSize={"1.5rem"}
           color="white"
-          textAlign={"center"}
+          padding={"20px 0 20px 0"}
         >
-          Récapitulatif de mon panier
+          Mon panier
         </Typography>
-        <Grid2 display="flex" spacing={2}>
+        <Grid2 container spacing={2}>
           {/* Section du panier */}
-          <Box flex={2} marginRight={2}>
+          <Grid2 size={{ xs: 12, md: 8 }}>
             <Stack component={Paper} bgcolor={"#E7E2E1"}>
               {basket.items.map((item) => (
                 <Box
                   key={item.creationId}
                   sx={{
-                    padding: "10px",
+                    margin: "10px",
                     display: "flex",
-                    alignItems: "flex-start",
-                    borderBottom: "1px solid #ccc",
+                    flexDirection: { xs: "column", md: "row" },
+                    alignItems: "center",
+                    borderBottom: "1px solid #640a02",
                   }}
                 >
                   <Box>
                     <img
                       src={item.pictureUrl}
                       alt={item.name}
-                      style={{ width: 150 }}
+                      style={{ width: 100 }}
                     />
                   </Box>
-                  <Box sx={{ paddingLeft: "10px" }}>
-                    <Typography fontFamily={"Gowun"} color="black">
+                  <Box sx={{ padding: "0 20px", flexGrow: 1 }}>
+                    <Typography
+                      textAlign={"center"}
+                      fontWeight={"bold"}
+                      fontFamily={"Gowun"}
+                      fontSize={"1rem"}
+                      color="black"
+                      sx={{
+                        WebkitLineClamp: 2,
+                        wordWrap: "break-word",
+                      }}
+                    >
                       {item.name}
                     </Typography>
-                    <Typography fontFamily={"Gowun"} color="black">
-                      {item.price}€
+
+                    <Typography
+                      textAlign={"center"}
+                      fontFamily={"Gowun"}
+                      color="black"
+                    >
+                      {item.price.toFixed(2)}€
                     </Typography>
                   </Box>
-                  <Box display="flex" alignItems="center" marginLeft="auto">
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    border={"1px solid  #AD8A3D"}
+                    borderRadius="4px"
+                    margin="0 20px"
+                    sx={{ padding: "5px" }}
+                  >
                     <LoadingButton
                       loading={loading}
                       onClick={() => handleRemoveItem(item.creationId)}
-                      sx={{ minWidth: "30px", marginRight: "5px" }}
+                      sx={{ minWidth: "30px", color: "black" }}
                     >
-                      <Remove />
+                      <Remove sx={{ color: "black" }} />
                     </LoadingButton>
                     <Typography
                       padding={"0 10px"}
+                      fontWeight={"bold"}
                       fontFamily={"Gowun"}
                       color="black"
                     >
@@ -99,43 +127,109 @@ export default function BasketPage() {
                     <LoadingButton
                       loading={loading}
                       onClick={() => handleAddItem(item.creationId)}
-                      sx={{ minWidth: "20px", marginLeft: "5px" }}
+                      sx={{ minWidth: "10px", color: "black" }}
                     >
-                      <Add />
+                      <Add sx={{ color: "black" }} />
                     </LoadingButton>
                   </Box>
                   <Typography
                     fontFamily={"Gowun"}
+                    fontSize={"1rem"}
+                    fontWeight={"bold"}
                     color="black"
-                    padding={"10px"}
+                    padding={"5px"}
+                    margin="0 20px"
                   >
-                    {item.quantity * item.price}€
+                    {(item.quantity * item.price).toFixed(2)}€
                   </Typography>
                   <LoadingButton
                     loading={loading}
                     onClick={() =>
                       handleRemoveItem(item.creationId, item.quantity)
                     }
-                    color="error"
                   >
-                    <Delete />
+                    <Delete sx={{ color: "red" }} />
                   </LoadingButton>
                 </Box>
               ))}
             </Stack>
-          </Box>
-
+            <Link to="/accueil" style={{ textDecoration: "none" }}>
+              <Typography
+                fontFamily={"Gowun"}
+                fontSize={"1rem"}
+                padding={"10px 0"}
+                color="white"
+              >
+                {"<"} Continuer à parcourir le site
+              </Typography>
+            </Link>
+          </Grid2>
           {/* Section Total */}
-          <Box flex={1}>
-            <Stack component={Paper} bgcolor={"#E7E2E1"}>
-              <Typography fontFamily={"Gowun"} fontSize={"1.5rem"} color="red">
-                Total
+          <Grid2 size={{ xs: 9, md: 4 }}>
+            <Stack component={Paper} bgcolor={"#E7E2E1"} padding={"10px"}>
+              <Typography
+                fontFamily={"Gowun"}
+                fontSize={"1.2rem"}
+                color="black"
+                paddingBottom={"20px"}
+                borderBottom={"1px solid #640a02"}
+              >
+                Résumé de la commande
               </Typography>
-              <Typography color="red" marginTop={2} fontSize={"1.2rem"}>
-                {total}€
-              </Typography>
+
+              <Box
+                display={"flex"}
+                justifyContent={"space-between"}
+                marginTop={"10px"}
+                
+                paddingBottom={"20px"}
+                borderBottom={"1px solid #640a02"}
+              >
+                <Typography
+                  fontFamily={"Gowun"}
+                  fontSize={"1.2rem"}
+                  color="black"
+                  fontWeight={"bold"}
+
+                >
+                  Sous-total :
+                </Typography>
+                <Typography
+                  fontFamily={"Gowun"}
+                  fontSize={"1.2rem"}
+                  fontWeight={"bold"}
+                  color="black"
+                >
+                  {total.toFixed(2)}€
+                </Typography>
+              </Box>
+
+              <Box
+                display={"flex"}
+                justifyContent={"space-between"}
+                marginTop={"10px"}
+              >
+                <Typography
+                  fontFamily={"Gowun"}
+                  fontSize={"1.2rem"}
+                  color="black"
+                  fontWeight={"bold"}
+
+                >
+                  Total :
+                </Typography>
+                <Typography
+                  fontFamily={"Gowun"}
+                  fontSize={"1.2rem"}
+                  fontWeight={"bold"}
+                  color="black"
+                >
+                  {total.toFixed(2)}€
+                </Typography>
+              </Box>
+
             </Stack>
-          </Box>
+          </Grid2>
         </Grid2>
       </Box>
       <Footer />
