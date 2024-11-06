@@ -7,7 +7,7 @@ import "swiper/css";
 import "./HomePageCarrousel.css";
 
 import { Pagination } from "swiper/modules";
-import CreationCardCarrousel from "./CreationCardCarrousel"; // Assurez-vous d'importer ce composant
+import CreationCardCarrousel from "./CreationCardCarrousel"; 
 import { Typography } from "@mui/material";
 import "swiper/css";
 import "swiper/css/pagination";
