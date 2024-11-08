@@ -7,41 +7,57 @@ import { LoadingButton } from "@mui/lab";
 import NavBar from "../NavBar/navbar";
 import "./BasketPage.css";
 import Footer from "../Footer/footer";
-import { Link } from "react-router-dom"; // Correct import
+import { Link } from "react-router-dom"; 
 
 export default function BasketPage() {
-  const { basket, setBasket } = useAtelierContext();
+  const { basket, setBasket, removeItem } = useAtelierContext();
   const [loading, setLoading] = useState(false);
-
-  function handleAddItem(productId: number) {
-    setLoading(true);
-    agent.Basket.addItem(productId)
-      .then((basket) => setBasket(basket))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }
-
-  function handleRemoveItem(productId: number, quantity = 1) {
-    setLoading(true);
-    agent.Basket.removeItem(productId, quantity)
-      .then((basket) => setBasket(basket))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }
-
-  if (!basket) {
-    return (
-      <Typography variant="h3" color="white" fontFamily={"Alice"}>
-        Votre panier est vide
-      </Typography>
-    );
-  }
-
-  // Calculer le total
-  const total = basket.items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
+  const total = basket?.items.reduce(
+    (sum, item) => sum + item.price * item.quantity, // Calcule le total en ajoutant le prix de chaque article multiplié par sa quantité
+    0 // Valeur initiale de `sum` est 0, au cas où le panier serait vide
   );
+
+// Fonction pour gérer l'ajout d'un article dans le panier
+function handleAddItem(creationId: number) {
+  setLoading(true); // Indique que le chargement est en cours
+  agent.Basket.addItem(creationId) // Appelle l'API pour ajouter l'article
+    .then((basket) => setBasket(basket)) // Met à jour le panier avec la réponse de l'API
+    .catch((error) => console.log(error)) // Affiche une erreur dans la console en cas d'échec
+    .finally(() => setLoading(false)); // Désactive l'état de chargement une fois l'opération terminée
+}
+
+// Fonction pour gérer la suppression d'un article dans le panier
+function handleRemoveItem(creationId: number, quantity = 1) {
+  setLoading(true); // Active l'état de chargement pour indiquer que l'opération est en cours
+  agent.Basket.removeItem(creationId, quantity)   // Appelle l'API pour supprimer un article ou réduire sa quantité dans le panier
+    .then(() => removeItem(creationId, quantity)) // Si la suppression est réussie, met à jour le panier localement
+    .catch((error) => console.log(error)) // En cas d'échec, affiche l'erreur dans la console pour faciliter le débogage
+    .finally(() => setLoading(false)); // Désactive l'état de chargement, qu'il y ait eu une erreur ou non
+}
+
+
+// Calcul du prix total des articles dans le panier
+
+
+if ( basket?.items.length === 0) {
+  return (
+    <>
+      <NavBar />
+      <Box width="80%" margin="20px auto">
+        <Typography
+          fontFamily={"Gowun"}
+          fontSize={"1.5rem"}
+          color="white"
+          padding={"20px 0 20px 0"}
+        >
+          Votre panier est vide...
+        </Typography>
+      </Box>
+      <Footer />
+    </>
+  );
+}
+
 
   return (
     <>
@@ -59,7 +75,7 @@ export default function BasketPage() {
           {/* Section du panier */}
           <Grid2 size={{ xs: 12, md: 8 }}>
             <Stack component={Paper} bgcolor={"#E7E2E1"}>
-              {basket.items.map((item) => (
+              {basket?.items.map((item) => (
                 <Box
                   key={item.creationId}
                   sx={{
@@ -181,7 +197,6 @@ export default function BasketPage() {
                 display={"flex"}
                 justifyContent={"space-between"}
                 marginTop={"10px"}
-                
                 paddingBottom={"20px"}
                 borderBottom={"1px solid #640a02"}
               >
@@ -190,7 +205,6 @@ export default function BasketPage() {
                   fontSize={"1.2rem"}
                   color="black"
                   fontWeight={"bold"}
-
                 >
                   Sous-total :
                 </Typography>
@@ -200,7 +214,7 @@ export default function BasketPage() {
                   fontWeight={"bold"}
                   color="black"
                 >
-                  {total.toFixed(2)}€
+                  {total?.toFixed(2)}€
                 </Typography>
               </Box>
 
@@ -214,7 +228,6 @@ export default function BasketPage() {
                   fontSize={"1.2rem"}
                   color="black"
                   fontWeight={"bold"}
-
                 >
                   Total :
                 </Typography>
@@ -224,10 +237,9 @@ export default function BasketPage() {
                   fontWeight={"bold"}
                   color="black"
                 >
-                  {total.toFixed(2)}€
+                  {total?.toFixed(2)}€
                 </Typography>
               </Box>
-
             </Stack>
           </Grid2>
         </Grid2>

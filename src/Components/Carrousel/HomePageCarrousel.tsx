@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Creation } from "../../Models/Creations";
 import agent from "../../App/Api/agent";
-import LoadingComponent from "../Laoding/laodingComponent";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./HomePageCarrousel.css";
