@@ -2,26 +2,27 @@
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
-import { useAtelierContext } from "./App/Context/context";
 import { useEffect, useState } from "react";
 import agent from "./App/Api/agent";
 import { getCookie } from "./App/Api/util";
+import { setBasket } from "./Components/Basket/BasketSlice";
+import { useAppDispatch } from "./App/Store/configureStore";
 
 function App() {
-  const {setBasket} = useAtelierContext();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] =useState(true);
 
   useEffect(() =>{
   const buyerId = getCookie('buyerId');
 if (buyerId) {
   agent.Basket.get()
-    .then(basket => setBasket(basket))
+    .then(basket => dispatch(setBasket(basket)))
     .catch(error => console.error(error)) 
     .finally(() => setLoading(false));
   } else{
     setLoading(false)
   }
-}, [setBasket] )
+}, [dispatch] )
 
 
   return (

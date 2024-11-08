@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardActionArea,
   CardActions,
@@ -8,10 +7,9 @@ import {
   Typography,
 } from "@mui/material";
 import { Creation } from "../../Models/Creations";
-import { useState } from "react";
-import agent from "../../App/Api/agent";
 import { LoadingButton } from "@mui/lab";
-import { useAtelierContext } from "../../App/Context/context";
+import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
+import { addBasketItemAsync } from '../Basket/BasketSlice';
 
 // Définition de l'interface Props
 interface Props {
@@ -19,16 +17,9 @@ interface Props {
 }
 
  export default function CreationCard({ creation } :Props){
-  const [loading, setLoading] = useState(false);
-  const {setBasket} =useAtelierContext();
+const {status} = useAppSelector (state =>state.basket);
+const dispatch = useAppDispatch();
 
-  function handleAddItem(creationId: number) {
-    setLoading(true);
-    agent.Basket.addItem(creationId,)
-    .then(basket =>setBasket(basket))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }
   return (
     <Card sx={{ maxWidth: 300, margin: "auto", backgroundSize: "contain" }}>
       <CardActionArea>
@@ -58,7 +49,7 @@ interface Props {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <LoadingButton loading={loading} onClick={() =>handleAddItem(creation.id)}size="small">Ajouter au panier</LoadingButton>
+        <LoadingButton loading={status.includes('pendingAddItem' + creation.id)} onClick={() =>dispatch(addBasketItemAsync({creationId :creation.id}))}size="small">Ajouter au panier</LoadingButton>
       </CardActions>
     </Card>
   );
