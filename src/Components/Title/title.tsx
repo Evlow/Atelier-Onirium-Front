@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AppBar, Toolbar, Typography, IconButton, Badge } from "@mui/material";
 import { useAtelierContext } from "../../App/Context/context";
 import "./title.css"; 
+import { useAppSelector } from "../../App/Store/configureStore";
 
 const icon = [
   {
@@ -19,8 +20,7 @@ const icon = [
 
 export default function Title() {
   // Récupère le contexte de l'Atelier, qui inclut les informations du panier
-const { basket } = useAtelierContext();
-
+  const { basket } = useAppSelector(state => state.basket);
 // Calcule le nombre total d'articles dans le panier en additionnant les quantités de chaque article
 // Si le panier est vide ou indéfini, le total des articles sera de 0 par défaut
 const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0) || 0;
