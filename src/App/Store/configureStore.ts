@@ -8,7 +8,7 @@ export const store = configureStore({
     reducer: {
             counter: counterSlice.reducer,
             basket: basketSlice.reducer,
-            catalog: creationSlice.reducer,
+            creation : creationSlice.reducer,
             // account: accountSlice.reducer
         }
     })

@@ -1,6 +1,6 @@
 import Banners from "../../Components/Banners/banners";
 import NavBar from "../../Components/NavBar/navbar";
-import imgBanners from "../../Assets/Banniere.jpg";
+import imgBanners from "../../Assets/Banniere.webp";
 import Footer from "../../Components/Footer/footer";
 import { useEffect, useState } from "react";
 import { Creation } from "../../Models/Creations";
@@ -36,11 +36,12 @@ export default function HomePage() {
           color="white"
           fontFamily="Lovers"
           sx={{
-            textAlign: "left",
+            textAlign: "center",
             fontSize: { xs: "3em", md: "6em" },
+            padding: "20px"
           }}
         >
-          L'Atelier d'Onirium
+          L'Atelier d'Onirium, la création au-delà du réel
         </Typography>
 
         {/* Section de présentation */}

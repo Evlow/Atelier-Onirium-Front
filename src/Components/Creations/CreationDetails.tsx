@@ -67,18 +67,7 @@ agent.Creations.details(parseInt(id))
       <Grid2 size={{ xs: 6 }}>
         <Typography variant="h3" style={{color: 'white'}}> {creation.name}</Typography>
         <Typography variant="h3" style={{color: 'white'}}> {(creation.price).toFixed(2)}€</Typography>
-        <LoadingButton
-                            disabled={item?.quantity === quantity}
-                            loading={status.includes('pending')}
-                            onClick={handleUpdateCart}
-                            sx={{height: '55px'}}
-                            color='primary'
-                            size='large'
-                            variant='contained'
-                            fullWidth
-                        >
-                            {item ? 'Update Quantity' : 'Ajouter au panier'}
-                        </LoadingButton>
+
 {/* <TableContainer>
 <Table>
 
