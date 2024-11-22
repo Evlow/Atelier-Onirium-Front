@@ -12,6 +12,8 @@ import NavBarAdmin from "../Admin/NavBarAdmin/NavBarAdmin";
 import ServerError from "../App/Errors/serverError";
 import NotFound from "../App/Errors/notFound";
 import BasketPage from "../Components/Basket/BasketPage";
+import Dashboard from "../Admin/NavBarAdmin/Dashbord/Dashboard";
+
 
 export const Router = createBrowserRouter([
   {
@@ -27,12 +29,13 @@ export const Router = createBrowserRouter([
       { path: "politique-de-confidentialite", element: <PrivatePolicy /> },
 { path:"/creations/:id", element:<CreationDetails />},
       {path : "admin", element : <Aside></Aside>},
+      {path : "dashboard", element : <Dashboard></Dashboard>},
       {path : "navBarAdmin", element : <NavBarAdmin></NavBarAdmin>},
       {path : "server-error", element : <ServerError></ServerError>},
       {path : "not-found", element : <NotFound></NotFound>},
       {path : "Basket/GetBasket", element : <BasketPage></BasketPage>},
 
-      {path : "*", element : <Navigate replace to="not-found"/>},
+      // {path : "*", element : <Navigate replace to="not-found"/>},
 
 
 

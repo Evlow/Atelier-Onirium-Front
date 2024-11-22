@@ -14,7 +14,7 @@ const icon = [
   // },
   {
     title: "Mon profil",
-    path: "/Profile",
+    path: "/dashboard",
     icon: process.env.PUBLIC_URL + "/Images/profil.webp", 
   },
 ];
