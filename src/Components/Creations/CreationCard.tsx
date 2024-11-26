@@ -1,15 +1,15 @@
 import {
   Card,
   CardActionArea,
-  CardActions,
+  // CardActions,
   CardContent,
   CardMedia,
   Typography,
 } from "@mui/material";
 import { Creation } from "../../Models/Creations";
-import { LoadingButton } from "@mui/lab";
-import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
-import { addBasketItemAsync } from '../Basket/BasketSlice';
+// import { LoadingButton } from "@mui/lab";
+// import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
+// import { addBasketItemAsync } from '../Basket/BasketSlice';
 
 // Définition de l'interface Props
 interface Props {
@@ -17,8 +17,8 @@ interface Props {
 }
 
  export default function CreationCard({ creation } :Props){
-const {status} = useAppSelector (state =>state.basket);
-const dispatch = useAppDispatch();
+// const {status} = useAppSelector (state =>state.basket);
+// const dispatch = useAppDispatch();
 
   return (
     <Card sx={{ maxWidth: 300, margin: "auto", backgroundSize: "contain" }}>
@@ -48,9 +48,9 @@ const dispatch = useAppDispatch();
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      {/* <CardActions>
         <LoadingButton loading={status.includes('pendingAddItem' + creation.id)} onClick={() =>dispatch(addBasketItemAsync({creationId :creation.id}))}size="small">Ajouter au panier</LoadingButton>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };

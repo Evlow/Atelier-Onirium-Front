@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@better-scroll/mouse-wheel": "^2.5.1",
+    "@cloudinary/react": "^1.13.1",
+    "@cloudinary/url-gen": "^1.21.0",
     "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
