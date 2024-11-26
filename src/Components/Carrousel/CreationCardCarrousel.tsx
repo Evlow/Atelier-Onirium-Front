@@ -2,7 +2,6 @@ import {
     Card,
     CardActionArea,
     CardMedia,
-    Typography,
     
   } from "@mui/material";
   import { Creation } from "../../Models/Creations";
