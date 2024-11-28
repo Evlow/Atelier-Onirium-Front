@@ -2,7 +2,10 @@
   font-family: 'Love Light';
   src: url('/public/Fonts/LoveLight-Regular.ttf') format('truetype');
 }
-
+@font-face {
+  font-family: 'Gowun';
+  src: url('/public/Fonts/GowunBatang-Regular.ttf') format('truetype');
+}
 footer {
   background-color: #E7E2E1;
   padding: 20px 0;
@@ -37,6 +40,8 @@ align-items: center;
 
 .footer-column ul li {
   margin-bottom: 10px;
+  font-family: 'Gowun';
+
 }
 
 .h2-footer {
@@ -61,6 +66,8 @@ footer ul, footer li, footer a, footer img, footer .h2-footer{
 .p-copyright {
   background-color: #E7E2E1;
   padding-bottom: 20px;
+  font-family: 'Gowun';
+
 }
 .p-copyright {
   background-color: #E7E2E1;

@@ -5,7 +5,7 @@ import Footer from "../../Components/Footer/footer";
 import { useEffect, useState } from "react";
 import { Creation } from "../../Models/Creations";
 import CreationList from "../../Components/Creations/CreationList";
-import agent from "../../App/Api/agent";
+import agent, { creationSelectors } from "../../App/Api/agent";
 import LoadingComponent from "../../Components/Laoding/laodingComponent";
 import { Box, Stack, Typography } from "@mui/material";
 import Home from "../../Assets/home.jpg";
@@ -13,16 +13,18 @@ import Arabesque1 from "../../Assets/Arabesque1.svg";
 import Arabesque2 from "../../Assets/Arabesque2.svg";
 import creation from "../../Assets/creation.jpg";
 import HomePageCarrousel from "../../Components/Carrousel/HomePageCarrousel";
+import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
+import { fetchCreationsAsync } from "../../Components/Creations/creationSlice";
 
 export default function HomePage() {
-  const [creations, setCreations] = useState<Creation[]>([]);
+const {creationsLoaded, status} =useAppSelector(state=>state.creation);
+const dispatch = useAppDispatch();
 
   useEffect(() => {
-    agent.Creations.list()
-      .then((creations) => setCreations(creations))
-      .catch((error) => console.log(error));
-  }, []);
+    if(!creationsLoaded) dispatch(fetchCreationsAsync());
+  }, [creationsLoaded, dispatch]);
 
+if (status.includes('pending')) return <LoadingComponent message= "Chargement des créations"/> 
   return (
     <div>
       <NavBar />
