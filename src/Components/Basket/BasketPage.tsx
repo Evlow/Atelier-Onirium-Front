@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { Box, Grid2, Paper, Stack, Typography } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import { useAtelierContext } from "../../App/Context/context";
@@ -7,41 +8,38 @@ import { LoadingButton } from "@mui/lab";
 import NavBar from "../NavBar/navbar";
 import "./BasketPage.css";
 import Footer from "../Footer/footer";
-import { Link } from "react-router-dom"; // Correct import
+import { Link } from "react-router-dom"; 
+import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
+import { addBasketItemAsync, removeBasketItemAsync } from "./BasketSlice";
 
 export default function BasketPage() {
-  const { basket, setBasket } = useAtelierContext();
-  const [loading, setLoading] = useState(false);
-
-  function handleAddItem(productId: number) {
-    setLoading(true);
-    agent.Basket.addItem(productId)
-      .then((basket) => setBasket(basket))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }
-
-  function handleRemoveItem(productId: number, quantity = 1) {
-    setLoading(true);
-    agent.Basket.removeItem(productId, quantity)
-      .then((basket) => setBasket(basket))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }
-
-  if (!basket) {
-    return (
-      <Typography variant="h3" color="white" fontFamily={"Alice"}>
-        Votre panier est vide
-      </Typography>
-    );
-  }
-
-  // Calculer le total
-  const total = basket.items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
+  const { basket } = useAppSelector(state=>state.basket);
+  const dispatch = useAppDispatch();
+  const total = basket?.items.reduce(
+    (sum, item) => sum + item.price * item.quantity, // Calcule le total en ajoutant le prix de chaque article multiplié par sa quantité
+    0 // Valeur initiale de `sum` est 0, au cas où le panier serait vide
   );
+
+
+if ( basket?.items.length === 0) {
+  return (
+    <>
+      <NavBar />
+      <Box width="80%" margin="20px auto">
+        <Typography
+          fontFamily={"Gowun"}
+          fontSize={"1.5rem"}
+          color="white"
+          padding={"20px 0 20px 0"}
+        >
+          Votre panier est vide...
+        </Typography>
+      </Box>
+      <Footer />
+    </>
+  );
+}
+
 
   return (
     <>
@@ -59,7 +57,7 @@ export default function BasketPage() {
           {/* Section du panier */}
           <Grid2 size={{ xs: 12, md: 8 }}>
             <Stack component={Paper} bgcolor={"#E7E2E1"}>
-              {basket.items.map((item) => (
+              {basket?.items.map((item) => (
                 <Box
                   key={item.creationId}
                   sx={{
@@ -110,8 +108,8 @@ export default function BasketPage() {
                     sx={{ padding: "5px" }}
                   >
                     <LoadingButton
-                      loading={loading}
-                      onClick={() => handleRemoveItem(item.creationId)}
+                      loading={status ==='pendingRemoveItem'+item.creationId + 'rem'}
+                      onClick={() => dispatch(removeBasketItemAsync({creationId:item.creationId, quantity :1, name :'rem'}))}
                       sx={{ minWidth: "30px", color: "black" }}
                     >
                       <Remove sx={{ color: "black" }} />
@@ -125,8 +123,8 @@ export default function BasketPage() {
                       {item.quantity}
                     </Typography>
                     <LoadingButton
-                      loading={loading}
-                      onClick={() => handleAddItem(item.creationId)}
+                      loading={status === 'pendingRemoveItem'+item.creationId}
+                      onClick={() => dispatch(addBasketItemAsync({creationId:item.creationId, quantity : item.quantity}))}
                       sx={{ minWidth: "10px", color: "black" }}
                     >
                       <Add sx={{ color: "black" }} />
@@ -143,9 +141,10 @@ export default function BasketPage() {
                     {(item.quantity * item.price).toFixed(2)}€
                   </Typography>
                   <LoadingButton
-                    loading={loading}
+                    loading={status === 'pendingRemoveItem' + item.creationId + 'del'}
                     onClick={() =>
-                      handleRemoveItem(item.creationId, item.quantity)
+                      dispatch(removeBasketItemAsync({
+                        creationId :item.creationId, quantity : item.quantity, name:'del'}))
                     }
                   >
                     <Delete sx={{ color: "red" }} />
@@ -181,7 +180,6 @@ export default function BasketPage() {
                 display={"flex"}
                 justifyContent={"space-between"}
                 marginTop={"10px"}
-                
                 paddingBottom={"20px"}
                 borderBottom={"1px solid #640a02"}
               >
@@ -190,7 +188,6 @@ export default function BasketPage() {
                   fontSize={"1.2rem"}
                   color="black"
                   fontWeight={"bold"}
-
                 >
                   Sous-total :
                 </Typography>
@@ -200,7 +197,7 @@ export default function BasketPage() {
                   fontWeight={"bold"}
                   color="black"
                 >
-                  {total.toFixed(2)}€
+                  {total?.toFixed(2)}€
                 </Typography>
               </Box>
 
@@ -214,7 +211,6 @@ export default function BasketPage() {
                   fontSize={"1.2rem"}
                   color="black"
                   fontWeight={"bold"}
-
                 >
                   Total :
                 </Typography>
@@ -224,10 +220,9 @@ export default function BasketPage() {
                   fontWeight={"bold"}
                   color="black"
                 >
-                  {total.toFixed(2)}€
+                  {total?.toFixed(2)}€
                 </Typography>
               </Box>
-
             </Stack>
           </Grid2>
         </Grid2>

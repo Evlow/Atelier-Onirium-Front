@@ -1,6 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { createBrowserHistory } from 'history';
+import { RootState } from "../Store/configureStore";
+import { createEntityAdapter } from "@reduxjs/toolkit";
+import { Creation } from "../../Models/Creations";
 
 // Configuration de la base URL pour toutes les requêtes Axios
 axios.defaults.baseURL = "http://localhost:5000/api/";
@@ -46,7 +49,7 @@ axios.interceptors.response.use(
 
         return Promise.reject(error.response);
     }
-);
+);const creationsAdapter = createEntityAdapter<Creation>();
 
 // Objets contenant les méthodes de requêtes HTTP (GET, POST, PUT, DELETE)
 const requests = {
@@ -63,7 +66,6 @@ const requests = {
 const Creations = {
     list: () => requests.get('Creation/GetCreations'), // Récupère la liste des créations
     details: (id: number) => requests.get(`Creation/CreationId/${id}`), // Récupère les détails d'une création spécifique par ID
-    detail: (name: string) => requests.get(`Creation/CreationByName/${name}`) // Récupère les détails d'une création par nom
 };
 
 const Basket = {
@@ -88,5 +90,5 @@ const agent = {
     TestErrors,
     Basket
 };
-
+export const creationSelectors = creationsAdapter.getSelectors((state: RootState) => state.creation);
 export default agent; // Exportation de l'objet agent pour une utilisation dans d'autres parties de l'application
