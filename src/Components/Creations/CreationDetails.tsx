@@ -42,7 +42,7 @@ const creation = useAppSelector(state => creationSelectors.selectById(state, +id
           <img
             src={creation.pictureUrl}
             alt={creation.name}
-            style={{ width: "100%", height: "auto", objectFit: "cover" }}
+            style={{height: "auto", objectFit: "cover" }}
           />
         </Grid>
         <Grid xs={12} sm={6}>

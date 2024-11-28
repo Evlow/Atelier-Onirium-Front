@@ -1,7 +1,6 @@
 import {
   Card,
   CardActionArea,
-  // CardActions,
   CardContent,
   CardMedia,
   Typography,
@@ -13,41 +12,58 @@ interface Props {
   creation: Creation;
 }
 
- export default function CreationCard({ creation } :Props){
-
-
+export default function CreationCard({ creation }: Props) {
   return (
-    <Card sx={{ maxWidth: 300, margin: "auto", backgroundSize: "contain" }}>
+    <Card
+      sx={{
+        maxWidth: 300,
+        margin: "auto",
+        backgroundColor: "transparent",
+        overflow: "hidden",
+        transition: "transform 0.3s ease",
+        "&:hover": {
+          transform: "scale(1.05)",
+        },
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
-          height="300"
+          height="300" // Hauteur explicite de l'image
           image={creation.pictureUrl}
           alt={creation.name}
-          sx={{ objectFit: "cover" }}
+          sx={{
+            objectFit: "cover", // L'image couvre l'espace disponible sans déformation
+          }}
         />
-        <CardContent>
+        <CardContent sx={{ padding: 2 }}>
           <Typography
             gutterBottom
-            variant="h5"
+            variant="h6"
             component="div"
-            textAlign="center"
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              fontSize: "1.1rem",
+              fontWeight: "bold",
+              color: "white",
+            }}
           >
             {creation.name}
           </Typography>
           <Typography
-            gutterBottom
             component="div"
-            textAlign="center" // Texte centré
+            sx={{
+              fontSize: "1rem",
+              fontWeight: "lighter",
+              color: "white",
+            }}
           >
             {creation.price.toFixed(2)}€
           </Typography>
         </CardContent>
       </CardActionArea>
-      {/* <CardActions>
-        <LoadingButton loading={status.includes('pendingAddItem' + creation.id)} onClick={() =>dispatch(addBasketItemAsync({creationId :creation.id}))}size="small">Ajouter au panier</LoadingButton>
-      </CardActions> */}
     </Card>
   );
-};
-
+}

@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
 import { Creation } from "../../Models/Creations";
 import agent from "../../App/Api/agent";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "./HomePageCarrousel.css";
-
-import { Pagination } from "swiper/modules";
-import CreationCardCarrousel from "./CreationCardCarrousel"; 
-import { Typography } from "@mui/material";
-import "swiper/css";
-import "swiper/css/pagination";
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function HomePageCarrousel() {
@@ -22,7 +14,7 @@ export default function HomePageCarrousel() {
         setCreations(creationsData);
       } catch (error) {
         console.error("Erreur lors de la récupération des créations:", error);
-      } 
+      }
     };
 
     fetchCreations();
@@ -41,24 +33,50 @@ export default function HomePageCarrousel() {
       >
         Les dernières créations
       </Typography>
-      <Swiper
-        slidesPerView={4}
-        spaceBetween={10}
-        pagination={true}
-        modules={[Pagination]}
-        className="Swiper"
+
+      {/* Conteneur avec défilement horizontal */}
+      <div
+        style={{
+          display: "flex",
+          overflowX: "auto", // Permet le défilement horizontal
+          gap: "10px", // Espace entre les éléments
+          paddingBottom: "10px", // Pour ne pas cacher le scroll en bas
+          scrollbarWidth: "none", // Masque la barre de défilement pour Firefox
+          msOverflowStyle: "none", // Masque la barre de défilement pour IE et Edge
+        }}
       >
         {creations.map((creation) => (
-          <SwiperSlide key={creation.id}>
-            <Link
-              to={`/creations/${creation.id}`}
-              style={{ textDecoration: "none" }}
+          <Link
+            key={creation.id}
+            to={`/creations/${creation.id}`}
+            style={{ textDecoration: "none", flexShrink: 0 }} // Evite que les éléments rétrécissent
+          >
+            <Card
+              sx={{
+                width: 300, // Largeur fixe des cartes
+                backgroundColor: "transparent",
+                overflow: "hidden",
+                transition: "transform 0.3s ease",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                },
+              }}
             >
-              <CreationCardCarrousel creation={creation} />
-            </Link>
-          </SwiperSlide>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="300"
+                  image={creation.pictureUrl}
+                  alt={creation.name}
+                  sx={{
+                    objectFit: "cover",
+                  }}
+                />
+              </CardActionArea>
+            </Card>
+          </Link>
         ))}
-      </Swiper>
+      </div>
     </div>
   );
 }

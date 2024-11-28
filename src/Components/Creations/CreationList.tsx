@@ -9,7 +9,8 @@ interface Props {
 
 export default function CreationList({ creations }: Props) {
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={4} padding="50px 0 50px 0"
+    alignItems="center" >
      {creations.map((creation) => {
   return (
     <Grid key={creation.id} item xs={9} sm={6} md={3}>
