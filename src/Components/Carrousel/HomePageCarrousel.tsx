@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Creation } from "../../Models/Creations";
 import agent from "../../App/Api/agent";
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardActionArea, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function HomePageCarrousel() {
