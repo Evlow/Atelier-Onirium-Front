@@ -1,40 +1,29 @@
 import { useParams } from "react-router-dom";
 import { Grid, Grid2, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Creation } from "../../Models/Creations";
+import { useEffect } from "react";
 import NavBar from "../NavBar/navbar";
 import Footer from "../Footer/footer";
-import agent from "../../App/Api/agent";
+import  { creationSelectors } from "../../App/Api/agent";
 import LoadingComponent from "../Laoding/laodingComponent";
 import NotFound from "../../App/Errors/notFound";
-import { useAppDispatch } from "../../App/Store/configureStore";
+import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
+import { fetchCreationAsync } from "./creationSlice";
 
 export default function CreationDetails() {
   // const {basket, status} = useAppSelector(state =>state.basket);
   const dispatch = useAppDispatch();
+  // const [creation, setCreation] = useState<Creation | null>(null);
+  const {status : creationStatus} = useAppSelector (state=>state.creation);
   const { id } = useParams<{ id: string }>();
-  const [creation, setCreation] = useState<Creation | null>(null);
-  const [loading, setLoading] = useState(true);
+const creation = useAppSelector(state => creationSelectors.selectById(state, +id!));  // const [loading, setLoading] = useState(true);
   
   // const item = basket?.items.find(i=>i.creationId === creation?.id);
 
   useEffect(() => {
-    // Si id est valide, récupérer les détails de la création
-    if (id) {
-      agent.Creations.details(parseInt(id))
-        .then((response) => {
-          setCreation(response); // On récupère et met à jour l'état avec la création
-        })
-        .catch((error) => {
-          console.log(error); // Gestion des erreurs
-        })
-        .finally(() => {
-          setLoading(false); // Arrêter le chargement
-        });
-    }
-  }, [id]); // Exécution chaque fois que l'ID change
+    if (!creation && id) dispatch(fetchCreationAsync(parseInt(id)));
+  }, [id, dispatch, creation ]);
 
-  if (loading) {
+  if (creationStatus.includes('pending')){
     return (
       <LoadingComponent message="Chargement du détail des créations, veuillez patienter..." />
     );

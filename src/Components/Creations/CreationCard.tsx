@@ -7,9 +7,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Creation } from "../../Models/Creations";
-// import { LoadingButton } from "@mui/lab";
-// import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
-// import { addBasketItemAsync } from '../Basket/BasketSlice';
 
 // Définition de l'interface Props
 interface Props {
@@ -17,8 +14,7 @@ interface Props {
 }
 
  export default function CreationCard({ creation } :Props){
-// const {status} = useAppSelector (state =>state.basket);
-// const dispatch = useAppDispatch();
+
 
   return (
     <Card sx={{ maxWidth: 300, margin: "auto", backgroundSize: "contain" }}>
