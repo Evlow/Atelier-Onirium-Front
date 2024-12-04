@@ -13,6 +13,8 @@ import ServerError from "../App/Errors/serverError";
 import NotFound from "../App/Errors/notFound";
 import BasketPage from "../Components/Basket/BasketPage";
 import Dashboard from "../Admin/NavBarAdmin/Dashbord/Dashboard";
+import Login from "../App/Features/login";
+import Register from "../App/Features/register";
 
 // Route principale
 export const Router = createBrowserRouter([
@@ -32,6 +34,10 @@ export const Router = createBrowserRouter([
       { path: "dashboard", element: <Dashboard /> },
       { path: "navBarAdmin", element: <NavBarAdmin /> },
       { path: "server-error", element: <ServerError /> },
+      { path: "connexion", element: <Login /> },
+      { path: "inscription", element: <Register /> },
+
+
       { path: "not-found", element: <NotFound /> },
       { path: "Basket/GetBasket", element: <BasketPage /> },
 

@@ -9,7 +9,7 @@ interface Props {
 
 export default function CreationList({ creations }: Props) {
   return (
-    <Grid container spacing={4} padding="50px 0 50px 0"
+    <Grid container spacing={1} padding="50px 0 50px 0"
     alignItems="center" >
      {creations.map((creation) => {
   return (

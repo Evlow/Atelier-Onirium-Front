@@ -83,12 +83,17 @@ const TestErrors = {
     get500Error: () => requests.get('Buggy/GetServerError/server-error'), // Simule une erreur 500 (Internal Server Error)
     getValidationError: () => requests.get('Buggy/GetValidationError/validation-error'), // Simule une erreur de validation
 };
-
+const Account = {
+    login: (values: any) => requests.post('Account/Login/login', values),
+    register: (values: any) => requests.post('Account/Register/register', values),
+    currentUser: () => requests.get('Account/GetCurrentUser/currentUser'),
+}
 // Agrégation des agents pour l'exportation
 const agent = {
     Creations,
     TestErrors,
-    Basket
+    Basket,
+    Account
 };
 export const creationSelectors = creationsAdapter.getSelectors((state: RootState) => state.creation);
 export default agent; // Exportation de l'objet agent pour une utilisation dans d'autres parties de l'application
