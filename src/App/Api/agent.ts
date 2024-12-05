@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { createBrowserHistory } from 'history';
-import { RootState } from "../Store/configureStore";
+import { RootState, store } from "../Store/configureStore";
 import { createEntityAdapter } from "@reduxjs/toolkit";
 import { Creation } from "../../Models/Creations";
 
@@ -11,6 +11,18 @@ axios.defaults.withCredentials =true;
 const sleep = () => new Promise(resolve => setTimeout(resolve, 1000))
 // Fonction utilitaire pour extraire les données de la réponse Axios
 const responseBody = (response: AxiosResponse) => response.data;
+
+axios.interceptors.request.use(config => {
+    const token = store.getState().account.user?.token;
+    if (!config) {
+        config = {};
+    }
+    if (!config.headers) {
+        config.headers = {};
+    }
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+})
 
 const history = createBrowserHistory(); // Utiliser history pour la navigation
 
