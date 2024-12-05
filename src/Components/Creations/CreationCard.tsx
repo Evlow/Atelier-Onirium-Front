@@ -36,7 +36,7 @@ export default function CreationCard({ creation }: Props) {
             objectFit: "cover", // L'image couvre l'espace disponible sans déformation
           }}
         />
-        <CardContent sx={{ padding: 2 }}>
+        <CardContent sx={{ padding: 1 }}>
           <Typography
             gutterBottom
             variant="h6"

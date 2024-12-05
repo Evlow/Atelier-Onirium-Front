@@ -1,23 +1,21 @@
-import { createTheme, ThemeProvider, } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { useCallback, useEffect, useState } from "react";
 import agent from "./App/Api/agent";
 import { getCookie } from "./App/Api/util";
-import { setBasket } from "./Components/Basket/BasketSlice";
+import { fetchBasketAsync, setBasket } from "./Components/Basket/BasketSlice";
 import { useAppDispatch } from "./App/Store/configureStore";
 import { CssBaseline } from "@mui/material";
+import { fetchCurrentUser } from "./App/Features/Account/accountSlice";
 
 // Création du thème personnalisé avec un fond noir
 const theme = createTheme({
   palette: {
     background: {
-      default: "black", // Couleur de fond de l'application (vous pouvez changer cette couleur)
+      default: "black",
     },
-    // text: {
-    //   primary: "white", // Changez la couleur du texte pour être lisible sur un fond noir
-    // },
   },
   typography: {
     h1: {
@@ -46,13 +44,26 @@ const theme = createTheme({
 function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
+  const initApp = useCallback(async () => {
+    try {
+      await dispatch(fetchCurrentUser());
+      await dispatch(fetchBasketAsync());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    const buyerId = getCookie('buyerId');
+    initApp().then(() => setLoading(false));
+  }, [initApp]);
+  
+  useEffect(() => {
+    const buyerId = getCookie("buyerId");
+    dispatch(fetchCurrentUser());
     if (buyerId) {
       agent.Basket.get()
-        .then(basket => dispatch(setBasket(basket)))
-        .catch(error => console.error(error))
+        .then((basket) => dispatch(setBasket(basket)))
+        .catch((error) => console.error(error))
         .finally(() => setLoading(false));
     } else {
       setLoading(false);
@@ -60,9 +71,12 @@ function App() {
   }, [dispatch]);
 
   return (
-    <ThemeProvider theme={theme}> {/* Applique le thème personnalisé */}
+    <ThemeProvider theme={theme}>
+      {" "}
+      {/* Applique le thème personnalisé */}
       <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
-      <CssBaseline /> {/* Applique les styles de base et normalise les éléments */}
+      <CssBaseline />{" "}
+      {/* Applique les styles de base et normalise les éléments */}
       <Outlet /> {/* Permet de rendre les routes enfants */}
     </ThemeProvider>
   );
