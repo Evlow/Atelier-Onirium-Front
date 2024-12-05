@@ -7,7 +7,7 @@ import { Creation } from "../../Models/Creations";
 
 // Configuration de la base URL pour toutes les requêtes Axios
 axios.defaults.baseURL = "http://localhost:5000/api/";
-axios.defaults.withCredentials =true;
+axios.defaults.withCredentials = true;
 const sleep = () => new Promise(resolve => setTimeout(resolve, 1000))
 // Fonction utilitaire pour extraire les données de la réponse Axios
 const responseBody = (response: AxiosResponse) => response.data;
@@ -24,7 +24,8 @@ axios.interceptors.request.use(config => {
     return config;
 })
 
-const history = createBrowserHistory(); // Utiliser history pour la navigation
+const history = createBrowserHistory();
+
 
 axios.interceptors.response.use(
     async response => {
@@ -61,18 +62,31 @@ axios.interceptors.response.use(
 
         return Promise.reject(error.response);
     }
-);const creationsAdapter = createEntityAdapter<Creation>();
+); const creationsAdapter = createEntityAdapter<Creation>();
 
-// Objets contenant les méthodes de requêtes HTTP (GET, POST, PUT, DELETE)
 const requests = {
-    get: (url: string) => axios.get(url).then(responseBody), // Effectue une requête GET
-    post: (url: string, body: object) => axios.post(url, body).then(responseBody), // Effectue une requête POST
-    put: (url: string, body: object) => axios.put(url, body).then(responseBody), // Effectue une requête PUT
-    delete: (url: string, p0: {}) => axios.delete(url).then(responseBody), // Effectue une requête DELETE
-};
+    get: (url: string, params?: URLSearchParams) =>
+        axios.get(url, { params }).then(responseBody),
 
+    post: (url: string, body: {}) =>
+        axios.post(url, body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }).then(responseBody),
 
+    put: (url: string, body: {}) =>
+        axios.put(url, body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }).then(responseBody),
 
+    delete: (url: string) =>
+        axios.delete(url).then(responseBody),
+}
 
 // Objet pour gérer les créations (Atelier)
 const Creations = {
@@ -80,12 +94,12 @@ const Creations = {
     details: (id: number) => requests.get(`Creation/CreationId/${id}`), // Récupère les détails d'une création spécifique par ID
 };
 
-const Basket = {
-    get: () => requests.get(`Basket/GetBasket`),
-    addItem: (creationId: number, quantity = 1) => requests.post(`Basket/AddItemToBasket/AddItemToBasket/${creationId}/${quantity}`, {}),
-    removeItem: (creationId: number, quantity = 1) => requests.delete(`Basket/RemoveBasketItem/DeleteItem/${creationId}/${quantity}`, {}),
+// const Basket = {
+//     get: () => requests.get(`Basket/GetBasket`),
+//     addItem: (creationId: number, quantity = 1) => requests.post(`Basket/AddItemToBasket/AddItemToBasket/${creationId}/${quantity}`, {}),
+//     removeItem: (creationId: number, quantity = 1) => requests.delete(`Basket/RemoveBasketItem/DeleteItem/${creationId}/${quantity}`, {}),
 
-}
+// }
 
 // Objet pour tester la gestion des erreurs
 const TestErrors = {
@@ -104,7 +118,7 @@ const Account = {
 const agent = {
     Creations,
     TestErrors,
-    Basket,
+    // Basket,
     Account
 };
 export const creationSelectors = creationsAdapter.getSelectors((state: RootState) => state.creation);
