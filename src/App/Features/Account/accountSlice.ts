@@ -3,7 +3,7 @@ import { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 import { User } from "../../../Models/User";
 import agent from "../../Api/agent";
-import { setBasket } from "../../../Components/Basket/BasketSlice";
+// import { setBasket } from "../../../Components/Basket/BasketSlice";
 
 interface AccountState {
     user: User | null;
@@ -19,7 +19,7 @@ export const signInUser = createAsyncThunk<User,FieldValues >(
         try {
             const userDto = await agent.Account.login(data);
             const { basket, ...user } = userDto;
-            if (basket) thunkAPI.dispatch(setBasket(basket));
+            // if (basket) thunkAPI.dispatch(setBasket(basket));
             localStorage.setItem('user', JSON.stringify(user));
             navigate('/'); 
             return user;
@@ -35,7 +35,7 @@ export const fetchCurrentUser = createAsyncThunk<User, void>(
         thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
         try {
             const userDTO = await agent.Account.currentUser();
-            const { user } = userDTO;
+            const { ...user } = userDTO;
             // const { basket, ...user } = userDTO;
             // if (basket) thunkAPI.dispatch(setBasket(basket));
             localStorage.setItem('user', JSON.stringify(user));
@@ -73,8 +73,8 @@ export const accountSlice = createSlice({
         });
         builder.addMatcher(isAnyOf(signInUser.fulfilled, fetchCurrentUser.fulfilled), (state, action) => {
             const claims = JSON.parse(atob(action.payload.token.split('.')[1]));
-            const roles = claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-            // state.user = { ...action.payload, roles: typeof roles === 'string' ? [roles] : roles };
+            const roles = claims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+            state.user = { ...action.payload, roles: typeof roles === 'string' ? [roles] : roles };
         });
         builder.addMatcher(isAnyOf(signInUser.rejected), (state, action) => {
             throw action.payload;

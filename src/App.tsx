@@ -3,9 +3,7 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCallback, useEffect, useState } from "react";
-import agent from "./App/Api/agent";
-import { getCookie } from "./App/Api/util";
-import { fetchBasketAsync, setBasket } from "./Components/Basket/BasketSlice";
+// import { fetchBasketAsync, setBasket } from "./Components/Basket/BasketSlice";
 import { useAppDispatch } from "./App/Store/configureStore";
 import { CssBaseline } from "@mui/material";
 import { fetchCurrentUser } from "./App/Features/Account/accountSlice";
@@ -44,10 +42,11 @@ const theme = createTheme({
 function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
+  
   const initApp = useCallback(async () => {
     try {
       await dispatch(fetchCurrentUser());
-      await dispatch(fetchBasketAsync());
+      // await dispatch(fetchBasketAsync());
     } catch (error) {
       console.log(error);
     }
@@ -56,19 +55,6 @@ function App() {
   useEffect(() => {
     initApp().then(() => setLoading(false));
   }, [initApp]);
-  
-  useEffect(() => {
-    const buyerId = getCookie("buyerId");
-    dispatch(fetchCurrentUser());
-    if (buyerId) {
-      agent.Basket.get()
-        .then((basket) => dispatch(setBasket(basket)))
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-    }
-  }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>
