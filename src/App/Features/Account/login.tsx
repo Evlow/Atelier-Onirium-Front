@@ -13,7 +13,7 @@ import { signInUser } from "./accountSlice";
 
 export default function Login() {
   const navigate = useNavigate();
-//   const location = useLocation<any>();
+  // const location = useLocation<any>();
   const dispatch = useAppDispatch();
   const {
     register,
@@ -26,7 +26,7 @@ export default function Login() {
   async function submitForm(data: FieldValues) {
     try {
       await dispatch(signInUser(data));
-      navigate("/catalog");
+      navigate("/accueil");
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +83,7 @@ export default function Login() {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
         >
-          Connexion{" "}
+          Connexion
         </LoadingButton>
       </Box>
     </Container>
