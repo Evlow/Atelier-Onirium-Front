@@ -18,8 +18,7 @@ export const signInUser = createAsyncThunk<User,FieldValues >(
     async ({ data, navigate }, thunkAPI) => {
         try {
             const userDto = await agent.Account.login(data);
-            const { basket, ...user } = userDto;
-            // if (basket) thunkAPI.dispatch(setBasket(basket));
+            const { ...user } = userDto;
             localStorage.setItem('user', JSON.stringify(user));
             navigate('/'); 
             return user;
