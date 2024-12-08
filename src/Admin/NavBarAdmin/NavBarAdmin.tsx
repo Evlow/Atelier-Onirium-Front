@@ -28,7 +28,7 @@ export default function NavBarAdmin() {
                 paddingX: 2 
             }}
         >
-            <Typography variant='h2' fontFamily={"Love"}>
+            <Typography variant='h1' fontSize="4rem">
                 L'Atelier d'Onirium
             </Typography>
             <Box 

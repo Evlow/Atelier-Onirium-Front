@@ -5,10 +5,12 @@ import Title from "../Title/title";
 
 // Déclaration d'un tableau d'objets représentant les liens de navigation
 const nav = [
-  { title: "ACCUEIL", path: "/accueil" },
-  { title: "CRÉATIONS DE L'ATELIER", path: "/creations-atelier" },
-  { title: "GALERIE D'EXPOSITION", path: "/galerie-exposition" },
-  { title: "LOCATIONS", path: "/locations" },
+  { title: "Accueil", path: "/accueil" },
+  { title: "Créations de l'Atelier", path: "/creations-atelier" },
+  { title: "Galerie d'exposition", path: "/galerie-exposition" },
+  { title: "Locations", path: "/locations" },
+  { title: "Me contacter", path: "/me-contacter" },
+
 ];
 
 export default function NavBar() {

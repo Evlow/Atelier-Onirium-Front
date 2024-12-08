@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Alice";
-  src: url("/public/Fonts/Alice-Regular.ttf") format("truetype");
+  src: url("/public/Fonts/GowunBatang-Regular.ttf") format("truetype");
 }
 
 .navbar {
@@ -19,11 +19,11 @@
 }
 
 .item-navbar a {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: black;
   text-decoration: none;
   background-color: #e7e2e1;
-  font-family: "Alice", cursive;
+  font-family: "Gowun", cursive;
   font-weight: lighter;
 }
 

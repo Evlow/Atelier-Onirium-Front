@@ -37,23 +37,22 @@ export default function Login() {
 
     return (
     <div>   <NavBar></NavBar>
-
+        <Typography  variant="h2"  sx={{ textAlign: "center", }} >
+                Espace administrateur
+            </Typography>
         <Container
             component={Paper}
-            maxWidth="sm"
+            maxWidth="xs"
             sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                p: 4,
+                mb:8,
+                mt:4,
+                backgroundColor: "#E7E2E1",  
             }}
         >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-                Connexion
-            </Typography>
+    
             <Box
                 component="form"
                 onSubmit={handleSubmit(submitForm)}
@@ -61,9 +60,10 @@ export default function Login() {
                 sx={{ mt: 1 }}
             >
                 <TextField
+                variant="standard"
                     margin="normal"
                     fullWidth
-                    label="Nom d'utilisateur"
+                    label="Nom d'utilisateur *"
                     autoFocus
                     {...register("userName", {
                         required: "Le nom d'utilisateur est requis",
@@ -72,9 +72,11 @@ export default function Login() {
                     helperText={errors?.userName?.message as string}
                 />
                 <TextField
+                                variant="standard"
+
                     margin="normal"
                     fullWidth
-                    label="Mot de passe"
+                    label="Mot de passe *"
                     type="password"
                     {...register("password", {
                         required: "Le mot de passe est requis",
@@ -88,10 +90,9 @@ export default function Login() {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
+                    sx={{ mt: 3, mb: 2  }}
                 >
-                    Connexion
-                </LoadingButton>
+Se connecter              </LoadingButton>
             </Box>
         </Container>
         <Footer></Footer>

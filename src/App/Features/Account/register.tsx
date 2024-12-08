@@ -64,6 +64,7 @@ export default function Register() {
         sx={{ mt: 1 }}
       >
         <TextField
+                    variant="standard" // Utilisation de la variante standard
           margin="normal"
           fullWidth
           label="Nom d'utilisateur"
@@ -75,6 +76,7 @@ export default function Register() {
           helperText={errors?.userName?.message as string}
         />
         <TextField
+                    variant="standard" // Utilisation de la variante standard
           margin="normal"
           fullWidth
           label="Email"
@@ -90,6 +92,7 @@ export default function Register() {
           helperText={errors?.email?.message as string}
         />
         <TextField
+                    variant="standard" // Utilisation de la variante standard
           margin="normal"
           fullWidth
           label="Mot de passe"
