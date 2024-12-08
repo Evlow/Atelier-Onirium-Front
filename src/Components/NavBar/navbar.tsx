@@ -1,43 +1,168 @@
 import React, { useState } from "react";
-import "./navbar.css";
+import { AppBar, Toolbar, IconButton, MenuItem, Container, Box, Typography } from "@mui/material";
+import { Facebook, Instagram } from "@mui/icons-material";
+import MenuIcon from '@mui/icons-material/Menu';
+import { SiTiktok } from "react-icons/si";
 import { NavLink } from "react-router-dom";
-import Title from "../Title/title";
+import "./navbar.css";
 
-// Déclaration d'un tableau d'objets représentant les liens de navigation
+// Liste des éléments du menu de navigation
 const nav = [
-  { title: "ACCUEIL", path: "/accueil" },
-  { title: "CRÉATIONS DE L'ATELIER", path: "/creations-atelier" },
-  { title: "GALERIE D'EXPOSITION", path: "/galerie-exposition" },
-  { title: "LOCATIONS", path: "/locations" },
+  { title: "Accueil", path: "/accueil" },
+  { title: "Créations de l'Atelier", path: "/creations-atelier" },
+  { title: "Galerie d'exposition", path: "/galerie-exposition" },
+  { title: "Locations", path: "/locations" },
+  { title: "Me contacter", path: "/me-contacter" },
+];
+
+// Liste des icônes de profil
+const icon = [
+  {
+    title: "Mon profil",
+    path: "/connexion",
+    icon: process.env.PUBLIC_URL + "/Images/profil.webp",
+  },
 ];
 
 export default function NavBar() {
-  const [isOpen, setIsOpen] = useState(false); // État pour gérer l'ouverture du menu
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const handleMenuOpen = () => setMenuOpen(true);
+  const handleMenuClose = () => setMenuOpen(false);
 
   return (
-    <>
-      <div className="title-burger">
-  <Title />
-  <div className={`burger ${isOpen ? "open" : ""}`} onClick={toggleMenu}>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <nav className={`navbar ${isOpen ? "active" : ""}`}>
-    <ul className="item-navbar">
-      {nav.map((item) => (
-        <li key={item.path || item.title}>
-          <NavLink to={item.path}>{item.title}</NavLink>
-        </li>
-      ))}
-    </ul>
-  </nav>
-</div>
+    <AppBar position="static" sx={{ backgroundColor: "#e7e2e1" }}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        {/* Menu Burger */}
+        <IconButton
+          aria-label="menu"
+          onClick={handleMenuOpen}
+          sx={{ display: { xs: "block", md: "none" } }}
+        >
+          <MenuIcon sx={{ fontSize: "30px", color: "black" }} />
+        </IconButton>
 
-    </>
+        {/* Titre */}
+        <Typography
+          color="black"
+          variant="h1"
+          sx={{
+            flexGrow: 1,
+            textAlign: "center",
+            fontSize: { xs: "2.5rem", sm: "3rem", md: "4rem", lg: "5rem" },
+          }}
+        >
+          L'Atelier d'Onirium
+        </Typography>
+
+        {/* Icône de profil */}
+        {icon.map((item) => (
+          <IconButton
+            key={item.path}
+            component={NavLink}
+            to={item.path}
+          >
+            <img
+              src={item.icon}
+              alt={item.title}
+              className="icon"
+            />
+          </IconButton>
+        ))}
+      </Toolbar>
+
+      <hr className="hr-title" />
+
+      {/* Menu Mobile */}
+      {menuOpen && (
+        <Box
+          sx={{
+            paddingTop: "80px",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "#e7e2e1",
+            zIndex: 1300,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {nav.map((item) => (
+            <MenuItem key={item.path} onClick={handleMenuClose}>
+              <NavLink
+                to={item.path}
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                  fontSize: "1.2rem",
+                  padding: "5px",
+                }}
+              >
+                {item.title}
+              </NavLink>
+            </MenuItem>
+          ))}
+
+          <Box sx={{ marginTop: "20px", display: "flex", gap: 2 }}>
+            <IconButton
+              component="a"
+              href="https://www.facebook.com/latelierdonirium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Facebook sx={{ fontSize: 30, color: "black" }} />
+            </IconButton>
+            <IconButton
+              component="a"
+              href="https://www.instagram.com/latelierdonirium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram sx={{ fontSize: 30, color: "black" }} />
+            </IconButton>
+            <IconButton
+              component="a"
+              href="https://www.tiktok.com/@latelierdonirium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SiTiktok style={{ fontSize: 30, color: "black" }} />
+            </IconButton>
+          </Box>
+
+          <IconButton
+            aria-label="close-menu"
+            onClick={handleMenuClose}
+            sx={{
+              position: "absolute",
+              top: "10px",
+              left: "10px",
+              fontSize: "30px",
+              color: "black",
+            }}
+          >
+            X
+          </IconButton>
+        </Box>
+      )}
+
+      {/* Menu Desktop */}
+      <Container sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center", paddingTop: "20px" }}>
+        <Box component="nav">
+          <ul style={{ display: "flex", padding: 0, listStyle: "none" }}>
+            {nav.map((item) => (
+              <li key={item.path} style={{ padding: "20px", fontSize: "1.2rem" }}>
+                <NavLink to={item.path} style={{ textDecoration: "none", color: "black" }}>
+                  {item.title}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </Box>
+      </Container>
+    </AppBar>
   );
 }

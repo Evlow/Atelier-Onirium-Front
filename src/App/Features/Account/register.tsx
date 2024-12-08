@@ -28,8 +28,8 @@ export default function Register() {
           setError("password", { message: error });
         } else if (error.includes("Email")) {
           setError("email", { message: error });
-        } else if (error.includes("Username")) {
-          setError("username", { message: error });
+        } else if (error.includes("UserName")) {
+          setError("userName", { message: error });
         }
       });
     }
@@ -64,6 +64,7 @@ export default function Register() {
         sx={{ mt: 1 }}
       >
         <TextField
+                    variant="standard" // Utilisation de la variante standard
           margin="normal"
           fullWidth
           label="Nom d'utilisateur"
@@ -71,10 +72,11 @@ export default function Register() {
           {...register("userName", {
             required: "Le nom d'utilisateur est requis",
           })}
-          error={!!errors.username}
+          error={!!errors.userName}
           helperText={errors?.userName?.message as string}
         />
         <TextField
+                    variant="standard" // Utilisation de la variante standard
           margin="normal"
           fullWidth
           label="Email"
@@ -90,6 +92,7 @@ export default function Register() {
           helperText={errors?.email?.message as string}
         />
         <TextField
+                    variant="standard" // Utilisation de la variante standard
           margin="normal"
           fullWidth
           label="Mot de passe"
