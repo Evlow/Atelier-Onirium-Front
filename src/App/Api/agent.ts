@@ -7,7 +7,7 @@ import { Creation } from "../../Models/Creations";
 
 // Configuration de la base URL pour toutes les requêtes Axios
 axios.defaults.baseURL = "http://localhost:5000/api/";
-axios.defaults.withCredentials =true;
+axios.defaults.withCredentials = true;
 const sleep = () => new Promise(resolve => setTimeout(resolve, 1000))
 // Fonction utilitaire pour extraire les données de la réponse Axios
 const responseBody = (response: AxiosResponse) => response.data;
@@ -24,7 +24,7 @@ axios.interceptors.request.use(config => {
     return config;
 })
 
-const history = createBrowserHistory(); 
+const history = createBrowserHistory();
 
 
 axios.interceptors.response.use(
@@ -62,27 +62,32 @@ axios.interceptors.response.use(
 
         return Promise.reject(error.response);
     }
-);const creationsAdapter = createEntityAdapter<Creation>();
+); const creationsAdapter = createEntityAdapter<Creation>();
 
 // Objets contenant les méthodes de requêtes HTTP (GET, POST, PUT, DELETE)
 
-    const requests = {
-        get: (url: string, params?: URLSearchParams) => 
-            axios.get(url, { params }).then(responseBody),
-    
-        post: (url: string, body: {}) => 
-            axios.post(url, body, {
-            
-            }).then(responseBody),
-    
-        put: (url: string, body: {}) => 
-            axios.put(url, body, {
-        
-            }).then(responseBody),
-    
-        delete: (url: string) => 
-            axios.delete(url).then(responseBody),
-    }
+const requests = {
+    get: (url: string, params?: URLSearchParams) =>
+        axios.get(url, { params }).then(responseBody),
+
+    post: (url: string, body: {}) =>
+        axios.post(url, body, {
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // }
+        }).then(responseBody),
+
+    put: (url: string, body: {}) =>
+        axios.put(url, body, {
+            // headers: {
+            //     'Content-Type': 'application/json',
+            //     'Accept': 'application/json'
+            // }
+        }).then(responseBody),
+
+    delete: (url: string) =>
+        axios.delete(url).then(responseBody),
+}
 
 // Objet pour gérer les créations (Atelier)
 const Creations = {
