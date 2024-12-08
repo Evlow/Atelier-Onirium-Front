@@ -1,84 +1,98 @@
-import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { FieldValues } from "react-hook-form";
+import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { User } from "../../../Models/User";
 import agent from "../../Api/agent";
-// import { setBasket } from "../../../Components/Basket/BasketSlice";
 
+// Définition de l'état initial de l'utilisateur
 interface AccountState {
     user: User | null;
 }
 
+// Définition d'une interface pour les erreurs retournées par l'API
+interface ApiError {
+    message: string;
+}
+
 const initialState: AccountState = {
-    user: null
+    user: null,
 };
 
-export const signInUser = createAsyncThunk<User,FieldValues >(
-    'account/signInUser',
-    async ({ data, navigate }, thunkAPI) => {
+// Action asynchrone pour la connexion de l'utilisateur
+export const signInUser = createAsyncThunk<User, any, { rejectValue: ApiError }>(
+    "account/signInUser",
+    async (data, thunkAPI) => {
         try {
             const userDto = await agent.Account.login(data);
             const { ...user } = userDto;
-            localStorage.setItem('user', JSON.stringify(user));
-            navigate('/'); 
+            localStorage.setItem("user", JSON.stringify(user));
             return user;
         } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.data });
+            // Si une erreur survient, nous rejetons avec un message d'erreur
+            return thunkAPI.rejectWithValue({ message: error.response?.data || error.message });
         }
     }
 );
 
-export const fetchCurrentUser = createAsyncThunk<User, void>(
-    'account/fetchCurrentUser',
+// Action asynchrone pour récupérer les informations de l'utilisateur actuel
+export const fetchCurrentUser = createAsyncThunk<User, void, { rejectValue: ApiError }>(
+    "account/fetchCurrentUser",
     async (_, thunkAPI) => {
-        thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
+        thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem("user")!)));
         try {
             const userDTO = await agent.Account.currentUser();
             const { ...user } = userDTO;
-            // const { basket, ...user } = userDTO;
-            // if (basket) thunkAPI.dispatch(setBasket(basket));
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem("user", JSON.stringify(user));
             return user;
         } catch (error: any) {
-            return thunkAPI.rejectWithValue({ error: error.data });
+            return thunkAPI.rejectWithValue({ message: error.response?.data || error.message });
         }
     },
     {
         condition: () => {
-            if (!localStorage.getItem('user')) return false;
-        }
+            if (!localStorage.getItem("user")) return false;
+        },
     }
 );
 
+// Slice Redux pour la gestion de l'état de l'utilisateur
 export const accountSlice = createSlice({
-    name: 'account',
+    name: "account",
     initialState,
     reducers: {
+        // Réinitialiser l'état de l'utilisateur et supprimer les données locales
         signOut: (state) => {
             state.user = null;
-            localStorage.removeItem('user');
+            localStorage.removeItem("user");
+            toast.info("Vous avez été déconnecté.");
         },
-        setUser: (state, action) => {
-            const claims = JSON.parse(atob(action.payload.token.split('.')[1]));
-            const roles = claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-            state.user = { ...action.payload, roles: typeof roles === 'string' ? [roles] : roles };
-        }
+        // Mettre à jour l'utilisateur dans l'état global
+        setUser: (state, action: PayloadAction<User>) => {
+            const claims = JSON.parse(atob(action.payload.token.split(".")[1]));
+            const roles = claims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+            state.user = { ...action.payload, roles: typeof roles === "string" ? [roles] : roles };
+        },
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchCurrentUser.rejected, (state) => {
-            state.user = null;
-            localStorage.removeItem('user');
-            toast.error('Session expirée - Veuillez vous reconnecter');
-        });
-        builder.addMatcher(isAnyOf(signInUser.fulfilled, fetchCurrentUser.fulfilled), (state, action) => {
-            const claims = JSON.parse(atob(action.payload.token.split('.')[1]));
-            const roles = claims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-            state.user = { ...action.payload, roles: typeof roles === 'string' ? [roles] : roles };
-        });
-        builder.addMatcher(isAnyOf(signInUser.rejected), (state, action) => {
-            throw action.payload;
-        });
-    }
+        builder.addMatcher(
+            isAnyOf(signInUser.fulfilled, fetchCurrentUser.fulfilled),
+            (state, action) => {
+                const claims = JSON.parse(atob(action.payload.token.split(".")[1]));
+                const roles = claims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                state.user = { ...action.payload, roles: typeof roles === "string" ? [roles] : roles };
+            }
+        );
+
+        builder.addMatcher(
+            isAnyOf(signInUser.rejected),
+            (state, action: PayloadAction<ApiError | undefined>) => {
+                // Vérifier que l'action contient un message d'erreur
+                const errorMessage = action.payload?.message || "Connexion échouée.";
+                toast.error(errorMessage);
+            }
+        );
+    },
 });
 
 export const { signOut, setUser } = accountSlice.actions;
+
+export default accountSlice.reducer;
