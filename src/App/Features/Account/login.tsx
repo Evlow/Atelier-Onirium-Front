@@ -10,6 +10,8 @@ import { LoadingButton } from "@mui/lab";
 import { useAppDispatch } from "../../Store/configureStore";
 import { signInUser } from "./accountSlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import NavBar from "../../../Components/NavBar/navbar";
+import Footer from '../../../Components/Footer/footer';
 
 export default function Login() {
     const dispatch = useAppDispatch();
@@ -34,6 +36,8 @@ export default function Login() {
     }
 
     return (
+    <div>   <NavBar></NavBar>
+
         <Container
             component={Paper}
             maxWidth="sm"
@@ -90,5 +94,7 @@ export default function Login() {
                 </LoadingButton>
             </Box>
         </Container>
+        <Footer></Footer>
+        </div>
     );
 }
