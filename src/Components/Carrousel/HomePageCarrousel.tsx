@@ -24,7 +24,6 @@ export default function HomePageCarrousel() {
     <div style={{ padding: "20px" }}>
       <Typography
         variant="h2"
-        color="white"
         fontFamily="Lovers"
         sx={{
           textAlign: "left",

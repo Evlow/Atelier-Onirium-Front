@@ -35,8 +35,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
         {/* Titre principal */}
         <Typography
           variant="h2"
-          color="white"
-          fontFamily="Lovers"
           sx={{
             textAlign: "center",
             fontSize: { xs: "3em", md: "6em" },
@@ -58,8 +56,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
             component="div"
             variant="body1"
             sx={{
-              color: "white",
-              fontFamily: "Gowun",
               flex: 1,
               textAlign: "justify",
             }}
@@ -126,7 +122,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
           component="div"
           variant="h3"
           sx={{
-            color: "white",
             fontFamily: "Lovers",
             textAlign: "center",
             fontSize: { xs: "2.5em", md: "3.5em" },
@@ -174,8 +169,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
             {/* Titre "Création Atelier" */}
             <Typography
               variant="h2"
-              color="white"
-              fontFamily="Lovers"
               sx={{
                 textAlign: "left",
                 fontSize: { xs: "3em", md: "6em" },
@@ -190,8 +183,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
               component="div"
               variant="body1"
               sx={{
-                color: "white",
-                fontFamily: "Gowun",
                 textAlign: "center",
               }}
             >
@@ -222,8 +213,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
             {/* Titre "Galerie Expo" */}
             <Typography
               variant="h2"
-              color="white"
-              fontFamily="Lovers"
               sx={{
                 textAlign: "left",
                 fontSize: { xs: "3em", md: "6em" },
@@ -238,8 +227,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
               component="div"
               variant="body1"
               sx={{
-                color: "white",
-                fontFamily: "Gowun",
                 textAlign: "center",
               }}
             >

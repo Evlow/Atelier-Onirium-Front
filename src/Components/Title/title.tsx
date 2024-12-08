@@ -28,7 +28,7 @@ export default function Title() {
   // const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
   return (
-    <AppBar position="static" className="appbar" color="transparent">
+    <AppBar position="static" color="transparent">
       <Toolbar>
         <Typography fontFamily="Love Light" color="black" variant="h1" component="div" sx={{ flexGrow: 1 }} className="title">
           L'Atelier d'Onirium
@@ -63,7 +63,6 @@ export default function Title() {
           </IconButton>
         ))}
       </Toolbar>
-      <hr className="hr-title"/>
     </AppBar>
   );
 }

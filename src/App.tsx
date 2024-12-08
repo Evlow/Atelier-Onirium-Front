@@ -3,18 +3,57 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCallback, useEffect, useState } from "react";
-// import { fetchBasketAsync, setBasket } from "./Components/Basket/BasketSlice";
 import { useAppDispatch } from "./App/Store/configureStore";
 import { CssBaseline } from "@mui/material";
 import { fetchCurrentUser } from "./App/Features/Account/accountSlice";
 
 // Création du thème personnalisé avec un fond noir
 const theme = createTheme({
-  palette: {
-    background: {
-      default: "black",
+  components: {
+    // Personnalisation du TextField
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiInputLabel-root": {
+            color: "#640a02", // Couleur du label par défaut
+            "&.Mui-focused": {
+              color: "#c26a3c", // Couleur du label lorsqu'il est en focus
+            },
+            "&.MuiInputLabel-shrink": {
+              color: "#640a02", // Couleur du label lorsqu'il est rempli (shrink)
+            },
+          },
+        },
+      },
+    },
+    // Personnalisation du champ InputBase pour appliquer la couleur à la bordure sous le champ
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focused::after": {
+            borderBottom: "2px solid #640a02", // Couleur de la bordure sous le champ en focus
+          },
+        },
+      },
+    },
+    // Personnalisation du Button
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#640a02", // Couleur du bouton
+          color: "white", // Couleur du texte du bouton
+          fontFamily: "Gowun", // Personnalisation de la police du bouton
+        },
+      },
     },
   },
+  // Palette de couleurs
+  palette: {
+    background: {
+      default: "#1E1410", // Marron plus foncé
+    },
+  },
+  // Typographie
   typography: {
     h1: {
       fontFamily: "Love",
@@ -23,18 +62,13 @@ const theme = createTheme({
     h2: {
       fontFamily: "Lovers",
       fontWeight: "lighter",
+      color: "#CFC5C3", // Couleur du texte du corps
     },
-    h4: {
+    body1: {
       fontFamily: "Gowun",
+      color: "#CFC5C3", // Couleur du texte du corps
       fontWeight: "lighter",
-    },
-    h5: {
-      fontFamily: "Gowun",
-      fontWeight: "lighter",
-    },
-    h6: {
-      fontFamily: "Gowun",
-      fontWeight: "lighter",
+
     },
   },
 });
@@ -42,7 +76,7 @@ const theme = createTheme({
 function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
-  
+
   const initApp = useCallback(async () => {
     try {
       await dispatch(fetchCurrentUser());
@@ -58,11 +92,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {" "}
-      {/* Applique le thème personnalisé */}
       <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
-      <CssBaseline />{" "}
-      {/* Applique les styles de base et normalise les éléments */}
+      <CssBaseline /> {/* Applique les styles de base et normalise les éléments */}
       <Outlet /> {/* Permet de rendre les routes enfants */}
     </ThemeProvider>
   );
