@@ -50,7 +50,7 @@ const theme = createTheme({
   // Palette de couleurs
   palette: {
     background: {
-      default: "#1E1410", // Marron plus foncé
+      default: "black", 
     },
   },
   // Typographie
