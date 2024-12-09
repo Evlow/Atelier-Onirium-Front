@@ -50,9 +50,9 @@ const creation = useAppSelector(state => creationSelectors.selectById(state, +id
           <Typography variant="h3" style={{ color: "white", marginBottom: "20px" }}>
             {creation.name}
           </Typography>
-          <Typography variant="h5" style={{ color: "white" }}>
+          {/* <Typography variant="h5" style={{ color: "white" }}>
             {creation.price.toFixed(2)}€
-          </Typography>
+          </Typography> */}
         </Grid>
       </Grid2>
       <Footer />
