@@ -18,7 +18,7 @@ export default function CreationCard({ creation }: Props) {
       sx={{
         maxWidth: 300,
         margin: "auto",
-        backgroundColor: "transparent",
+        backgroundColor: "#e7e2e1",
         overflow: "hidden",
         transition: "transform 0.3s ease",
         "&:hover": {

@@ -36,16 +36,7 @@ const theme = createTheme({
         },
       },
     },
-    // Personnalisation du Button
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "#640a02", // Couleur du bouton
-          color: "white", // Couleur du texte du bouton
-          fontFamily: "Gowun", // Personnalisation de la police du bouton
-        },
-      },
-    },
+
   },
   // Palette de couleurs
   palette: {
@@ -64,8 +55,13 @@ const theme = createTheme({
       fontWeight: "lighter",
       color: "#CFC5C3", // Couleur du texte du corps
     },
-    body1: {
+    h3: {
       fontFamily: "Gowun",
+      fontWeight: "lighter",
+      color: "#CFC5C3", 
+    },
+    body1: {
+      fontFamily: "Alice",
       color: "#CFC5C3", // Couleur du texte du corps
       fontWeight: "lighter",
 
