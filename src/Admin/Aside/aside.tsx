@@ -1,7 +1,5 @@
 import { Box } from "@mui/material";
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import CreateIcon from '@mui/icons-material/Create';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Aside() {
   const asideItems = [
@@ -9,16 +7,6 @@ export default function Aside() {
       title: "Dashboard",
       path: "/dashboard",
       icon: <DashboardIcon />,
-    },
-    {
-      title: "Créations",
-      path: "/creations",
-      icon: <CreateIcon />,
-    },
-    {
-      title: "Corbeille",
-      path: "/corbeille",
-      icon: <DeleteIcon />,
     },
   ];
 
@@ -34,12 +22,12 @@ export default function Aside() {
           border: "2px solid #640a02", 
           borderRadius: "20px", 
           height: "85px", 
-          padding: '10px' 
+          padding: '10px', 
         }}>
           <a href={item.path} style={{ textDecoration: 'none', color: 'black', textAlign: 'center' }}>
             {item.title}
           </a>
-          <a href={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <a href={item.path} style={{ textDecoration: 'none',  color: 'black',}}>
             {item.icon} 
           </a>
         </Box>

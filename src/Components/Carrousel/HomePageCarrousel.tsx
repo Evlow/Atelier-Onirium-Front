@@ -27,7 +27,7 @@ export default function HomePageCarrousel() {
         fontFamily="Lovers"
         sx={{
           textAlign: "left",
-          fontSize: { xs: "3em", md: "6em" },
+          fontSize: { xs: "3rem", md: "5rem" },
         }}
       >
         Les dernières créations

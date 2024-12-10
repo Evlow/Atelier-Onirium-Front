@@ -1,54 +1,145 @@
-// Dashboard.tsx
 import Aside from "../../Aside/aside";
 import NavBarAdmin from "../NavBarAdmin";
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import { User } from "../../../Models/User";
 import { useState, useEffect } from "react";
 import agent from "../../../App/Api/agent";
+import CircularProgress from "@mui/material/CircularProgress";
+import AddIcon from '@mui/icons-material/Add'; 
+import {
+  Container,
+  Grid,
+  Card,
+  Button,
+  CardActionArea,
+  CardContent,
+} from "@mui/material";
+import { Creation } from "../../../Models/Creations";
+import CreationAdminCard from "../../../Components/Creations/CreationAdminCard";
 
 export default function Dashboard() {
-  // Utilisation de l'état pour gérer l'utilisateur, initialisé à undefined
   const [user, setCurrentUser] = useState<User | undefined>(undefined);
+  const [creations, setCreations] = useState<Creation[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-  // Utilisation du useEffect pour récupérer les données de l'utilisateur dès le premier rendu du composant
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userData = await agent.Account.currentUser(); // Assurez-vous que cette méthode renvoie bien un utilisateur
-        setCurrentUser(userData);  // Assigner l'utilisateur récupéré dans l'état
+        const userData = await agent.Account.currentUser();
+        setCurrentUser(userData);
       } catch (error) {
         console.error("Erreur lors de la récupération de l'utilisateur:", error);
+        setError(
+          "Impossible de charger votre profil. Veuillez réessayer plus tard."
+        );
       }
     };
 
     fetchUserData();
   }, []);
 
+  useEffect(() => {
+    const fetchCreations = async () => {
+      try {
+        const creationsData = await agent.Creations.list();
+        setCreations(creationsData);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des créations:", error);
+      }
+    };
+
+    fetchCreations();
+  }, []);
+
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <NavBarAdmin /> {/* Barre de navigation */}
-      <Box sx={{ display: 'flex', flex: 1 }}> {/* Conteneur flex pour Aside et contenu principal */}
-        <Aside />
-        <Box 
-          sx={{
-            flex: 1, // Prend tout l'espace restant
-            padding: '70px', // Espace autour du contenu
-            overflowY: 'auto', // Assure que le contenu peut défiler si nécessaire
-            paddingLeft:"200px"
-            
-          }}
+    <>
+      <NavBarAdmin />
+      {/* Box principal - contenu principal */}
+      <Box>
+        <Typography
+          variant="h3"
+          color="white"
+          textAlign="center"
+          fontSize="1.8rem"
+          padding="30px"
+          fontFamily="Alice"
         >
-          {/* Box pour styliser la zone de texte */}
-          <Typography component="h2" color="white" variant="h4">
-            {user ? (
-              `Bienvenue ${user.userName}, sur ton espace !`
-            ) : (
-              <div>Chargement de votre profil...</div>
-            )}
-          </Typography>
-        </Box>
+          {error ? (
+            <Typography color="error" textAlign="center">
+              {error}
+            </Typography>
+          ) : user ? (
+            `✨Wesh ${user.userName}, maintenant c'est à toi de te débrouiller pour gérer ton site !✨`
+          ) : (
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              height="100%"
+            >
+              <CircularProgress color="inherit" />
+            </Box>
+          )}
+        </Typography>
       </Box>
-    </Box>
+      <Container sx={{ paddingTop: 2, paddingBottom: 2 }}>
+        <Grid container spacing={3} >
+          {/* Carte "Ajouter une création" */}
+          <Grid item xs={12} sm={6} md={3}>
+            <Card
+              sx={{
+                maxWidth: "250px",
+                margin: "auto",
+                backgroundColor: "#e7e2e1",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "250px", // Fixer une hauteur uniforme
+                alignContent:"center"
+              
+              }}
+            >
+              <Button
+                variant="outlined"
+                sx={{
+                  width: "100%", // Prendre toute la largeur de la carte
+                  height: "100%", // Prendre toute la hauteur de la carte
+                  border: "none",
+                  display: "flex",
+                  justifyContent: "center", // Centrer horizontalement
+                  alignItems: "center", // Centrer verticalement
+                  textTransform: "none", // Désactiver la transformation de texte en majuscules
+                  flexDirection: "column", // Disposer le texte et l'icône verticalement
+                }}
+              >
+                <Typography
+                  color="black"
+                  marginBottom="8px" // Espacement entre le texte et l'icône
+                  fontSize="1.2rem"
+                >
+                  Ajouter une création
+                </Typography>
+                <AddIcon sx={{ fontSize: "3rem", color: "#640a02" }} /> {/* Icône "+" */}
+              </Button>
+            </Card>
+          </Grid>
+
+          {/* Afficher les créations */}
+          {creations.length > 0 ? (
+            creations.map((creation) => (
+              <Grid item xs={12} sm={6} md={3} key={creation.id}>
+                <CreationAdminCard creation={creation} />
+              </Grid>
+            ))
+          ) : (
+            <Typography variant="body1" color="white" textAlign="center">
+              Aucune création disponible pour le moment.
+            </Typography>
+          )}
+        </Grid>
+      </Container>
+    </>
   );
 }

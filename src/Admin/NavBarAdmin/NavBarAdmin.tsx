@@ -28,18 +28,19 @@ export default function NavBarAdmin() {
                 paddingX: 2 
             }}
         >
-            <Typography variant='h1' fontSize="4rem">
-                L'Atelier d'Onirium
+            <Typography variant='h1' fontSize="4rem" color="black" textAlign="center"
+>                L'Atelier d'Onirium
             </Typography>
             <Box 
                 sx={{ 
                     display: "flex", 
-                    justifyContent: "center", 
-                    flexGrow: 1
+                    justifyContent: "right", 
+                    padding:"10px",
+                    flexGrow: 1,
                 }}
             >
                 {appBarItems.map((item, index) => (
-                    <Box key={index} marginLeft={3}>
+                    <Box key={index} marginLeft={4}>
                         <a 
                             href={item.path} 
                             onClick={item.onClick ? (e) => { e.preventDefault(); item.onClick(); } : undefined}

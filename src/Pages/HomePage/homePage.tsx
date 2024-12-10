@@ -37,7 +37,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
           variant="h2"
           sx={{
             textAlign: "center",
-            fontSize: { xs: "3em", md: "6em" },
+            fontSize: { xs: "3em", md: "5em" },
             padding: "20px"
           }}
         >
@@ -124,7 +124,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
           sx={{
             fontFamily: "Lovers",
             textAlign: "center",
-            fontSize: { xs: "2.5em", md: "3.5em" },
+            fontSize: { xs: "2rem", md: "3rem" },
           }}
         >
           Créer quelque chose d'unique, c'est donner vie à une idée qui
@@ -171,7 +171,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
               variant="h2"
               sx={{
                 textAlign: "left",
-                fontSize: { xs: "3em", md: "6em" },
+                fontSize: { xs: "3rem", md: "4rem" },
                 marginBottom: "20px",
               }}
             >
@@ -215,7 +215,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
               variant="h2"
               sx={{
                 textAlign: "left",
-                fontSize: { xs: "3em", md: "6em" },
+                fontSize: { xs: "3rem", md: "4rem" },
                 marginBottom: "20px",
               }}
             >
