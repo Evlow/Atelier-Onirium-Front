@@ -42,7 +42,7 @@ export default function DropZoneInput(props: Props) {
             <FormControl error={!!fieldState.error} style={isDragActive ? { ...dzStyles, ...dzActive } : dzStyles}>
                 <input {...getInputProps()} />
                 <UploadFile sx={{ fontSize: '100px' }} />
-                <Typography variant='h4'>Glisse ton image ici !</Typography>
+                <Typography variant='body1' textAlign="center" >Hey la Gueuse,glisse ton image ici ! ou Clique ! Fais comme tu veux mais mets-moi une jolie image !</Typography>
                 <FormHelperText>{fieldState.error?.message}</FormHelperText> 
             </FormControl>
         </div>

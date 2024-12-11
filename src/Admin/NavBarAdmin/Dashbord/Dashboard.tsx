@@ -1,4 +1,3 @@
-import Aside from "../../Aside/aside";
 import NavBarAdmin from "../NavBarAdmin";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -9,7 +8,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import AddIcon from "@mui/icons-material/Add";
 import { Container, Grid, Card, Button, CardActionArea, CardMedia } from "@mui/material";
 import { Creation } from "../../../Models/Creations";
-import { useNavigate } from "react-router-dom";
 import useCreations from "../../../App/Hook/useCreation";
 import { useAppDispatch } from "../../../App/Store/configureStore";
 import CreationForm from "../../../App/Form/CreationForm";
@@ -18,7 +16,6 @@ import { removeCreation } from "../../../Components/Creations/creationSlice";
 export default function Dashboard() {
   const [user, setCurrentUser] = useState<User | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
   const { creations } = useCreations();
   const dispatch = useAppDispatch();
   const [editMode, setEditMode] = useState(false);

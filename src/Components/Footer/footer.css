@@ -6,6 +6,10 @@
   font-family: 'Gowun';
   src: url('/public/Fonts/GowunBatang-Regular.ttf') format('truetype');
 }
+
+.h2-footer{
+  color:black
+}
 footer {
   background-color: #E7E2E1;
   padding: 20px 0;
@@ -67,6 +71,7 @@ footer ul, footer li, footer a, footer img, footer .h2-footer{
   background-color: #E7E2E1;
   padding-bottom: 20px;
   font-family: 'Gowun';
+  color:black
 
 }
 .p-copyright {
