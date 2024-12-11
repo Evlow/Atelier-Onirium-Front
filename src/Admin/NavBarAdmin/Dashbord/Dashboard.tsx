@@ -6,22 +6,27 @@ import { User } from "../../../Models/User";
 import { useState, useEffect } from "react";
 import agent from "../../../App/Api/agent";
 import CircularProgress from "@mui/material/CircularProgress";
-import AddIcon from '@mui/icons-material/Add'; 
-import {
-  Container,
-  Grid,
-  Card,
-  Button,
-  CardActionArea,
-  CardContent,
-} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { Container, Grid, Card, Button, CardActionArea, CardMedia } from "@mui/material";
 import { Creation } from "../../../Models/Creations";
-import CreationAdminCard from "../../../Components/Creations/CreationAdminCard";
+import { useNavigate } from "react-router-dom";
+import useCreations from "../../../App/Hook/useCreation";
+import { useAppDispatch } from "../../../App/Store/configureStore";
+import CreationForm from "../../../App/Form/CreationForm";
+import { removeCreation } from "../../../Components/Creations/creationSlice";
 
 export default function Dashboard() {
   const [user, setCurrentUser] = useState<User | undefined>(undefined);
-  const [creations, setCreations] = useState<Creation[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const { creations } = useCreations();
+  const dispatch = useAppDispatch();
+  const [editMode, setEditMode] = useState(false);
+  const [selectedCreation, setSelectedCreation] = useState<
+    Creation | undefined
+  >(undefined);
+  const [loading, setLoading] = useState(false);
+  const [target, setTarget] = useState(0);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -29,7 +34,10 @@ export default function Dashboard() {
         const userData = await agent.Account.currentUser();
         setCurrentUser(userData);
       } catch (error) {
-        console.error("Erreur lors de la récupération de l'utilisateur:", error);
+        console.error(
+          "Erreur lors de la récupération de l'utilisateur:",
+          error
+        );
         setError(
           "Impossible de charger votre profil. Veuillez réessayer plus tard."
         );
@@ -39,19 +47,27 @@ export default function Dashboard() {
     fetchUserData();
   }, []);
 
-  useEffect(() => {
-    const fetchCreations = async () => {
-      try {
-        const creationsData = await agent.Creations.list();
-        setCreations(creationsData);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des créations:", error);
-      }
-    };
+  function handleSelectCreation(creation: Creation) {
+    setSelectedCreation(creation);
+    setEditMode(true);
+  }
 
-    fetchCreations();
-  }, []);
+  function handleDeleteCreation(id: number) {
+    setLoading(true);
+    setTarget(id);
+    agent.Admin.deleteCreation(id)
+      .then(() => dispatch(removeCreation(id)))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  }
 
+  function cancelEdit() {
+    if (selectedCreation) setSelectedCreation(undefined);
+    setEditMode(false);
+  }
+
+  if (editMode)
+    return <CreationForm creation={selectedCreation} cancelEdit={cancelEdit} />;
   return (
     <>
       <NavBarAdmin />
@@ -84,7 +100,7 @@ export default function Dashboard() {
         </Typography>
       </Box>
       <Container sx={{ paddingTop: 2, paddingBottom: 2 }}>
-        <Grid container spacing={3} >
+        <Grid container spacing={3}>
           {/* Carte "Ajouter une création" */}
           <Grid item xs={12} sm={6} md={3}>
             <Card
@@ -97,11 +113,11 @@ export default function Dashboard() {
                 justifyContent: "center",
                 alignItems: "center",
                 height: "250px", // Fixer une hauteur uniforme
-                alignContent:"center"
-              
+                alignContent: "center",
               }}
             >
               <Button
+                onClick={() => setEditMode(true)}
                 variant="outlined"
                 sx={{
                   width: "100%", // Prendre toute la largeur de la carte
@@ -121,23 +137,106 @@ export default function Dashboard() {
                 >
                   Ajouter une création
                 </Typography>
-                <AddIcon sx={{ fontSize: "3rem", color: "#640a02" }} /> {/* Icône "+" */}
+                <AddIcon sx={{ fontSize: "3rem", color: "#640a02" }} />{" "}
+                {/* Icône "+" */}
               </Button>
             </Card>
           </Grid>
 
           {/* Afficher les créations */}
-          {creations.length > 0 ? (
-            creations.map((creation) => (
-              <Grid item xs={12} sm={6} md={3} key={creation.id}>
-                <CreationAdminCard creation={creation} />
-              </Grid>
-            ))
-          ) : (
-            <Typography variant="body1" color="white" textAlign="center">
-              Aucune création disponible pour le moment.
-            </Typography>
-          )}
+          {creations.map((creation) => (
+            <Grid item xs={12} sm={6} md={3} key={creation.id}>
+    <Card
+      sx={{
+        maxWidth: "250px",
+        margin: "auto",
+        backgroundColor: "#e7e2e1",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
+      <Typography
+        gutterBottom
+        sx={{
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          fontSize: "1.2rem",
+          fontWeight: "bold",
+          color: "black",
+          textAlign: "center",
+          padding: "10px",
+        }}
+      >
+        {creation.name}
+      </Typography>
+
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="250px"
+          image={creation.pictureUrl}
+          alt={creation.name}
+          sx={{
+            objectFit: "cover",
+          }}
+        />
+      </CardActionArea>
+
+      <Box sx={{ padding: "10px", display: "flex", justifyContent: "center" }}>
+        {/* Bouton Modifier */}
+        <Button
+          onClick={() => handleSelectCreation(creation)}
+          variant="outlined"
+          sx={{
+            width: "45%",
+            backgroundColor: "transparent", // Fond transparent
+            border: "1px solid #640a02", // Bordure rouge
+            color: "black", // Texte rouge
+            margin: "5px",
+            fontFamily: "Alice",
+            textTransform: "none", // Désactiver la transformation de texte en majuscules
+          }}
+        >
+          Modifier
+        </Button>
+
+        {/* Bouton Supprimer */}
+        <Button
+          onClick={() => handleDeleteCreation(creation.id)}
+          variant="outlined"
+          sx={{
+            width: "45%",
+            backgroundColor: "transparent",
+            border: "1px solid #640a02",
+            color: "black",
+            margin: "5px",
+            fontFamily: "Alice",
+            textTransform: "none",
+          }}
+        >
+          Supprimer
+        </Button>
+      </Box>
+    </Card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </>
