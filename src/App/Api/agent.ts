@@ -87,13 +87,43 @@ const requests = {
     // Méthode DELETE
     delete: (url: string) =>
         axios.delete(url).then(responseBody), // Effectue une requête DELETE et extrait les données
+    postForm: (url: string, data: FormData) => axios.post(url, data, {
+        headers: {'Content-type': 'multipart/form-data'}
+    }).then(responseBody),
+    putForm: (url: string, data: FormData) => axios.put(url, data, {
+        headers: {'Content-type': 'multipart/form-data'}
+    }).then(responseBody)
 }
+
+function createFormData(item: any) {
+    var formData = new FormData();
+    for (const key in item) {
+        formData.append(key, item[key])
+    }
+    return formData;
+}
+
+const Admin = {
+    createCreation: (creation: any) => requests.postForm('Creation/CreateCreation', createFormData(creation)),
+    updateCreation: (creation: any) => requests.putForm('/Creation/UpdateCreation', createFormData(creation)),
+    deleteCreation: (id: number) => requests.delete(`Creation/DeleteCreation/${id}`),
+};
+
+
 
 // Objet pour gérer les créations (Atelier)
 const Creations = {
     list: () => requests.get('Creation/GetCreations'), // Récupère la liste des créations
     details: (id: number) => requests.get(`Creation/CreationId/${id}`), // Récupère les détails d'une création spécifique par ID
 };
+
+
+// Objet pour gérer les actions liées au compte utilisateur
+const Account = {
+    login: (values: any) => requests.post('Account/Login/login', values), // Effectue une connexion (POST)
+    register: (values: any) => requests.post('Account/Register/register', values), // Effectue une inscription (POST)
+    currentUser: () => requests.get('Account/GetCurrentUser/currentUser'), // Récupère les informations de l'utilisateur connecté
+}
 
 // Objet pour tester la gestion des erreurs (pour simuler différentes erreurs côté serveur)
 const TestErrors = {
@@ -104,17 +134,11 @@ const TestErrors = {
     getValidationError: () => requests.get('Buggy/GetValidationError/validation-error'), // Simule une erreur de validation
 };
 
-// Objet pour gérer les actions liées au compte utilisateur
-const Account = {
-    login: (values: any) => requests.post('Account/Login/login', values), // Effectue une connexion (POST)
-    register: (values: any) => requests.post('Account/Register/register', values), // Effectue une inscription (POST)
-    currentUser: () => requests.get('Account/GetCurrentUser/currentUser'), // Récupère les informations de l'utilisateur connecté
-}
-
 // Agrégation des agents pour l'exportation
 const agent = {
     Creations,
     TestErrors,
+    Admin,
     Account, // Ajouter ici les objets gérant les autres parties de l'application
 };
 
