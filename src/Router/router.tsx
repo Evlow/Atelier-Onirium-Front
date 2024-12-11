@@ -16,6 +16,8 @@ import Dashboard from "../Admin/NavBarAdmin/Dashbord/Dashboard";
 import Register from "../App/Features/Account/register";
 import Login from "../App/Features/Account/login";
 import RequireAuth from "./RequiredAuth";
+import CreationForm from "../App/Form/CreationForm";
+import CreateForm from "../App/Form/CreationForm";
 
 // Route principale
 export const Router = createBrowserRouter([
@@ -23,21 +25,20 @@ export const Router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-        {
-            // authenticated routes
-            element: <RequireAuth />, children: [
-            ]
-        },
-        {
-            // admin routes
-            element: <RequireAuth roles={['Admin']} />, children: [
-                { path: 'dashboard', element: <Dashboard /> },
-                { path: "navBarAdmin", element: <NavBarAdmin /> },
-                { path: "admin", element: <Aside /> },
-
-
-            ]
-        },
+      {
+        // authenticated routes
+        element: <RequireAuth />,
+        children: [],
+      },
+      {
+        // admin routes
+        element: <RequireAuth roles={["Admin"]} />,
+        children: [
+          { path: "dashboard", element: <Dashboard /> },
+          { path: "navBarAdmin", element: <NavBarAdmin /> },
+          { path: "admin", element: <Aside /> },
+        ],
+      },
       { path: "/", element: <HomePage /> },
       { path: "accueil", element: <HomePage /> },
       { path: "creations-atelier", element: <WorkshopCreation /> },

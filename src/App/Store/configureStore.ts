@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 // Importation des slices de Redux pour gérer différents morceaux d'état
 // import { basketSlice } from "../../Components/Basket/BasketSlice";
-import { counterSlice } from "../../Components/Counter/CounterSlice";
 import { creationSlice } from "../../Components/Creations/creationSlice";
 import { accountSlice } from "../Features/Account/accountSlice";
+import { counterSlice } from "../../Components/Counter/CounterSlice";
 
 // Configuration du store Redux avec les reducers des slices
 export const store = configureStore({
