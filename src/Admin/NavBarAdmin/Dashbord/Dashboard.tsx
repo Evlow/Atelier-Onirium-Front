@@ -1,4 +1,3 @@
-import Aside from "../../Aside/aside";
 import NavBarAdmin from "../NavBarAdmin";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -7,24 +6,21 @@ import { useState, useEffect } from "react";
 import agent from "../../../App/Api/agent";
 import CircularProgress from "@mui/material/CircularProgress";
 import AddIcon from "@mui/icons-material/Add";
-import { Container, Grid, Card, Button, CardActionArea, CardMedia } from "@mui/material";
+import { Container, Grid, Card, Button, CardActionArea, CardMedia, Link } from "@mui/material";
 import { Creation } from "../../../Models/Creations";
-import { useNavigate } from "react-router-dom";
 import useCreations from "../../../App/Hook/useCreation";
 import { useAppDispatch } from "../../../App/Store/configureStore";
 import CreationForm from "../../../App/Form/CreationForm";
 import { removeCreation } from "../../../Components/Creations/creationSlice";
+import { Link as RouterLink } from 'react-router-dom'; // Importation correcte du Link de react-router-dom
 
 export default function Dashboard() {
   const [user, setCurrentUser] = useState<User | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
   const { creations } = useCreations();
   const dispatch = useAppDispatch();
   const [editMode, setEditMode] = useState(false);
-  const [selectedCreation, setSelectedCreation] = useState<
-    Creation | undefined
-  >(undefined);
+  const [selectedCreation, setSelectedCreation] = useState<Creation | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [target, setTarget] = useState(0);
 
@@ -34,13 +30,8 @@ export default function Dashboard() {
         const userData = await agent.Account.currentUser();
         setCurrentUser(userData);
       } catch (error) {
-        console.error(
-          "Erreur lors de la récupération de l'utilisateur:",
-          error
-        );
-        setError(
-          "Impossible de charger votre profil. Veuillez réessayer plus tard."
-        );
+        console.error("Erreur lors de la récupération de l'utilisateur:", error);
+        setError("Impossible de charger votre profil. Veuillez réessayer plus tard.");
       }
     };
 
@@ -68,6 +59,7 @@ export default function Dashboard() {
 
   if (editMode)
     return <CreationForm creation={selectedCreation} cancelEdit={cancelEdit} />;
+
   return (
     <>
       <NavBarAdmin />
@@ -146,95 +138,81 @@ export default function Dashboard() {
           {/* Afficher les créations */}
           {creations.map((creation) => (
             <Grid item xs={12} sm={6} md={3} key={creation.id}>
-    <Card
-      sx={{
-        maxWidth: "250px",
-        margin: "auto",
-        backgroundColor: "#e7e2e1",
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-      }}
-    >
-      <Typography
-        gutterBottom
-        sx={{
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-          fontSize: "1.2rem",
-          fontWeight: "bold",
-          color: "black",
-          textAlign: "center",
-          padding: "10px",
-        }}
-      >
-        {creation.name}
-      </Typography>
+              <Card
+                sx={{
+                  maxWidth: "250px",
+                  margin: "auto",
+                  backgroundColor: "#e7e2e1",
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                }}
+              >
+                <Typography
+                  gutterBottom
+                  sx={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    fontSize: "1.2rem",
+                    fontWeight: "bold",
+                    color: "black",
+                    textAlign: "center",
+                    padding: "10px",
+                  }}
+                >
+                  {creation.name}
+                </Typography>
 
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="250px"
-          image={creation.pictureUrl}
-          alt={creation.name}
-          sx={{
-            objectFit: "cover",
-          }}
-        />
-      </CardActionArea>
+                {/* Lien vers la page de création */}
+                <RouterLink to={`/creations/${creation.id}`} style={{ textDecoration: "none" }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="300"
+                      image={creation.pictureUrl}
+                      alt={creation.name}
+                      sx={{ objectFit: "cover" }}
+                    />
+                  </CardActionArea>
+                </RouterLink>
 
-      <Box sx={{ padding: "10px", display: "flex", justifyContent: "center" }}>
-        {/* Bouton Modifier */}
-        <Button
-          onClick={() => handleSelectCreation(creation)}
-          variant="outlined"
-          sx={{
-            width: "45%",
-            backgroundColor: "transparent", // Fond transparent
-            border: "1px solid #640a02", // Bordure rouge
-            color: "black", // Texte rouge
-            margin: "5px",
-            fontFamily: "Alice",
-            textTransform: "none", // Désactiver la transformation de texte en majuscules
-          }}
-        >
-          Modifier
-        </Button>
+                <Box sx={{ padding: "10px", display: "flex", justifyContent: "center" }}>
+                  {/* Bouton Modifier */}
+                  <Button
+                    onClick={() => handleSelectCreation(creation)}
+                    variant="outlined"
+                    sx={{
+                      width: "45%",
+                      backgroundColor: "transparent", // Fond transparent
+                      border: "1px solid #640a02", // Bordure rouge
+                      color: "black", // Texte rouge
+                      margin: "5px",
+                      fontFamily: "Alice",
+                      textTransform: "none", // Désactiver la transformation de texte en majuscules
+                    }}
+                  >
+                    Modifier
+                  </Button>
 
-        {/* Bouton Supprimer */}
-        <Button
-          onClick={() => handleDeleteCreation(creation.id)}
-          variant="outlined"
-          sx={{
-            width: "45%",
-            backgroundColor: "transparent",
-            border: "1px solid #640a02",
-            color: "black",
-            margin: "5px",
-            fontFamily: "Alice",
-            textTransform: "none",
-          }}
-        >
-          Supprimer
-        </Button>
-      </Box>
-    </Card>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  {/* Bouton Supprimer */}
+                  <Button
+                    onClick={() => handleDeleteCreation(creation.id)}
+                    variant="outlined"
+                    sx={{
+                      width: "45%",
+                      backgroundColor: "transparent",
+                      border: "1px solid #640a02",
+                      color: "black",
+                      margin: "5px",
+                      fontFamily: "Alice",
+                      textTransform: "none",
+                    }}
+                  >
+                    Supprimer
+                  </Button>
+                </Box>
+              </Card>
             </Grid>
           ))}
         </Grid>
