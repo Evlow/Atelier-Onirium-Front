@@ -17,28 +17,26 @@ import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
 import { fetchCreationsAsync } from "../../Components/Creations/creationSlice";
 
 export default function HomePage() {
-const {creationsLoaded, status} =useAppSelector(state=>state.creation);
-const dispatch = useAppDispatch();
+  const { creationsLoaded } = useAppSelector((state) => state.creation);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if(!creationsLoaded) dispatch(fetchCreationsAsync());
+    if (!creationsLoaded) dispatch(fetchCreationsAsync());
   }, [creationsLoaded, dispatch]);
-
-if (status.includes('pending')) return <LoadingComponent message= "Chargement des créations"/> 
   return (
     <div>
       <NavBar />
       <Banners imgBanner={imgBanners} />
 
       {/* Section principale */}
-      <Box width="80%" margin="0 auto">
+      <Box component="main" width="80%" margin="0 auto">
         {/* Titre principal */}
         <Typography
           variant="h2"
           sx={{
             textAlign: "center",
             fontSize: { xs: "3em", md: "5em" },
-            padding: "20px"
+            padding: "20px",
           }}
         >
           L'Atelier d'Onirium, la création au-delà du réel
@@ -46,6 +44,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
 
         {/* Section de présentation */}
         <Stack
+          component="article"
           direction={{ xs: "column", md: "row" }}
           spacing={4}
           alignItems="center"
@@ -53,7 +52,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
         >
           {/* Texte présentation */}
           <Typography
-            component="div"
             variant="body1"
             sx={{
               flex: 1,
@@ -109,6 +107,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
 
       {/* Citation */}
       <Stack
+        component="article"
         justifyContent="center"
         alignItems="center"
         direction="row"
@@ -119,7 +118,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
           <img src={Arabesque1} alt="Arabesque 1" height="40px" />
         </Box>
         <Typography
-          component="div"
           variant="h3"
           sx={{
             fontFamily: "Lovers",
@@ -136,9 +134,10 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
       </Stack>
 
       <HomePageCarrousel></HomePageCarrousel>
-      <Box width="80%" margin="0 auto">
+      <Box component="main"width="80%" margin="0 auto">
         {/* Section création unique */}
         <Stack
+          component="article"
           direction={{ xs: "column", md: "row" }}
           spacing={4}
           alignItems="flex-start"
@@ -146,7 +145,8 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
           sx={{ marginTop: "50px" }}
         >
           {/* Image création unique */}
-          <Box
+          <Box          component="section"
+
             sx={{
               flex: 1,
               display: "flex",
@@ -165,7 +165,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
           </Box>
 
           {/* Conteneur pour le titre et la description */}
-          <Box flex={1}>
+          <Box component="section" flex={1}>
             {/* Titre "Création Atelier" */}
             <Typography
               variant="h2"
@@ -180,7 +180,6 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
 
             {/* Texte création atelier */}
             <Typography
-              component="div"
               variant="body1"
               sx={{
                 textAlign: "center",
@@ -202,6 +201,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
         </Stack>
         {/* Section gallerie expo */}
         <Stack
+          component="article"
           direction={{ xs: "column", md: "row" }}
           spacing={4}
           alignItems="flex-start"
@@ -209,7 +209,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
           sx={{ marginTop: "50px" }}
         >
           {/* Conteneur pour le titre et la description */}
-          <Box flex={1}>
+          <Box component="section" flex={1}>
             {/* Titre "Galerie Expo" */}
             <Typography
               variant="h2"
@@ -224,7 +224,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
 
             {/* Texte galerie exposition */}
             <Typography
-              component="div"
+              component="section"
               variant="body1"
               sx={{
                 textAlign: "center",
@@ -245,6 +245,7 @@ if (status.includes('pending')) return <LoadingComponent message= "Chargement de
           </Box>
           {/* Image galerie expo */}
           <Box
+            component="section"
             sx={{
               flex: 1,
               display: "flex",

@@ -60,7 +60,6 @@ export default function CreationCard({ creation }: Props) {
               color: "white",
             }}
           >
-            {/* {creation.price.toFixed(2)}€ */}
           </Typography>
         </CardContent>
       </CardActionArea>
