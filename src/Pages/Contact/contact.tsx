@@ -1,9 +1,8 @@
+import React, { useState } from "react";
 import NavBar from "../../Components/NavBar/navbar";
 import Footer from "../../Components/Footer/footer";
-import { useState } from "react";
-import ContactInputForm from "../../Components/Formulaires/contactInputForm";
+import { TextField, Button, Typography, Grid, Container, Box } from "@mui/material";
 import emailjs from "emailjs-com";
-import "./contact.css";
 import contactImage from "../../Assets/contact.jpg";
 
 export default function Contact() {
@@ -13,7 +12,7 @@ export default function Contact() {
   const [userMessage, setMessage] = useState("");
   const [userPhone, setPhone] = useState("");
 
-  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = (e: any) => {
     e.preventDefault();
     alert("😀 Merci pour votre message, il sera traité au plus vite 😀");
 
@@ -43,84 +42,82 @@ export default function Contact() {
       });
   };
 
-  const changeFirstName = (value: string) => {
-    setFirstName(value);
-  };
-
-  const changeLastName = (value: string) => {
-    setLastName(value);
-  };
-
-  const changeEmail = (value: string) => {
-    setEmail(value);
-  };
-  const changePhone = (value: string) => {
-    setPhone(value);
-  };
-  const changeMessage = (value: string) => {
-    setMessage(value);
-  };
-
   return (
     <div>
       <NavBar />
-      <h2 className="h2-contact">Contact</h2>
+      <Container maxWidth="md">
+        <Typography variant="h2" align="center" gutterBottom>
+          Contact
+        </Typography>
 
-      <article className="contact-image-form">
-        <div className="contact-image">
-          <img src={contactImage} alt="Photo de contact" />
-        </div>
-        <form onSubmit={submitForm}>
-          <div className="contact-form-container">
-            <article className="article-contact">
-              <p>
-                Besoin d'un devis pour votre projet ? <br></br>Des informations
-                complémentaires ?<br></br> Rien de plus simple, remplissez ce
-                formulaire :
-              </p>
-            </article>
-            <div className="contact-form-row">
-              <ContactInputForm
-                type="text"
-                value={userFirstName}
-                onChange={changeFirstName}
-                placeholder="Prénom"
-              />
-              <ContactInputForm
-                type="text"
-                value={userLastName}
-                onChange={changeLastName}
-                placeholder="Nom"
-              />
-            </div>
-            <div className="contact-form-row">
-              <ContactInputForm
-                type="text"
-                value={userPhone}
-                onChange={changePhone}
-                placeholder="Téléphone"
-              />
-              <ContactInputForm
-                type="email"
-                value={userEmail}
-                onChange={changeEmail}
-                placeholder="E-mail"
-              />
-            </div>
-            <div className="contact-form-area">
-              <ContactInputForm
-                type="area"
-                value={userMessage}
-                onChange={changeMessage}
-                placeholder="Message"
-              />
-            </div>
-            <button className="contact-button-form" type="submit">
-              Envoyer
-            </button>
-          </div>
-        </form>
-      </article>
+        <Grid container spacing={4} alignItems="center">
+          <Grid item xs={12} md={6}>
+            <img
+              src={contactImage}
+              alt="Contact"
+              style={{ width: "100%", borderRadius: "8px" }}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <Typography variant="body1" paragraph>
+              Besoin d'un devis pour votre projet ? Des informations
+              complémentaires ? Rien de plus simple, remplissez ce formulaire :
+            </Typography>
+
+            <form onSubmit={submitForm}>
+              <Box display="flex" flexDirection="column" gap={2}>
+                <TextField
+                  label="Prénom"
+                  value={userFirstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  fullWidth
+                  required
+                />
+                <TextField
+                  label="Nom"
+                  value={userLastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  fullWidth
+                  required
+                />
+                <TextField
+                  label="Téléphone"
+                  value={userPhone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  fullWidth
+                  required
+                />
+                <TextField
+                  label="E-mail"
+                  type="email"
+                  value={userEmail}
+                  onChange={(e) => setEmail(e.target.value)}
+                  fullWidth
+                  required
+                />
+                <TextField
+                  label="Message"
+                  value={userMessage}
+                  onChange={(e) => setMessage(e.target.value)}
+                  multiline
+                  rows={4}
+                  fullWidth
+                  required
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                >
+                  Envoyer
+                </Button>
+              </Box>
+            </form>
+          </Grid>
+        </Grid>
+      </Container>
       <Footer />
     </div>
   );

@@ -1,4 +1,4 @@
-import { Typography, Grid, Paper, Box, Button } from "@mui/material";
+import { Typography, Grid, Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Creation } from "../../Models/Creations";
@@ -43,8 +43,11 @@ export default function CreationForm({ creation, cancelEdit }: Props) {
       setEditMode(false); // Passer en mode création si aucune création n'est présente
     }
 
+    // Nettoyage de l'objet URL après la fin du composant
     return () => {
-      if (watchFile) URL.revokeObjectURL(watchFile.preview); // Nettoyage des objets URL après la fin du composant
+      if (watchFile) {
+        URL.revokeObjectURL(watchFile.preview); // Nettoyer l'URL de prévisualisation
+      }
     };
   }, [creation, reset, watchFile, isDirty]);
 
@@ -66,10 +69,9 @@ export default function CreationForm({ creation, cancelEdit }: Props) {
 
   return (
     <>
-      {" "}
-      <NavBarAdmin></NavBarAdmin>
-      <Box component={Paper} sx={{ p: 4 }}>
-        <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
+      <NavBarAdmin />
+      <Box component="section">
+        <Typography variant="h2" gutterBottom sx={{ mb: 4 }}>
           {editMode ? "Modifier la création" : "Ajouter une création"}
         </Typography>
 
@@ -106,25 +108,34 @@ export default function CreationForm({ creation, cancelEdit }: Props) {
                 <DropZoneInput control={control} name="file" />
                 {watchFile ? (
                   <img
-                    src={watchFile.preview}
+                    src={URL.createObjectURL(watchFile)} // Créer une URL pour l'image sélectionnée
                     alt="Prévisualisation"
                     style={{ maxHeight: 200 }}
                   />
                 ) : (
                   <img
-                    src={creation?.pictureUrl}
+                    src={creation?.pictureUrl} // Utiliser l'URL existante si pas de nouvelle image
                     alt={creation?.name}
                     style={{ maxHeight: 200 }}
                   />
-                )}{" "}
+                )}
               </Box>
             </Grid>
           </Grid>
 
           {/* Boutons pour soumettre ou annuler */}
-          <Box display="flex" justifyContent="space-between" sx={{ mt: 3 }}>
+          <Box display="flex" justifyContent="space-between" sx={{ mt: 3, mr:3, ml:3 }}>
             {/* Bouton pour annuler (optionnel) */}
-            <Button onClick={cancelEdit} variant="contained" color="inherit">
+            <Button
+              onClick={cancelEdit}
+              variant="outlined"
+              sx={{
+                backgroundColor: "#e7e2e1", // Fond bordeaux
+                borderColor: "##640a02", // Bordure bordeaux
+                color: "#640a02", // Texte bordeaux
+         
+              }}
+            >
               Annuler
             </Button>
 
@@ -133,7 +144,12 @@ export default function CreationForm({ creation, cancelEdit }: Props) {
               loading={isSubmitting}
               type="submit"
               variant="contained"
-              color="success"
+              sx={{
+                backgroundColor: "#640a02", // Fond bordeaux
+                borderColor: "#e7e2e1", // Bordure blanche
+                color: "#e7e2e1", // Texte blanc
+                
+              }}
             >
               {editMode ? "Modifier la création" : "Ajouter la création"}
             </LoadingButton>
