@@ -1,18 +1,30 @@
+import React, { useState, useEffect } from "react";
 import NavBarAdmin from "../NavBarAdmin";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { User } from "../../../Models/User";
-import { useState, useEffect } from "react";
 import agent from "../../../App/Api/agent";
 import CircularProgress from "@mui/material/CircularProgress";
 import AddIcon from "@mui/icons-material/Add";
-import { Container, Grid, Card, Button, CardActionArea, CardMedia, Link } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Card,
+  Button,
+  CardActionArea,
+  CardMedia,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Link,
+} from "@mui/material";
 import { Creation } from "../../../Models/Creations";
 import useCreations from "../../../App/Hook/useCreation";
 import { useAppDispatch } from "../../../App/Store/configureStore";
 import CreationForm from "../../../App/Form/CreationForm";
 import { removeCreation } from "../../../Components/Creations/creationSlice";
-import { Link as RouterLink } from 'react-router-dom'; // Importation correcte du Link de react-router-dom
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Dashboard() {
   const [user, setCurrentUser] = useState<User | undefined>(undefined);
@@ -23,6 +35,10 @@ export default function Dashboard() {
   const [selectedCreation, setSelectedCreation] = useState<Creation | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [target, setTarget] = useState(0);
+
+  // State pour le dialogue de confirmation
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [creationToDelete, setCreationToDelete] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -43,13 +59,24 @@ export default function Dashboard() {
     setEditMode(true);
   }
 
-  function handleDeleteCreation(id: number) {
-    setLoading(true);
-    setTarget(id);
-    agent.Admin.deleteCreation(id)
-      .then(() => dispatch(removeCreation(id)))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
+  function openDeleteDialog(id: number) {
+    setDialogOpen(true);
+    setCreationToDelete(id);
+  }
+
+  function confirmDeleteCreation() {
+    if (creationToDelete !== null) {
+      setLoading(true);
+      setTarget(creationToDelete);
+      agent.Admin.deleteCreation(creationToDelete)
+        .then(() => dispatch(removeCreation(creationToDelete)))
+        .catch((error) => console.log(error))
+        .finally(() => {
+          setLoading(false);
+          setDialogOpen(false); 
+          setCreationToDelete(null);
+        });
+    }
   }
 
   function cancelEdit() {
@@ -63,7 +90,6 @@ export default function Dashboard() {
   return (
     <>
       <NavBarAdmin />
-      {/* Box principal - contenu principal */}
       <Box>
         <Typography
           variant="h3"
@@ -80,12 +106,7 @@ export default function Dashboard() {
           ) : user ? (
             `✨Wesh ${user.userName}, maintenant c'est à toi de te débrouiller pour gérer ton site !✨`
           ) : (
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              height="100%"
-            >
+            <Box display="flex" justifyContent="center" alignItems="center" height="100%">
               <CircularProgress color="inherit" />
             </Box>
           )}
@@ -93,7 +114,6 @@ export default function Dashboard() {
       </Box>
       <Container sx={{ paddingTop: 2, paddingBottom: 2 }}>
         <Grid container spacing={3}>
-          {/* Carte "Ajouter une création" */}
           <Grid item xs={12} sm={6} md={3}>
             <Card
               sx={{
@@ -104,7 +124,7 @@ export default function Dashboard() {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                height: "250px", // Fixer une hauteur uniforme
+                height: "250px",
                 alignContent: "center",
               }}
             >
@@ -112,30 +132,23 @@ export default function Dashboard() {
                 onClick={() => setEditMode(true)}
                 variant="outlined"
                 sx={{
-                  width: "100%", // Prendre toute la largeur de la carte
-                  height: "100%", // Prendre toute la hauteur de la carte
+                  width: "100%",
+                  height: "100%",
                   border: "none",
                   display: "flex",
-                  justifyContent: "center", // Centrer horizontalement
-                  alignItems: "center", // Centrer verticalement
-                  textTransform: "none", // Désactiver la transformation de texte en majuscules
-                  flexDirection: "column", // Disposer le texte et l'icône verticalement
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textTransform: "none",
+                  flexDirection: "column",
                 }}
               >
-                <Typography
-                  color="black"
-                  marginBottom="8px" // Espacement entre le texte et l'icône
-                  fontSize="1.2rem"
-                >
+                <Typography color="black" marginBottom="8px" fontSize="1.2rem">
                   Ajouter une création
                 </Typography>
-                <AddIcon sx={{ fontSize: "3rem", color: "#640a02" }} />{" "}
-                {/* Icône "+" */}
+                <AddIcon sx={{ fontSize: "3rem", color: "#640a02" }} />
               </Button>
             </Card>
           </Grid>
-
-          {/* Afficher les créations */}
           {creations.map((creation) => (
             <Grid item xs={12} sm={6} md={3} key={creation.id}>
               <Card
@@ -163,8 +176,6 @@ export default function Dashboard() {
                 >
                   {creation.name}
                 </Typography>
-
-                {/* Lien vers la page de création */}
                 <RouterLink to={`/creations/${creation.id}`} style={{ textDecoration: "none" }}>
                   <CardActionArea>
                     <CardMedia
@@ -176,28 +187,24 @@ export default function Dashboard() {
                     />
                   </CardActionArea>
                 </RouterLink>
-
                 <Box sx={{ padding: "10px", display: "flex", justifyContent: "center" }}>
-                  {/* Bouton Modifier */}
                   <Button
                     onClick={() => handleSelectCreation(creation)}
                     variant="outlined"
                     sx={{
                       width: "45%",
-                      backgroundColor: "transparent", // Fond transparent
-                      border: "1px solid #640a02", // Bordure rouge
-                      color: "black", // Texte rouge
+                      backgroundColor: "transparent",
+                      border: "1px solid #640a02",
+                      color: "black",
                       margin: "5px",
                       fontFamily: "Alice",
-                      textTransform: "none", // Désactiver la transformation de texte en majuscules
+                      textTransform: "none",
                     }}
                   >
                     Modifier
                   </Button>
-
-                  {/* Bouton Supprimer */}
                   <Button
-                    onClick={() => handleDeleteCreation(creation.id)}
+                    onClick={() => openDeleteDialog(creation.id)}
                     variant="outlined"
                     sx={{
                       width: "45%",
@@ -217,6 +224,22 @@ export default function Dashboard() {
           ))}
         </Grid>
       </Container>
+
+      {/* Boîte de dialogue de confirmation */}
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+        <DialogTitle>Confirmation de suppression</DialogTitle>
+        <DialogContent>
+          <Typography color="black">/!\ Es-tu certaine de vouloir supprimer cette création ?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDialogOpen(false)} color='error'>
+            Annuler
+          </Button>
+          <Button onClick={confirmDeleteCreation} >
+            Confirmer
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

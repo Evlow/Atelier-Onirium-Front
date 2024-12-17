@@ -10,7 +10,7 @@ export default function NavBarAdmin() {
     const handleLogout = () => {
         delete localStorage["accessToken"];
         localStorage.clear();
-        navigate("/accueil");
+        navigate("/connexion");
     };
 
     const appBarItems = [
