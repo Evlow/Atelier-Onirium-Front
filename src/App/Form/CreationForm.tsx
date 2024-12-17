@@ -18,7 +18,7 @@ interface Props {
 }
 
 export default function CreationForm({ creation, cancelEdit }: Props) {
-  const [editMode, setEditMode] = useState<boolean>(false); // Initialiser editMode à false
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   const {
     control,
@@ -34,34 +34,31 @@ export default function CreationForm({ creation, cancelEdit }: Props) {
   const watchFile = watch("file", null);
   const dispatch = useAppDispatch();
 
-  // Utilisation de useEffect pour réinitialiser le formulaire lorsque la création change
   useEffect(() => {
     if (creation && !watchFile && !isDirty) {
-      reset(creation); // Remplir le formulaire avec les données de la création
-      setEditMode(true); // Passer en mode édition si une création est présente
+      reset(creation);
+      setEditMode(true);
     } else if (!creation) {
-      setEditMode(false); // Passer en mode création si aucune création n'est présente
+      setEditMode(false);
     }
 
-    // Nettoyage de l'objet URL après la fin du composant
     return () => {
       if (watchFile) {
-        URL.revokeObjectURL(watchFile.preview); // Nettoyer l'URL de prévisualisation
+        URL.revokeObjectURL(watchFile.preview);
       }
     };
   }, [creation, reset, watchFile, isDirty]);
 
-  // Fonction pour soumettre le formulaire
   async function handleSubmitData(data: FieldValues) {
     try {
       let response: Creation;
       if (creation) {
-        response = await agent.Admin.updateCreation(data); // Mise à jour si création existe
+        response = await agent.Admin.updateCreation(data);
       } else {
-        response = await agent.Admin.createCreation(data); // Création si aucune création
+        response = await agent.Admin.createCreation(data);
       }
-      dispatch(setCreation(response)); // Mettre à jour le store Redux avec la création
-      cancelEdit(); // Annuler l'édition après soumission
+      dispatch(setCreation(response));
+      cancelEdit();
     } catch (error) {
       console.log(error);
     }
@@ -70,91 +67,122 @@ export default function CreationForm({ creation, cancelEdit }: Props) {
   return (
     <>
       <NavBarAdmin />
-      <Box component="section">
-        <Typography variant="h2" gutterBottom sx={{ mb: 4 }}>
-          {editMode ? "Modifier la création" : "Ajouter une création"}
-        </Typography>
+      <Box
+        component="section"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        sx={{
+          marginTop: "30px",
+          marginBottom: "30px",
+          backgroundColor: "black", // Couleur de fond optionnelle
+        }}
+      >
+        <Box
+          sx={{
+            width: { xs: "90%", sm: "60%", md: "50%" }, // Largeur responsive
+            padding: 4, // Espacement intérieur
+            backgroundColor: "#e7e2e1",
+            boxShadow: 3, // Ombre pour l'effet de carte
+            borderRadius: 2, // Coins arrondis
+          }}
+        >
+          <Typography
+            variant="h4"
+            textAlign="center"
+            mb={4} // Espacement bas
+            sx={{
+              fontFamily: "Lovers",
+              color: "black",
+              fontSize: { xs: "3rem", md: "5rem" },
+            }}
+          >
+            {editMode ? "Modifier la création" : "Ajouter une création"}
+          </Typography>
 
-        {/* Formulaire */}
-        <form onSubmit={handleSubmit(handleSubmitData)}>
-          <Grid container spacing={3}>
-            {/* Champ pour le nom de la création */}
-            <Grid item xs={12}>
-              <InputForm
-                control={control}
-                name="name"
-                label="Nom de la création"
-              />
-            </Grid>
+          <form onSubmit={handleSubmit(handleSubmitData)}>
+            <Grid container spacing={3}>
+              {/* Champ pour le nom de la création */}
+              <Grid item xs={12}>
+                <InputForm
+                  control={control}
+                  name="name"
+                  label="Nom de la création"
+                />
+              </Grid>
 
-            {/* Champ pour la description */}
-            <Grid item xs={12}>
-              <InputForm
-                multiline={true}
-                rows={4}
-                control={control}
-                name="description"
-                label="Description"
-              />
-            </Grid>
-
-            {/* Zone de dépôt pour l'image */}
-            <Grid item xs={12}>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <DropZoneInput control={control} name="file" />
-                {watchFile ? (
-                  <img
-                    src={URL.createObjectURL(watchFile)} // Créer une URL pour l'image sélectionnée
-                    alt="Prévisualisation"
-                    style={{ maxHeight: 200 }}
-                  />
-                ) : (
-                  <img
-                    src={creation?.pictureUrl} // Utiliser l'URL existante si pas de nouvelle image
-                    alt={creation?.name}
-                    style={{ maxHeight: 200 }}
-                  />
-                )}
-              </Box>
-            </Grid>
-          </Grid>
-
-          {/* Boutons pour soumettre ou annuler */}
-          <Box display="flex" justifyContent="space-between" sx={{ mt: 3, mr:3, ml:3 }}>
-            {/* Bouton pour annuler (optionnel) */}
-            <Button
-              onClick={cancelEdit}
-              variant="outlined"
-              sx={{
-                backgroundColor: "#e7e2e1", // Fond bordeaux
-                borderColor: "##640a02", // Bordure bordeaux
-                color: "#640a02", // Texte bordeaux
-         
-              }}
-            >
-              Annuler
-            </Button>
-
-            {/* Bouton pour soumettre */}
-            <LoadingButton
-              loading={isSubmitting}
-              type="submit"
-              variant="contained"
-              sx={{
-                backgroundColor: "#640a02", // Fond bordeaux
-                borderColor: "#e7e2e1", // Bordure blanche
-                color: "#e7e2e1", // Texte blanc
+              {/* Champ pour la description */}
+              <Grid item xs={12}>
+                <InputForm
+                  multiline={true}
+                  rows={20}
+                  control={control}
+                  name="description"
+                  label="Description"
                 
-              }}
-            >
-              {editMode ? "Modifier la création" : "Ajouter la création"}
-            </LoadingButton>
-          </Box>
-        </form>
+                />
+              </Grid>
+
+              {/* Zone de dépôt pour l'image */}
+              <Grid item xs={12}>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  sx={{ gap: 2 }} // Espacement entre DropZone et l'image
+                >
+                  <DropZoneInput control={control} name="file" />
+                  {watchFile ? (
+                    <img
+                      src={URL.createObjectURL(watchFile)}
+                      alt="Prévisualisation"
+                      style={{ maxWidth: 300 }}
+                    />
+                  ) : (
+                    creation?.pictureUrl && (
+                      <img
+                        src={creation.pictureUrl}
+                        alt={creation.name}
+                        style={{ maxWidth: 300 }}
+                      />
+                    )
+                  )}
+                </Box>
+              </Grid>
+            </Grid>
+
+            {/* Boutons pour soumettre ou annuler */}
+            <Box display="flex" justifyContent="space-between" sx={{ mt: 4 }}>
+              <Button
+                onClick={cancelEdit}
+                variant="outlined"
+                sx={{
+                  backgroundColor: "#e7e2e1",
+                  borderColor: "#640a02",
+                  color: "#640a02",
+                  fontFamily: "Alice",
+                }}
+              >
+                Annuler
+              </Button>
+
+              <LoadingButton
+                loading={isSubmitting}
+                type="submit"
+                variant="contained"
+                sx={{
+                  backgroundColor: "#640a02",
+                  borderColor: "#e7e2e1",
+                  color: "#e7e2e1",
+                  fontFamily: "Alice",
+                }}
+              >
+                {editMode ? "Modifier la création" : "Ajouter la création"}
+              </LoadingButton>
+            </Box>
+          </form>
+        </Box>
       </Box>
     </>
   );
