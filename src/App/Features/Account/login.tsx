@@ -35,7 +35,6 @@ export default function Login() {
 
   return (
     <div>
-      {" "}
       <NavBar></NavBar>
       <Typography variant="h2" sx={{ textAlign: "center" }}>
         Espace administrateur
@@ -89,6 +88,8 @@ export default function Login() {
             fullWidth
             variant="contained"
             sx={{
+              mt:"20px",
+              mb:'20px',
               backgroundColor: "#640a02", // Fond bordeaux
               borderColor: "#e7e2e1", // Bordure blanche
               color: "#e7e2e1", // Texte blanc

@@ -56,15 +56,14 @@ const theme = createTheme({
       color: "#CFC5C3", // Couleur du texte du corps
     },
     h3: {
-      fontFamily: "Gowun",
+      fontFamily: "Lovers",
       fontWeight: "lighter",
       color: "#CFC5C3", 
     },
     body1: {
       fontFamily: "Alice",
       color: "#CFC5C3", // Couleur du texte du corps
-      fontWeight: "lighter",
-
+fontWeight:"lighter"
     },
   },
 });

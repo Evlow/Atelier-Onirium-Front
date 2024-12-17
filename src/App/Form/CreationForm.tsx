@@ -115,10 +115,11 @@ export default function CreationForm({ creation, cancelEdit }: Props) {
               <Grid item xs={12}>
                 <InputForm
                   multiline={true}
-                  rows={4}
+                  rows={20}
                   control={control}
                   name="description"
                   label="Description"
+                
                 />
               </Grid>
 
