@@ -11,32 +11,18 @@ import WorkshopCreation from "../Pages/WorkshopCreation/workshopCreation";
 import NavBarAdmin from "../Admin/NavBarAdmin/NavBarAdmin";
 import ServerError from "../App/Errors/serverError";
 import NotFound from "../App/Errors/notFound";
-// import BasketPage from "../Components/Basket/BasketPage";
 import Dashboard from "../Admin/NavBarAdmin/Dashbord/Dashboard";
 import Register from "../App/Features/Account/register";
 import Login from "../App/Features/Account/login";
 import RequireAuth from "./RequiredAuth";
 
-// Route principale
+// Configuration du routeur
 export const Router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      {
-        // authenticated routes
-        element: <RequireAuth />,
-        children: [],
-      },
-      {
-        // admin routes
-        element: <RequireAuth roles={["Admin"]} />,
-        children: [
-          { path: "dashboard", element: <Dashboard /> },
-          { path: "navBarAdmin", element: <NavBarAdmin /> },
-          { path: "admin", element: <Aside /> },
-        ],
-      },
+      // Routes publiques
       { path: "/", element: <HomePage /> },
       { path: "accueil", element: <HomePage /> },
       { path: "creations-atelier", element: <WorkshopCreation /> },
@@ -45,14 +31,23 @@ export const Router = createBrowserRouter([
       { path: "me-contacter", element: <Contact /> },
       { path: "politique-de-confidentialite", element: <PrivatePolicy /> },
       { path: "creations/:id", element: <CreationDetails /> },
-      { path: "server-error", element: <ServerError /> },
       { path: "connexion", element: <Login /> },
       { path: "inscription", element: <Register /> },
+      { path: "server-error", element: <ServerError /> },
       { path: "not-found", element: <NotFound /> },
-      // { path: "Basket/GetBasket", element: <BasketPage /> },
+
+      // Routes administratives (authentifié + rôle Admin)
+      {
+        element: <RequireAuth roles={["Admin"]} />,
+        children: [
+          { path: "dashboard", element: <Dashboard /> },
+          { path: "navBarAdmin", element: <NavBarAdmin /> },
+          { path: "admin", element: <Aside /> },
+        ],
+      },
 
       // Route pour toutes les URL non définies
-      { path: "*", element: <Navigate to="/not-found" /> },
+      { path: "*", element: <Navigate to="/not-found" replace /> },
     ],
   },
 ]);
