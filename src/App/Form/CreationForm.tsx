@@ -1,189 +1,361 @@
-import { Typography, Grid, Box, Button } from "@mui/material";
-import { useEffect, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
-import { Creation } from "../../Models/Creations";
-import { useAppDispatch } from "../Store/configureStore";
-import agent from "../Api/agent";
-import { LoadingButton } from "@mui/lab";
-import { setCreation } from "../../Components/Creations/creationSlice";
-import InputForm from "./InputForm";
-import DropZoneInput from "./DropZoneForm";
-import NavBarAdmin from "../../Admin/NavBarAdmin/NavBarAdmin";
-import { validationSchema } from "./CreationValidation";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useState, useEffect } from 'react';
+import { useDropzone } from 'react-dropzone';
+import axios from 'axios';
+import { Box, Grid, Typography, Button, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+interface CreationFormData {
+  name: string;
+  description: string;
+  mainImage: File | null;
+  additionalImages?: File[];
+}
+
+interface Creation {
+  id: number;
+  name: string;
+  description: string;
+  pictureUrl: string | null;
+  additionalImagesUrls?: string[];
+}
 
 interface Props {
   creation?: Creation;
   cancelEdit: () => void;
+  isSubmitting: boolean;
 }
 
-export default function CreationForm({ creation, cancelEdit }: Props) {
-  const [editMode, setEditMode] = useState<boolean>(false);
-
-  const {
-    control,
-    reset,
-    handleSubmit,
-    watch,
-    formState: { isDirty, isSubmitting },
-  } = useForm({
-    mode: "all",
-    resolver: yupResolver<any>(validationSchema),
+const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
+  const [formData, setFormData] = useState<CreationFormData>({
+    name: '',
+    description: '',
+    mainImage: null,
+    additionalImages: [],
   });
 
-  const watchFile = watch("file", null);
-  const dispatch = useAppDispatch();
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
-    if (creation && !watchFile && !isDirty) {
-      reset(creation);
+    if (creation) {
+      setFormData({
+        name: creation.name,
+        description: creation.description,
+        mainImage: null,
+        additionalImages: [],
+      });
       setEditMode(true);
-    } else if (!creation) {
+    } else {
       setEditMode(false);
     }
+  }, [creation]);
 
-    return () => {
-      if (watchFile) {
-        URL.revokeObjectURL(watchFile.preview);
-      }
-    };
-  }, [creation, reset, watchFile, isDirty]);
+  // Fonction de gestion du téléchargement de l'image principale
+  const { getRootProps: getMainImageRootProps, getInputProps: getMainImageInputProps } = useDropzone({
+    onDrop: (acceptedFiles) => handleMainImageUpload(acceptedFiles),
+  });
 
-  async function handleSubmitData(data: FieldValues) {
-    try {
-      let response: Creation;
-      if (creation) {
-        response = await agent.Admin.updateCreation(data);
-      } else {
-        response = await agent.Admin.createCreation(data);
-      }
-      dispatch(setCreation(response));
-      cancelEdit();
-    } catch (error) {
-      console.log(error);
+  // Fonction de gestion du téléchargement des images supplémentaires
+  const { getRootProps: getAdditionalImagesRootProps, getInputProps: getAdditionalImagesInputProps } = useDropzone({
+    onDrop: (acceptedFiles) => handleAdditionalImagesUpload(acceptedFiles),
+  });
+
+  // Fonction pour ajouter l'image principale au formulaire
+  const handleMainImageUpload = (files: File[]) => {
+    if (files.length === 1) {
+      setFormData((prev) => ({
+        ...prev,
+        mainImage: files[0],
+      }));
     }
-  }
+  };
+
+  // Fonction pour ajouter des images supplémentaires
+  const handleAdditionalImagesUpload = (files: File[]) => {
+    setFormData((prev) => ({
+      ...prev,
+      additionalImages: [...prev.additionalImages!, ...files],
+    }));
+  };
+
+  // Fonction pour supprimer l'image principale
+  const handleMainImageDelete = () => {
+    setFormData((prev) => ({
+      ...prev,
+      mainImage: null,
+    }));
+  };
+
+  // Fonction pour supprimer une image supplémentaire
+  const handleAdditionalImageDelete = (index: number) => {
+    const updatedImages = formData.additionalImages!.filter((_, i) => i !== index);
+    setFormData((prev) => ({
+      ...prev,
+      additionalImages: updatedImages,
+    }));
+  };
+
+  // Fonction pour gérer la mise à jour des autres champs du formulaire
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Fonction pour soumettre le formulaire
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Crée un objet FormData pour envoyer les fichiers
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('description', formData.description);
+
+    // Ajout de l'image principale (si elle est présente)
+    if (formData.mainImage) {
+      formDataToSend.append('mainImage', formData.mainImage);
+    } else if (creation && creation.pictureUrl) {
+      // Si pas de nouvelle image, on envoie l'URL existante
+      formDataToSend.append('mainImageUrl', creation.pictureUrl);
+    }
+
+    // Ajout des images supplémentaires (si présentes)
+    formData.additionalImages!.forEach((file) => {
+      formDataToSend.append('additionalImages', file);
+    });
+
+    try {
+      // Effectuer l'appel API pour soumettre le formulaire
+      let response;
+      if (editMode && creation) {
+        // Si en mode édition, on met à jour
+        response = await axios.put(
+          `http://localhost:5000/api/Creation/updateCreation/${creation.id}`,
+          formDataToSend,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
+        console.log('Mise à jour réussie', response.data);
+      } else {
+        // Sinon, on crée une nouvelle création
+        response = await axios.post(
+          'http://localhost:5000/api/Creation/CreateCreation',
+          formDataToSend,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
+        console.log('Création réussie', response.data);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la création ou mise à jour', error);
+    }
+  };
 
   return (
-    <>
-      <NavBarAdmin />
+    <Box
+      component="section"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        marginTop: '30px',
+        marginBottom: '30px',
+        backgroundColor: 'black',
+      }}
+    >
       <Box
-        component="section"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
         sx={{
-          marginTop: "30px",
-          marginBottom: "30px",
-          backgroundColor: "black", // Couleur de fond optionnelle
+          width: { xs: '90%', sm: '60%', md: '50%' },
+          padding: 4,
+          backgroundColor: '#e7e2e1',
+          boxShadow: 3,
+          borderRadius: 2,
         }}
       >
-        <Box
+        <Typography
+          variant="h4"
+          textAlign="center"
+          mb={4}
           sx={{
-            width: { xs: "90%", sm: "60%", md: "50%" }, // Largeur responsive
-            padding: 4, // Espacement intérieur
-            backgroundColor: "#e7e2e1",
-            boxShadow: 3, // Ombre pour l'effet de carte
-            borderRadius: 2, // Coins arrondis
+            fontFamily: 'Lovers',
+            color: 'black',
+            fontSize: { xs: '3rem', md: '5rem' },
           }}
         >
-          <Typography
-            variant="h4"
-            textAlign="center"
-            mb={4} // Espacement bas
-            sx={{
-              fontFamily: "Lovers",
-              color: "black",
-              fontSize: { xs: "3rem", md: "5rem" },
-            }}
-          >
-            {editMode ? "Modifier la création" : "Ajouter une création"}
-          </Typography>
+          {editMode ? 'Modifier la création' : 'Ajouter une création'}
+        </Typography>
 
-          <form onSubmit={handleSubmit(handleSubmitData)}>
-            <Grid container spacing={3}>
-              {/* Champ pour le nom de la création */}
-              <Grid item xs={12}>
-                <InputForm
-                  control={control}
-                  name="name"
-                  label="Nom de la création"
-                />
-              </Grid>
-
-              {/* Champ pour la description */}
-              <Grid item xs={12}>
-                <InputForm
-                  multiline={true}
-                  rows={20}
-                  control={control}
-                  name="description"
-                  label="Description"
-                
-                />
-              </Grid>
-
-              {/* Zone de dépôt pour l'image */}
-              <Grid item xs={12}>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{ gap: 2 }} // Espacement entre DropZone et l'image
-                >
-                  <DropZoneInput control={control} name="file" />
-                  {watchFile ? (
-                    <img
-                      src={URL.createObjectURL(watchFile)}
-                      alt="Prévisualisation"
-                      style={{ maxWidth: 300 }}
-                    />
-                  ) : (
-                    creation?.pictureUrl && (
-                      <img
-                        src={creation.pictureUrl}
-                        alt={creation.name}
-                        style={{ maxWidth: 300 }}
-                      />
-                    )
-                  )}
-                </Box>
-              </Grid>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={3}>
+            {/* Champ pour le nom de la création */}
+            <Grid item xs={12}>
+              <TextField
+                label="Nom de la création"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                fullWidth
+                required
+              />
             </Grid>
 
-            {/* Boutons pour soumettre ou annuler */}
-            <Box display="flex" justifyContent="space-between" sx={{ mt: 4 }}>
-              <Button
-                onClick={cancelEdit}
-                variant="outlined"
-                sx={{
-                  backgroundColor: "#e7e2e1",
-                  borderColor: "#640a02",
-                  color: "#640a02",
-                  fontFamily: "Alice",
-                }}
-              >
-                Annuler
-              </Button>
+            {/* Champ pour la description */}
+            <Grid item xs={12}>
+              <TextField
+                label="Description"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                fullWidth
+                multiline
+                rows={4}
+                required
+              />
+            </Grid>
 
+            {/* Zone de dépôt pour l'image principale */}
+            <Grid item xs={12}>
+              <Box
+                {...getMainImageRootProps()}
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                sx={{ gap: 2, border: '2px dashed #640a02', padding: 2, cursor: 'pointer' }}
+              >
+                <input {...getMainImageInputProps()} />
+                <CloudUploadIcon fontSize="large" />
+                <Typography variant="body2">
+                  Glissez et déposez l'image principale ici, ou cliquez pour sélectionner
+                </Typography>
+              </Box>
+            </Grid>
+
+            {/* Prévisualisation de l'image principale */}
+            {formData.mainImage || creation?.pictureUrl ? (
+              <Grid item xs={12}>
+                <Box sx={{ position: 'relative' }}>
+                  <img
+                    src={formData.mainImage ? URL.createObjectURL(formData.mainImage) : creation?.pictureUrl || undefined}
+                    alt="Main  Preview"
+                    style={{ maxWidth: 300, marginTop: '10px' }}
+                  />
+                  <Button
+                    sx={{
+                      position: 'absolute',
+                      top: 0,
+                      right: 0,
+                      backgroundColor: 'rgba(255, 0, 0, 0.6)',
+                      color: 'white',
+                    }}
+                    onClick={handleMainImageDelete}
+                  >
+                    Supprimer
+                  </Button>
+                </Box>
+              </Grid>
+            ) : null}
+
+            {/* Zone de dépôt pour les images supplémentaires */}
+            <Grid item xs={12}>
+              <Box
+                {...getAdditionalImagesRootProps()}
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                sx={{ gap: 2, border: '2px dashed #640a02', padding: 2, cursor: 'pointer' }}
+              >
+                <input {...getAdditionalImagesInputProps()} />
+                <CloudUploadIcon fontSize="large" />
+                <Typography variant="body2">
+                  Glissez et déposez les images supplémentaires ici, ou cliquez pour sélectionner
+                </Typography>
+              </Box>
+            </Grid>
+
+            {/* Prévisualisation des images supplémentaires */}
+            {formData.additionalImages?.length! > 0 && (
+              <Grid item xs={12}>
+                <Box display="flex" gap={2}>
+                  {formData.additionalImages!.map((file, index) => (
+                    <Box key={index} sx={{ position: 'relative' }}>
+                      <img
+                        src={URL.createObjectURL(file)}
+                        alt={`Additional  ${index}`}
+                        style={{ maxWidth: 100, marginTop: '10px' }}
+                      />
+                      <Button
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          right: 0,
+                          backgroundColor: 'rgba(255, 0, 0, 0.6)',
+                          color: 'white',
+                        }}
+                        onClick={() => handleAdditionalImageDelete(index)}
+                      >
+                        Supprimer
+                      </Button>
+                    </Box>
+                  ))}
+                </Box>
+              </Grid>
+            )}
+
+            {/* Bouton de soumission */}
+            <Grid item xs={12}>
               <LoadingButton
                 loading={isSubmitting}
                 type="submit"
                 variant="contained"
+                color="primary"
+                fullWidth
                 sx={{
-                  backgroundColor: "#640a02",
-                  borderColor: "#e7e2e1",
-                  color: "#e7e2e1",
-                  fontFamily: "Alice",
+                  textTransform: 'none',
+                  fontWeight: 'bold',
+                  backgroundColor: '#640a02',
+                  '&:hover': {
+                    backgroundColor: '#b03425',
+                  },
                 }}
               >
-                {editMode ? "Modifier la création" : "Ajouter la création"}
+                {editMode ? 'Sauvegarder les modifications' : 'Ajouter la création'}
               </LoadingButton>
-            </Box>
-          </form>
-        </Box>
+            </Grid>
+
+            {/* Bouton d'annulation */}
+            <Grid item xs={12}>
+              <Button
+                onClick={cancelEdit}
+                variant="outlined"
+                color="secondary"
+                fullWidth
+                sx={{
+                  textTransform: 'none',
+                  fontWeight: 'bold',
+                  backgroundColor: 'lightgray',
+                  '&:hover': {
+                    backgroundColor: '#bdbdbd',
+                  },
+                }}
+              >
+                Annuler
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
       </Box>
-    </>
+    </Box>
   );
-}
+};
+
+export default CreationForm;

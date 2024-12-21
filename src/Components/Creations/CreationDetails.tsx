@@ -30,31 +30,68 @@ export default function CreationDetails() {
         sx={{
           padding: 4,
           display: "flex",
+          flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
         {/* Image Section */}
         <Box
-          component="img"
-          src={creation.pictureUrl}
-          alt={creation.name}
           sx={{
-            width: "500px", // Largeur de l'image
-            height: "auto", // Hauteur ajustée automatiquement
-            objectFit: "cover", // Maintient les proportions et recadre si nécessaire
-            marginRight: 3, // Espacement entre l'image et le texte
+            display: "flex",
+            flexDirection: "column", // Affiche la principale au-dessus des autres
+            gap: 3,
           }}
-        />
+        >
+          {/* Image principale */}
+          <Box
+            component="img"
+            src={creation.pictureUrl}
+            alt={creation.name}
+            sx={{
+              width: "500px",
+              height: "auto",
+              objectFit: "cover",
+              border: "2px solid #ccc",
+              borderRadius: "8px",
+            }}
+          />
+
+          {/* Images supplémentaires */}
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap", // Si trop d'images, elles passent à la ligne
+              gap: 2,
+              marginTop: 2,
+            }}
+          >
+            {creation.pictureUrls?.map((url, index) => (
+              <Box
+                key={index}
+                component="img"
+                src={url}
+                alt={`Additional image ${index + 1}`}
+                sx={{
+                  width: "150px",
+                  height: "auto",
+                  objectFit: "cover",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                }}
+              />
+            ))}
+          </Box>
+        </Box>
 
         {/* Text Section */}
-        <Box sx={{ flex: 1, textAlign: "justify", padding:'20px'}}>
+        <Box sx={{ flex: 1, textAlign: "justify", padding: "20px" }}>
           <Typography variant="h2" gutterBottom sx={{ marginBottom: 2 }}>
             {creation.name}
           </Typography>
           <Typography
             variant="body1"
-            sx={{ whiteSpace: "pre-wrap", lineHeight: 1.8, width:"95%" }}
+            sx={{ whiteSpace: "pre-wrap", lineHeight: 1.8, width: "95%" }}
           >
             {creation.description}
           </Typography>

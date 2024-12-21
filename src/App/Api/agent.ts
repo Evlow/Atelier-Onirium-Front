@@ -95,17 +95,26 @@ const requests = {
     }).then(responseBody)
 }
 
-function createFormData(item: any) {
-    var formData = new FormData();
+function createFormData(item: any): FormData {
+    const formData = new FormData();
     for (const key in item) {
-        formData.append(key, item[key])
+        if (item[key] instanceof File) {
+            formData.append(key, item[key]); // Ajouter un fichier
+        } else if (Array.isArray(item[key])) {
+            item[key].forEach((value: any, index: number) => {
+                formData.append(`${key}[${index}]`, value); // Ajouter chaque élément d'un tableau
+            });
+        } else {
+            formData.append(key, item[key]); // Ajouter des champs simples
+        }
     }
     return formData;
 }
 
+
 const Admin = {
     createCreation: (creation: any) => requests.postForm('Creation/CreateCreation', createFormData(creation)),
-    updateCreation: (creation: any) => requests.putForm('/Creation/UpdateCreation', createFormData(creation)),
+    updateCreation: (creation: any) => requests.putForm('Creation/UpdateCreation', createFormData(creation)),
     deleteCreation: (id: number) => requests.delete(`Creation/DeleteCreation/${id}`),
 };
 
