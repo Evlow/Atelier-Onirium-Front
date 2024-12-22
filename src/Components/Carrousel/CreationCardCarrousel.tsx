@@ -19,7 +19,7 @@ export default function CreationCardCarrousel({ creation }: Props) {
   return (
     <Card
       sx={{
-        maxWidth: 300,
+        maxWidth: 400,
         margin: "auto",
         backgroundColor: "transparent",
         overflow: "hidden",
@@ -32,7 +32,7 @@ export default function CreationCardCarrousel({ creation }: Props) {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="300"
+          height="400"
           image={creation.pictureUrl}
           alt={creation.name}
           sx={{

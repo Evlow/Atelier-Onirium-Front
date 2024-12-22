@@ -61,6 +61,7 @@ const theme = createTheme({
       color: "#CFC5C3", 
     },
     body1: {
+      fontSize:"1.2rem",
       fontFamily: "Alice",
       color: "#CFC5C3", // Couleur du texte du corps
 fontWeight:"lighter"
@@ -75,7 +76,6 @@ function App() {
   const initApp = useCallback(async () => {
     try {
       await dispatch(fetchCurrentUser());
-      // await dispatch(fetchBasketAsync());
     } catch (error) {
       console.log(error);
     }

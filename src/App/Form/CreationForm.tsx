@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
-import axios from 'axios';
 import { Box, Grid, Typography, Button, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import axios from 'axios';
+import { Creation } from '../../Models/Creations';
 
 interface CreationFormData {
   name: string;
   description: string;
   mainImage: File | null;
   additionalImages?: File[];
-}
-
-interface Creation {
-  id: number;
-  name: string;
-  description: string;
-  pictureUrl: string | null;
-  additionalImagesUrls?: string[];
 }
 
 interface Props {
@@ -41,7 +34,7 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
       setFormData({
         name: creation.name,
         description: creation.description,
-        mainImage: null,
+        mainImage: null, // En mode édition, on laisse l'image principale vide
         additionalImages: [],
       });
       setEditMode(true);
@@ -82,17 +75,20 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
   const handleMainImageDelete = () => {
     setFormData((prev) => ({
       ...prev,
-      mainImage: null,
+      mainImage: null, // Supprimer l'image principale
     }));
   };
 
   // Fonction pour supprimer une image supplémentaire
   const handleAdditionalImageDelete = (index: number) => {
-    const updatedImages = formData.additionalImages!.filter((_, i) => i !== index);
-    setFormData((prev) => ({
-      ...prev,
-      additionalImages: updatedImages,
-    }));
+    setFormData((prev) => {
+      const updatedImages = [...prev.additionalImages!];
+      updatedImages.splice(index, 1); // Supprimer l'image à l'index spécifié
+      return {
+        ...prev,
+        additionalImages: updatedImages,
+      };
+    });
   };
 
   // Fonction pour gérer la mise à jour des autres champs du formulaire
@@ -126,13 +122,15 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
       formDataToSend.append('additionalImages', file);
     });
 
+    if (editMode && creation) {
+      formDataToSend.append('id', String(creation.id));
+    }
+    
     try {
-      // Effectuer l'appel API pour soumettre le formulaire
       let response;
       if (editMode && creation) {
-        // Si en mode édition, on met à jour
         response = await axios.put(
-          `http://localhost:5000/api/Creation/updateCreation/${creation.id}`,
+          `http://localhost:5000/api/Creation/UpdateCreation/${creation.id}`,
           formDataToSend,
           {
             headers: {
@@ -142,7 +140,6 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
         );
         console.log('Mise à jour réussie', response.data);
       } else {
-        // Sinon, on crée une nouvelle création
         response = await axios.post(
           'http://localhost:5000/api/Creation/CreateCreation',
           formDataToSend,
@@ -221,7 +218,7 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
               />
             </Grid>
 
-            {/* Zone de dépôt pour l'image principale */}
+            {/* Zone de dépôt pour l'image principale
             <Grid item xs={12}>
               <Box
                 {...getMainImageRootProps()}
@@ -237,7 +234,7 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
                   Glissez et déposez l'image principale ici, ou cliquez pour sélectionner
                 </Typography>
               </Box>
-            </Grid>
+            </Grid> */}
 
             {/* Prévisualisation de l'image principale */}
             {formData.mainImage || creation?.pictureUrl ? (
@@ -245,21 +242,21 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
                 <Box sx={{ position: 'relative' }}>
                   <img
                     src={formData.mainImage ? URL.createObjectURL(formData.mainImage) : creation?.pictureUrl || undefined}
-                    alt="Main  Preview"
+                    alt="Main Preview"
                     style={{ maxWidth: 300, marginTop: '10px' }}
                   />
-                  <Button
-                    sx={{
-                      position: 'absolute',
-                      top: 0,
-                      right: 0,
-                      backgroundColor: 'rgba(255, 0, 0, 0.6)',
-                      color: 'white',
-                    }}
-                    onClick={handleMainImageDelete}
-                  >
-                    Supprimer
-                  </Button>
+                <Button
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          right: 0,
+                          backgroundColor: 'rgba(255, 0, 0, 0.6)',
+                          color: 'white',
+                        }}
+                        onClick={() => handleAdditionalImageDelete(1)}
+                      >
+                        Supprimer
+                      </Button>
                 </Box>
               </Grid>
             ) : null}
@@ -277,21 +274,21 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
                 <input {...getAdditionalImagesInputProps()} />
                 <CloudUploadIcon fontSize="large" />
                 <Typography variant="body2">
-                  Glissez et déposez les images supplémentaires ici, ou cliquez pour sélectionner
+                  Glissez et déposez des images supplémentaires ici, ou cliquez pour sélectionner
                 </Typography>
               </Box>
             </Grid>
 
             {/* Prévisualisation des images supplémentaires */}
-            {formData.additionalImages?.length! > 0 && (
+            {formData.additionalImages!.length > 0 && (
               <Grid item xs={12}>
                 <Box display="flex" gap={2}>
                   {formData.additionalImages!.map((file, index) => (
                     <Box key={index} sx={{ position: 'relative' }}>
                       <img
                         src={URL.createObjectURL(file)}
-                        alt={`Additional  ${index}`}
-                        style={{ maxWidth: 100, marginTop: '10px' }}
+                        alt={`Additional ${index}`}
+                        style={{ maxWidth: 200, marginTop: '10px' }}
                       />
                       <Button
                         sx={{
@@ -311,45 +308,18 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
               </Grid>
             )}
 
-            {/* Bouton de soumission */}
-            <Grid item xs={12}>
+            {/* Boutons pour soumettre ou annuler */}
+            <Grid item xs={12} textAlign="center">
               <LoadingButton
-                loading={isSubmitting}
                 type="submit"
+                loading={isSubmitting}
                 variant="contained"
                 color="primary"
-                fullWidth
-                sx={{
-                  textTransform: 'none',
-                  fontWeight: 'bold',
-                  backgroundColor: '#640a02',
-                  '&:hover': {
-                    backgroundColor: '#b03425',
-                  },
-                }}
+                sx={{ marginRight: 2 }}
               >
-                {editMode ? 'Sauvegarder les modifications' : 'Ajouter la création'}
+                {editMode ? 'Mettre à jour' : 'Ajouter'}
               </LoadingButton>
-            </Grid>
-
-            {/* Bouton d'annulation */}
-            <Grid item xs={12}>
-              <Button
-                onClick={cancelEdit}
-                variant="outlined"
-                color="secondary"
-                fullWidth
-                sx={{
-                  textTransform: 'none',
-                  fontWeight: 'bold',
-                  backgroundColor: 'lightgray',
-                  '&:hover': {
-                    backgroundColor: '#bdbdbd',
-                  },
-                }}
-              >
-                Annuler
-              </Button>
+              <Button variant="outlined" onClick={cancelEdit}>Annuler</Button>
             </Grid>
           </Grid>
         </form>
