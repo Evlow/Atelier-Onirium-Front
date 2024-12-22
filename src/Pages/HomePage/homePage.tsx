@@ -2,15 +2,14 @@ import Banners from "../../Components/Banners/banners";
 import NavBar from "../../Components/NavBar/navbar";
 import imgBanners from "../../Assets/Banniere.webp";
 import Footer from "../../Components/Footer/footer";
-import { useEffect, useState } from "react";
-import { Creation } from "../../Models/Creations";
-import CreationList from "../../Components/Creations/CreationList";
-import agent, { creationSelectors } from "../../App/Api/agent";
-import LoadingComponent from "../../Components/Laoding/laodingComponent";
-import { Box, Stack, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import Home from "../../Assets/home.jpg";
 import Arabesque1 from "../../Assets/Arabesque1.svg";
 import Arabesque2 from "../../Assets/Arabesque2.svg";
+import Engrenage from "../../Assets/engrenage.svg";
+import Engrenage1 from "../../Assets/engrenage1.svg";
+
 import creation from "../../Assets/creation.jpg";
 import HomePageCarrousel from "../../Components/Carrousel/HomePageCarrousel";
 import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
@@ -20,29 +19,49 @@ export default function HomePage() {
   const { creationsLoaded } = useAppSelector((state) => state.creation);
   const dispatch = useAppDispatch();
 
+  const socialLinks = [
+    {
+      name: "facebook",
+      url: "https://www.facebook.com/latelierdonirium",
+      icon: process.env.PUBLIC_URL + "/Images/facebook.svg",
+    },
+    {
+      name: "instagram",
+      url: "https://www.instagram.com/latelierdonirium?igsh=MWF3Z2dyNzR5N2l0Yw==",
+      icon: process.env.PUBLIC_URL + "/Images/instagram.svg",
+    },
+    {
+      name: "tikTok",
+      url: "https://www.tiktok.com/@latelierdonirium?_t=8pf3S8fZJab&_r=1",
+      icon: process.env.PUBLIC_URL + "/Images/tiktok.svg",
+    },
+  ];
+
   useEffect(() => {
     if (!creationsLoaded) dispatch(fetchCreationsAsync());
   }, [creationsLoaded, dispatch]);
+
   return (
     <div>
       <NavBar />
       <Banners imgBanner={imgBanners} />
 
       {/* Section principale */}
-      <Box component="main" width="80%" margin="0 auto">
-        {/* Titre principal */}
+      <Box
+        component="main"
+        sx={{ width: "80%", margin: "0 auto", paddingY: 4 }}
+      >
         <Typography
           variant="h2"
           sx={{
             textAlign: "center",
-            fontSize: { xs: "3em", md: "5em" },
-            padding: "20px",
+            padding:"20px",
+            fontSize: { xs: "3rem", md: "5rem" },
           }}
         >
           L'Atelier d'Onirium, la création au-delà du réel
         </Typography>
 
-        {/* Section de présentation */}
         <Stack
           component="article"
           direction={{ xs: "column", md: "row" }}
@@ -50,15 +69,8 @@ export default function HomePage() {
           alignItems="center"
           justifyContent="space-between"
         >
-          {/* Texte présentation */}
-          <Typography
-            variant="body1"
-            sx={{
-              flex: 1,
-              textAlign: "justify",
-            }}
-          >
-            L'Atelier d'Onirium est avant tout un lieu où l'imagination prend
+          <Typography variant="body1" sx={{ flex: 1, textAlign: "justify" }}>
+          L'Atelier d'Onirium est avant tout un lieu où l'imagination prend
             vie à travers des projets variés et originaux. Mon approche repose
             sur un mélange d'artisanat traditionnel et de technologies modernes
             pour créer des expériences qui marquent les esprits.
@@ -84,27 +96,107 @@ export default function HomePage() {
             l'innovation.
           </Typography>
 
-          {/* Image présentation */}
-          <Box
-            sx={{
-              flex: 1,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
             <img
               src={Home}
               alt="L'Atelier d'Onirium"
-              style={{
-                maxWidth: "80%",
-                height: "auto",
-              }}
+              style={{ maxWidth: "80%", height: "auto" }}
             />
           </Box>
         </Stack>
       </Box>
+      <Box sx={{ backgroundColor: "#E7E2E1", position: "relative", overflow: "hidden" }}>
+  <Box sx={{ width:{xs:"100%", sm:"80%", md:"45%"} , m: "50px auto", textAlign: "center" }}>
+    {/* Engrenage image */}
+    <Box
+      component="img"
+      src={Engrenage1}
+      alt="Engrenage gauche"
+      sx={{
+        position: "absolute",  // Position it within the container
+        top: "-120px",
+        left: "-115px",  // Move it to the left side (use negative value to position it outside)
+        width: { xs: "400px", sm: "450px", md: "550px" },  // Make width responsive
+        height: { xs: "400px", sm: "450px", md: "550px" }, // Make height responsive
+        opacity: 0.2,
+        overflow: "hidden",  // Ensure no overflow
+        transform: "rotate(33deg)",  // Optional rotation
+      }}
+    />
 
+    <Typography 
+      variant="h3" 
+      sx={{ 
+        fontSize: { xs: "5rem", sm: "6rem", md: "7rem" },  // Adjusts the font size based on screen size
+        color: "black",
+      }}
+    >
+      Ne manquez rien
+    </Typography>
+    
+    <Typography variant="body1" sx={{ padding: "10px", color: "black" }}>
+      Suivez L'Atelier d'Onirium sur les réseaux sociaux pour plonger dans
+      l'univers de mes créations et ainsi ne rien manquer de mes dernières
+      nouveautés !
+    </Typography>
+  </Box>
+
+  <Grid container justifyContent="center" spacing={2} >
+    {socialLinks.map((link) => (
+      <Grid item key={link.name}>
+        <IconButton
+          component="a"
+          href={link.url}
+          target="_blank"
+          aria-label={link.name}
+          sx={{
+            color: "black",
+            width: 65,
+            height: 65,
+            zIndex: 2, // Ensure the icons are on top
+            position: "relative",
+            backgroundColor: "transparent",
+            "&:hover": {
+              backgroundColor: "transparent",
+            },
+          }}
+        >
+          <Box
+            component="img"
+            src={link.icon}
+            alt={link.name}
+            sx={{
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </IconButton>
+      </Grid>
+    ))}
+  </Grid>
+
+  {/* Engrenage image */}
+  <Box
+    component="img"
+    src={Engrenage}
+    alt="Engrenage droit"
+    sx={{
+      position: "absolute",  // Position it within the container
+      bottom: "-115px",
+      right: "-115px", // Move it to the left side (use negative value to position it outside)
+      width: { xs: "400px", sm: "450px", md: "600px" },  // Make width responsive
+      height: { xs: "450px", sm: "450px", md: "650px" }, // Make height responsive
+      opacity: 0.2,
+      overflow: "hidden",  // Ensure no overflow
+      transform: "rotate(-60deg)",  // Optional rotation
+    }}
+  />
+</Box>
+
+
+
+      {/* Carrousel */}
+      <HomePageCarrousel />
       {/* Citation */}
       <Stack
         component="article"
@@ -120,9 +212,9 @@ export default function HomePage() {
         <Typography
           variant="h3"
           sx={{
-            fontFamily: "Lovers",
+            fontFamily: "Alice",
             textAlign: "center",
-            fontSize: { xs: "2rem", md: "3rem" },
+            fontSize: { xs: "1rem", md: "2rem" },
           }}
         >
           Créer quelque chose d'unique, c'est donner vie à une idée qui
@@ -132,41 +224,24 @@ export default function HomePage() {
           <img src={Arabesque2} alt="Arabesque 2" height="50px" />
         </Box>
       </Stack>
-
-      <HomePageCarrousel></HomePageCarrousel>
-      <Box component="main"width="80%" margin="0 auto">
-        {/* Section création unique */}
+      {/* Section Création Unique */}
+      <Box component="main" sx={{ width: "80%", margin: "0 auto", mt: 4 }}>
         <Stack
           component="article"
           direction={{ xs: "column", md: "row" }}
           spacing={4}
           alignItems="flex-start"
           justifyContent="space-between"
-          sx={{ marginTop: "50px" }}
         >
-          {/* Image création unique */}
-          <Box          component="section"
-
-            sx={{
-              flex: 1,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
             <img
               src={creation}
               alt="Création unique"
-              style={{
-                maxWidth: "100%",
-                height: "auto",
-              }}
+              style={{ maxWidth: "100%", height: "auto" }}
             />
           </Box>
 
-          {/* Conteneur pour le titre et la description */}
-          <Box component="section" flex={1}>
-            {/* Titre "Création Atelier" */}
+          <Box sx={{ flex: 1 }}>
             <Typography
               variant="h2"
               sx={{
@@ -178,14 +253,8 @@ export default function HomePage() {
               Les Créations de l'Atelier
             </Typography>
 
-            {/* Texte création atelier */}
-            <Typography
-              variant="body1"
-              sx={{
-                textAlign: "center",
-              }}
-            >
-              Mon univers est atypique, influencé par le fantastique, et j'aime
+            <Typography variant="body1" sx={{ textAlign: "center" }}>
+            Mon univers est atypique, influencé par le fantastique, et j'aime
               repousser les limites de ce qui est possible. Chaque création,
               qu'il s'agisse de décors grandeur nature, d'impressions 3D, ou
               d'éléments sur mesure comme des mugs personnalisés, est conçue
@@ -199,7 +268,8 @@ export default function HomePage() {
             </Typography>
           </Box>
         </Stack>
-        {/* Section gallerie expo */}
+
+              {/* Section gallerie expo */}
         <Stack
           component="article"
           direction={{ xs: "column", md: "row" }}

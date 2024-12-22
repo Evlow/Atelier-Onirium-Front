@@ -218,7 +218,7 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
               />
             </Grid>
 
-            {/* Zone de dépôt pour l'image principale */}
+            {/* Zone de dépôt pour l'image principale
             <Grid item xs={12}>
               <Box
                 {...getMainImageRootProps()}
@@ -234,7 +234,7 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
                   Glissez et déposez l'image principale ici, ou cliquez pour sélectionner
                 </Typography>
               </Box>
-            </Grid>
+            </Grid> */}
 
             {/* Prévisualisation de l'image principale */}
             {formData.mainImage || creation?.pictureUrl ? (

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { Box, IconButton, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import NavBar from "../NavBar/navbar";
 import Footer from "../Footer/footer";
 import { creationSelectors } from "../../App/Api/agent";
@@ -14,10 +14,35 @@ export default function CreationDetails() {
   const creation = useAppSelector((state) =>
     creationSelectors.selectById(state, +id!)
   );
+  const [mainImage, setMainImage] = useState<string>("");
+
+  const socialLinks = [
+    {
+      name: "facebook",
+      url: "https://www.facebook.com/latelierdonirium",
+      icon: process.env.PUBLIC_URL + "/Images/facebook.svg",
+    },
+    {
+      name: "instagram",
+      url: "https://www.instagram.com/latelierdonirium?igsh=MWF3Z2dyNzR5N2l0Yw==",
+      icon: process.env.PUBLIC_URL + "/Images/instagram.svg",
+    },
+    {
+      name: "tikTok",
+      url: "https://www.tiktok.com/@latelierdonirium?_t=8pf3S8fZJab&_r=1",
+      icon: process.env.PUBLIC_URL + "/Images/tiktok.svg",
+    },
+  ];
 
   useEffect(() => {
     dispatch(fetchCreationAsync(+id!));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (creation?.pictureUrls?.length > 0) {
+      setMainImage(creation.pictureUrls[0]); // Set the first image as the main image by default
+    }
+  }, [creation]);
 
   if (!creation) {
     return <NotFound />;
@@ -41,27 +66,26 @@ export default function CreationDetails() {
             display: "flex",
             flexDirection: "column", // Affiche l'image principale au-dessus des autres
             gap: 3,
-            width: "500px", // Contrôle la largeur de l'image principale
+            width: "600px", // Contrôle la largeur de l'image principale
           }}
         >
-          {/* Image principale */}
+          {/* Main Image */}
           <Box
             component="img"
-            src={creation.pictureUrl}
+            src={mainImage}
             alt={creation.name}
             sx={{
-              width: "100%",
-              height: "auto",
+              width: "600px",
+              height: "600px",
               objectFit: "cover",
               borderRadius: 2, // Arrondir les bords de l'image si nécessaire
             }}
           />
 
-          {/* Images supplémentaires */}
+          {/* Additional Images (non-main images) */}
           <Box
             sx={{
               display: "flex",
-              flexWrap: "wrap", // Si trop d'images, elles passent à la ligne
               gap: 2,
               marginTop: 2,
             }}
@@ -73,11 +97,14 @@ export default function CreationDetails() {
                 src={url}
                 alt={`Additional image ${index + 1}`}
                 sx={{
-                  width: "100px", // Réduire la taille des images supplémentaires
-                  height: "100px",
+                  width: "200px", // Set the width of the thumbnail images
+                  height: "200px", // Set the height of the thumbnail images
                   objectFit: "cover",
-                  borderRadius: 2, // Arrondir les bords des images supplémentaires
+                  borderRadius: 2,
+                  cursor: "pointer", // Change cursor on hover to indicate clickability
+               
                 }}
+                onClick={() => setMainImage(url)} // Change main image on click
               />
             ))}
           </Box>
@@ -91,7 +118,12 @@ export default function CreationDetails() {
             textAlign: "justify",
           }}
         >
-          <Typography variant="h3" gutterBottom sx={{ marginBottom: 2 }}>
+          <Typography
+            variant="h2"
+            fontSize="6rem"
+            gutterBottom
+            sx={{ marginBottom: 2 }}
+          >
             {creation.name}
           </Typography>
           <Typography
@@ -105,6 +137,45 @@ export default function CreationDetails() {
             {creation.description}
           </Typography>
         </Box>
+      </Box>
+      <Typography variant="h2" textAlign="center" sx={{ marginBottom: 1 }}>
+        Retrouvez mes créations sur mes réseaux sociaux !
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center", // Centrer les icônes
+          gap: 2, // Espacement entre les icônes
+          paddingBottom: 5,
+        }}
+      >
+        {socialLinks.map((link) => (
+         <IconButton
+         component="a"
+         href={link.url}
+         target="_blank"
+         aria-label={link.name} // Amélioration de l'accessibilité
+         sx={{
+           width: 60,
+           height: 60,
+           backgroundColor: "transparent", // Pour assurer qu'il n'y a pas de fond
+           "&:hover": {
+             backgroundColor: "transparent", // Suppression du fond au survol
+           },
+         }}
+       >
+         <Box
+           component="img"
+           src={link.icon}
+           alt={link.name}
+           sx={{
+             width: "100%",
+             height: "100%",
+             filter: "invert(1)", // Appliquer un filtre pour colorer l'icône en blanc
+           }}
+         />
+       </IconButton>
+        ))}
       </Box>
       <Footer />
     </>

@@ -181,7 +181,7 @@ export default function Dashboard() {
                     <CardMedia
                       component="img"
                       height="300"
-                      image={creation.pictureUrl}
+                      image={Array.isArray(creation.pictureUrls) ? creation.pictureUrls[0] : creation.pictureUrls} // Utiliser la première image
                       alt={creation.name}
                       sx={{ objectFit: "cover" }}
                     />

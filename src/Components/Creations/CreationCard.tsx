@@ -13,6 +13,11 @@ interface Props {
 }
 
 export default function CreationCard({ creation }: Props) {
+  // If `creation.pictureUrls` is an array, we get the first image URL
+  const firstImage = Array.isArray(creation.pictureUrls) 
+    ? creation.pictureUrls[0] // Get the first image URL from the array
+    : creation.pictureUrls; // If it's not an array, use it as it is
+
   return (
     <Card
       sx={{
@@ -30,7 +35,7 @@ export default function CreationCard({ creation }: Props) {
         <CardMedia
           component="img"
           height="300" // Hauteur explicite de l'image
-          image={creation.pictureUrl}
+          image={firstImage} // Use the first image from pictureUrls or the single URL
           alt={creation.name}
           sx={{
             objectFit: "cover", // L'image couvre l'espace disponible sans déformation
@@ -60,6 +65,7 @@ export default function CreationCard({ creation }: Props) {
               color: "white",
             }}
           >
+            {/* Add more information here if needed */}
           </Typography>
         </CardContent>
       </CardActionArea>

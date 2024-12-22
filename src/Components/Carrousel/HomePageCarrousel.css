@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'Lovers';
+    src: url('/public/Fonts/LoversQuarrel-Regular.ttf') format('truetype');
+  }
+
+
+/* Style pour la carte de création */
+.carousel-card {
+    width: 300px; /* Largeur fixe des cartes */
+    background-color: transparent;
+    overflow: hidden;
+    position: relative; /* Pour le titre au-dessus de l'image */
+    transition: transform 0.3s ease; /* Garde la transition mais sans zoom */
+}
+
+.carousel-card:hover {
+    /* Retirer le zoom sur l'image, supprimer l'effet scale */
+    transform: none;
+}
+
+/* Style pour le titre de la création qui apparaît au survol */
+.carousel-title {
+    font-family: "Lovers";
+    position: absolute;
+    bottom: 0; /* Le titre est collé au bas de la carte */
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    color: white;
+    padding: 10px;
+    font-size: 3rem;
+    text-align: center;
+    opacity: 0; /* Initialement caché */
+    transform: translateY(20px); /* Le titre commence légèrement en bas */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transition pour l'opacité et la translation */
+    pointer-events: none; /* Empêche l'interférence avec l'effet de survol */
+}
+
+.carousel-card:hover .carousel-title {
+    opacity: 1; /* Affiche le titre lorsque la carte est survolée */
+    transform: translateY(0); /* Le titre monte à sa position d'origine */
+}
+
+/* Conteneur du carrousel */
+.carousel-container {
+    display: flex;
+    overflow-x: auto; /* Permet le défilement horizontal */
+    gap: 10px; /* Espace entre les éléments */
+    padding-bottom: 10px; /* Pour ne pas cacher le scroll */
+    scrollbar-width: none; /* Masque la barre de défilement pour Firefox */
+    -ms-overflow-style: none; /* Masque la barre de défilement pour IE et Edge */
+}
