@@ -3,8 +3,8 @@ import { useDropzone } from 'react-dropzone';
 import { Box, Grid, Typography, Button, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { Creation } from '../../Models/Creations';
 import axios from 'axios';
+import { Creation } from '../../Models/Creations';
 
 interface CreationFormData {
   name: string;
@@ -75,7 +75,7 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
   const handleMainImageDelete = () => {
     setFormData((prev) => ({
       ...prev,
-      mainImage: null, // Lors de la suppression, on met à null l'image principale
+      mainImage: null, // Supprimer l'image principale
     }));
   };
 
@@ -245,18 +245,18 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
                     alt="Main Preview"
                     style={{ maxWidth: 300, marginTop: '10px' }}
                   />
-                  <Button
-                    sx={{
-                      position: 'absolute',
-                      top: 0,
-                      right: 0,
-                      backgroundColor: 'rgba(255, 0, 0, 0.6)',
-                      color: 'white',
-                    }}
-                    onClick={handleMainImageDelete}
-                  >
-                    Supprimer
-                  </Button>
+                <Button
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          right: 0,
+                          backgroundColor: 'rgba(255, 0, 0, 0.6)',
+                          color: 'white',
+                        }}
+                        onClick={() => handleAdditionalImageDelete(1)}
+                      >
+                        Supprimer
+                      </Button>
                 </Box>
               </Grid>
             ) : null}
@@ -288,7 +288,7 @@ const CreationForm = ({ creation, cancelEdit, isSubmitting }: Props) => {
                       <img
                         src={URL.createObjectURL(file)}
                         alt={`Additional ${index}`}
-                        style={{ maxWidth: 100, marginTop: '10px' }}
+                        style={{ maxWidth: 200, marginTop: '10px' }}
                       />
                       <Button
                         sx={{

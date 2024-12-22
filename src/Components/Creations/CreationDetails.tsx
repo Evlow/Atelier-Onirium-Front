@@ -31,7 +31,7 @@ export default function CreationDetails() {
           padding: 4,
           display: "flex",
           flexDirection: "row",
-          alignItems: "center",
+          alignItems: "flex-start", // Aligner les éléments au début de la ligne
           justifyContent: "space-between",
         }}
       >
@@ -39,8 +39,9 @@ export default function CreationDetails() {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column", // Affiche la principale au-dessus des autres
+            flexDirection: "column", // Affiche l'image principale au-dessus des autres
             gap: 3,
+            width: "500px", // Contrôle la largeur de l'image principale
           }}
         >
           {/* Image principale */}
@@ -49,11 +50,10 @@ export default function CreationDetails() {
             src={creation.pictureUrl}
             alt={creation.name}
             sx={{
-              width: "500px",
+              width: "100%",
               height: "auto",
               objectFit: "cover",
-              border: "2px solid #ccc",
-              borderRadius: "8px",
+              borderRadius: 2, // Arrondir les bords de l'image si nécessaire
             }}
           />
 
@@ -73,11 +73,10 @@ export default function CreationDetails() {
                 src={url}
                 alt={`Additional image ${index + 1}`}
                 sx={{
-                  width: "150px",
-                  height: "auto",
+                  width: "100px", // Réduire la taille des images supplémentaires
+                  height: "100px",
                   objectFit: "cover",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
+                  borderRadius: 2, // Arrondir les bords des images supplémentaires
                 }}
               />
             ))}
@@ -85,13 +84,23 @@ export default function CreationDetails() {
         </Box>
 
         {/* Text Section */}
-        <Box sx={{ flex: 1, textAlign: "justify", padding: "20px" }}>
+        <Box
+          sx={{
+            flex: 1,
+            paddingLeft: 4, // Ajouter un peu d'espace entre l'image et le texte
+            textAlign: "justify",
+          }}
+        >
           <Typography variant="h3" gutterBottom sx={{ marginBottom: 2 }}>
             {creation.name}
           </Typography>
           <Typography
             variant="body1"
-            sx={{ whiteSpace: "pre-wrap", lineHeight: 1.8, width: "95%" }}
+            sx={{
+              whiteSpace: "pre-wrap", // Gérer les retours à la ligne dans la description
+              lineHeight: 1.8,
+              width: "95%", // Limiter la largeur du texte pour qu'il ne prenne pas trop de place
+            }}
           >
             {creation.description}
           </Typography>
