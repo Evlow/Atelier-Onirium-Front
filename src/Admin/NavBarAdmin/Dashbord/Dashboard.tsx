@@ -85,9 +85,7 @@ export default function Dashboard() {
   }
 
   if (editMode)
-    return <CreationForm cancelEdit={function (): void {
-      throw new Error("Function not implemented.");
-    } } isSubmitting={false}  />;
+    return <CreationForm creation={selectedCreation} cancelEdit={cancelEdit} isSubmitting={loading} />;
 
   return (
     <>

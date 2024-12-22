@@ -86,7 +86,7 @@ export default function CreationDetails() {
 
         {/* Text Section */}
         <Box sx={{ flex: 1, textAlign: "justify", padding: "20px" }}>
-          <Typography variant="h2" gutterBottom sx={{ marginBottom: 2 }}>
+          <Typography variant="h3" gutterBottom sx={{ marginBottom: 2 }}>
             {creation.name}
           </Typography>
           <Typography
