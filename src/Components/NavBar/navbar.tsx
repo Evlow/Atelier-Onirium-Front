@@ -31,7 +31,7 @@ export default function NavBar() {
   const handleMenuClose = () => setMenuOpen(false);
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#e7e2e1" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#e7e2e1", paddingTop:"50px" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         {/* Menu Burger */}
         <IconButton
@@ -150,11 +150,11 @@ export default function NavBar() {
       )}
 
       {/* Menu Desktop */}
-      <Container sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center", paddingTop: "20px" }}>
+      <Container sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center", paddingTop: "20px" , paddingBottom:"30px"}}>
         <Box component="nav">
           <ul style={{ display: "flex", padding: 0, listStyle: "none" }}>
             {nav.map((item) => (
-              <li key={item.path} style={{ padding: "20px", fontSize: "1.2rem" }}>
+              <li key={item.path} style={{ padding: "20px", fontSize: "1.5rem" }}>
                 <NavLink to={item.path} style={{ textDecoration: "none", color: "black" }}>
                   {item.title}
                 </NavLink>

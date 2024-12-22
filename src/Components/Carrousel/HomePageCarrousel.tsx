@@ -3,6 +3,7 @@ import { Creation } from "../../Models/Creations";
 import agent from "../../App/Api/agent";
 import { Card, CardActionArea, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import './HomePageCarrousel.css';
 
 export default function HomePageCarrousel() {
   const [creations, setCreations] = useState<Creation[]>([]);
@@ -27,54 +28,46 @@ export default function HomePageCarrousel() {
         fontFamily="Lovers"
         sx={{
           textAlign: "left",
-          fontSize: { xs: "3rem", md: "5rem" },
+          fontSize: { xs: "4rem", md: "6rem" },
         }}
       >
         Les dernières créations
       </Typography>
 
       {/* Conteneur avec défilement horizontal */}
-      <div
-        style={{
-          display: "flex",
-          overflowX: "auto", // Permet le défilement horizontal
-          gap: "10px", // Espace entre les éléments
-          paddingBottom: "10px", // Pour ne pas cacher le scroll en bas
-          scrollbarWidth: "none", // Masque la barre de défilement pour Firefox
-          msOverflowStyle: "none", // Masque la barre de défilement pour IE et Edge
-        }}
-      >
-        {creations.map((creation) => (
-          <Link
-            key={creation.id}
-            to={`/creations/${creation.id}`}
-            style={{ textDecoration: "none", flexShrink: 0 }} // Evite que les éléments rétrécissent
-          >
-            <Card
-              sx={{
-                width: 300, // Largeur fixe des cartes
-                backgroundColor: "transparent",
-                overflow: "hidden",
-                transition: "transform 0.3s ease",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                },
-              }}
+      <div className="carousel-container">
+        {creations.map((creation) => {
+          // Si `creation.pictureUrls` est un tableau, on prend la première image
+          const firstImage = Array.isArray(creation.pictureUrls)
+            ? creation.pictureUrls[0]
+            : creation.pictureUrls; // Si ce n'est pas un tableau, on utilise l'URL telle quelle
+
+          return (
+            <Link
+              key={creation.id}
+              to={`/creations/${creation.id}`}
+              style={{ textDecoration: "none", flexShrink: 0 }} // Empêche la rétrécissement des éléments
             >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={creation.pictureUrl}
-                  alt={creation.name}
-                  sx={{
-                    objectFit: "cover",
-                  }}
-                />
-              </CardActionArea>
-            </Card>
-          </Link>
-        ))}
+              <Card className="carousel-card">
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="400"
+                    image={firstImage} // Utilisation de la première image
+                    alt={creation.name}
+                    sx={{
+                      objectFit: "cover",
+                    }}
+                  />
+                  {/* Titre qui apparaît au survol */}
+                  <div className="carousel-title" >
+                    {creation.name}
+                  </div>
+                </CardActionArea>
+              </Card>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

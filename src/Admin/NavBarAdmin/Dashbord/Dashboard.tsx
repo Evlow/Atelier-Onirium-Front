@@ -85,9 +85,7 @@ export default function Dashboard() {
   }
 
   if (editMode)
-    return <CreationForm cancelEdit={function (): void {
-      throw new Error("Function not implemented.");
-    } } isSubmitting={false}  />;
+    return <CreationForm creation={selectedCreation} cancelEdit={cancelEdit} isSubmitting={loading} />;
 
   return (
     <>
@@ -183,7 +181,7 @@ export default function Dashboard() {
                     <CardMedia
                       component="img"
                       height="300"
-                      image={creation.pictureUrl}
+                      image={Array.isArray(creation.pictureUrls) ? creation.pictureUrls[0] : creation.pictureUrls} // Utiliser la première image
                       alt={creation.name}
                       sx={{ objectFit: "cover" }}
                     />
