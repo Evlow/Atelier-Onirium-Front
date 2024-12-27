@@ -19,7 +19,7 @@ export default function CreationCardCarrousel({ creation }: Props) {
   return (
     <Card
       sx={{
-        maxWidth: 400,
+        width: { xs: "250px", sm: "300px", md: "400px" },  // Make width responsive
         margin: "auto",
         backgroundColor: "transparent",
         overflow: "hidden",
@@ -32,11 +32,12 @@ export default function CreationCardCarrousel({ creation }: Props) {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="400"
           image={creation.pictureUrl}
           alt={creation.name}
           sx={{
             objectFit: "cover",
+            height: { xs: "250px", sm: "300px", md: "400px" },  // Make width responsive
+
           }}
         />
       </CardActionArea>

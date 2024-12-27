@@ -52,17 +52,18 @@ export default function HomePageCarrousel() {
                 <CardActionArea>
                   <CardMedia
                     component="img"
-                    height="400"
                     image={firstImage} // Utilisation de la première image
                     alt={creation.name}
                     sx={{
                       objectFit: "cover",
+                      height: { xs: "250px", sm: "300px", md: "400px" },  // Make width responsive
+
                     }}
                   />
                   {/* Titre qui apparaît au survol */}
-                  <div className="carousel-title" >
+                  <Typography className="carousel-title" >
                     {creation.name}
-                  </div>
+                  </Typography>
                 </CardActionArea>
               </Card>
             </Link>

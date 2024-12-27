@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar/navbar";
 import Footer from "../Footer/footer";
@@ -102,7 +102,6 @@ export default function CreationDetails() {
                   objectFit: "cover",
                   borderRadius: 2,
                   cursor: "pointer", // Change cursor on hover to indicate clickability
-               
                 }}
                 onClick={() => setMainImage(url)} // Change main image on click
               />
@@ -136,6 +135,27 @@ export default function CreationDetails() {
           >
             {creation.description}
           </Typography>
+
+          {/* Button Section (Centré sous la description) */}
+          <Box sx={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
+            <Button
+              component={Link}  
+              to="/me-contacter"     
+              sx={{
+                width: "20%",
+
+                backgroundColor: "#E7E2E1",
+                color: "black",
+                fontFamily: "Alice",
+                fontSize: "1.2rem",
+                textTransform: "none",  
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              Me contacter <span style={{ color: "#640a02", marginLeft: "5px"}}>&gt;</span>
+            </Button>
+          </Box>
         </Box>
       </Box>
       <Typography variant="h2" textAlign="center" sx={{ marginBottom: 1 }}>
