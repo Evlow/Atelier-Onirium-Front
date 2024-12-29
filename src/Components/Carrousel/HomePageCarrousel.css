@@ -6,7 +6,7 @@
 
 /* Style pour la carte de création */
 .carousel-card {
-    width: 300px; /* Largeur fixe des cartes */
+    width: 350px; /* Largeur fixe des cartes */
     background-color: transparent;
     overflow: hidden;
     position: relative; /* Pour le titre au-dessus de l'image */
@@ -20,15 +20,11 @@
 
 /* Style pour le titre de la création qui apparaît au survol */
 .carousel-title {
-    font-family: "Lovers";
     position: absolute;
     bottom: 0; /* Le titre est collé au bas de la carte */
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-    color: white;
-    padding: 10px;
-    font-size: 3rem;
+    background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
     text-align: center;
     opacity: 0; /* Initialement caché */
     transform: translateY(20px); /* Le titre commence légèrement en bas */

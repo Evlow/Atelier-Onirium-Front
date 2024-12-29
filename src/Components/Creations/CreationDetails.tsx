@@ -16,24 +16,6 @@ export default function CreationDetails() {
   );
   const [mainImage, setMainImage] = useState<string>("");
 
-  const socialLinks = [
-    {
-      name: "facebook",
-      url: "https://www.facebook.com/latelierdonirium",
-      icon: process.env.PUBLIC_URL + "/Images/facebook.svg",
-    },
-    {
-      name: "instagram",
-      url: "https://www.instagram.com/latelierdonirium?igsh=MWF3Z2dyNzR5N2l0Yw==",
-      icon: process.env.PUBLIC_URL + "/Images/instagram.svg",
-    },
-    {
-      name: "tikTok",
-      url: "https://www.tiktok.com/@latelierdonirium?_t=8pf3S8fZJab&_r=1",
-      icon: process.env.PUBLIC_URL + "/Images/tiktok.svg",
-    },
-  ];
-
   useEffect(() => {
     dispatch(fetchCreationAsync(+id!));
   }, [dispatch, id]);
@@ -55,8 +37,8 @@ export default function CreationDetails() {
         sx={{
           padding: 4,
           display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-start", // Aligner les éléments au début de la ligne
+          flexDirection: { xs: "column", md: "row" }, // Change flex direction based on screen size
+          alignItems: "flex-start",
           justifyContent: "space-between",
         }}
       >
@@ -64,9 +46,10 @@ export default function CreationDetails() {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column", // Affiche l'image principale au-dessus des autres
+            flexDirection: "column", // Show the main image above the others on small screens
             gap: 3,
-            width: "600px", // Contrôle la largeur de l'image principale
+            width: { xs: "100%", md: "600px" }, // Adjust width for different screen sizes
+            marginBottom: { xs: 4, md: 0 }, // Add margin bottom for small screens to separate from text
           }}
         >
           {/* Main Image */}
@@ -75,10 +58,10 @@ export default function CreationDetails() {
             src={mainImage}
             alt={creation.name}
             sx={{
-              width: "600px",
-              height: "600px",
+              width: "100%",
+              height: { xs: "300px", md: "600px" }, // Adjust image height for different screen sizes
               objectFit: "cover",
-              borderRadius: 2, // Arrondir les bords de l'image si nécessaire
+              borderRadius: 2,
             }}
           />
 
@@ -88,6 +71,7 @@ export default function CreationDetails() {
               display: "flex",
               gap: 2,
               marginTop: 2,
+              overflowX: "auto", // Allow horizontal scrolling on small screens for additional images
             }}
           >
             {creation.pictureUrls?.map((url, index) => (
@@ -97,13 +81,13 @@ export default function CreationDetails() {
                 src={url}
                 alt={`Additional image ${index + 1}`}
                 sx={{
-                  width: "200px", // Set the width of the thumbnail images
-                  height: "200px", // Set the height of the thumbnail images
+                  width: { xs: "80px", sm: "100px", md: "200px" }, 
+                  height: { xs: "80px", sm: "100px", md: "200px" }, 
                   objectFit: "cover",
                   borderRadius: 2,
                   cursor: "pointer", // Change cursor on hover to indicate clickability
                 }}
-                onClick={() => setMainImage(url)} // Change main image on click
+                onClick={() => setMainImage(url)} // Change the main image on click
               />
             ))}
           </Box>
@@ -113,13 +97,13 @@ export default function CreationDetails() {
         <Box
           sx={{
             flex: 1,
-            paddingLeft: 4, // Ajouter un peu d'espace entre l'image et le texte
+            paddingLeft: { xs: 0, md: 4 }, // Adjust padding for small screens
             textAlign: "justify",
           }}
         >
           <Typography
             variant="h2"
-            fontSize="6rem"
+            fontSize={{ xs: "3rem", md: "6rem" }} // Adjust title font size for smaller screens
             gutterBottom
             sx={{ marginBottom: 2 }}
           >
@@ -128,75 +112,44 @@ export default function CreationDetails() {
           <Typography
             variant="body1"
             sx={{
-              whiteSpace: "pre-wrap", // Gérer les retours à la ligne dans la description
+              whiteSpace: "pre-wrap", // Handle line breaks in description
               lineHeight: 1.8,
-              width: "95%", // Limiter la largeur du texte pour qu'il ne prenne pas trop de place
+              width: "95%",
             }}
           >
             {creation.description}
           </Typography>
 
-          {/* Button Section (Centré sous la description) */}
-          <Box sx={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
+          {/* Button Section (Centered below the description) */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "30px",
+            }}
+          >
             <Button
-              component={Link}  
-              to="/me-contacter"     
+              component={Link}
+              to="/me-contacter"
               sx={{
-                width: "20%",
-
+                width: { xs: "100%", sm: "20%" }, // Button size: 100% on mobile (xs), 20% on larger screens (sm, md)
                 backgroundColor: "#E7E2E1",
                 color: "black",
                 fontFamily: "Alice",
                 fontSize: "1.2rem",
-                textTransform: "none",  
+                textTransform: "none",
                 display: "flex",
                 alignItems: "center",
+                padding: { xs: "10px", sm: "5px" }, // Increase padding on mobile for a larger button
               }}
             >
-              Me contacter <span style={{ color: "#640a02", marginLeft: "5px"}}>&gt;</span>
+              Me contacter{" "}
+              <span style={{ color: "#640a02", marginLeft: "5px" }}>&gt;</span>
             </Button>
           </Box>
         </Box>
       </Box>
-      <Typography variant="h2" textAlign="center" sx={{ marginBottom: 1 }}>
-        Retrouvez mes créations sur mes réseaux sociaux !
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center", // Centrer les icônes
-          gap: 2, // Espacement entre les icônes
-          paddingBottom: 5,
-        }}
-      >
-        {socialLinks.map((link) => (
-         <IconButton
-         component="a"
-         href={link.url}
-         target="_blank"
-         aria-label={link.name} // Amélioration de l'accessibilité
-         sx={{
-           width: 60,
-           height: 60,
-           backgroundColor: "transparent", // Pour assurer qu'il n'y a pas de fond
-           "&:hover": {
-             backgroundColor: "transparent", // Suppression du fond au survol
-           },
-         }}
-       >
-         <Box
-           component="img"
-           src={link.icon}
-           alt={link.name}
-           sx={{
-             width: "100%",
-             height: "100%",
-             filter: "invert(1)", // Appliquer un filtre pour colorer l'icône en blanc
-           }}
-         />
-       </IconButton>
-        ))}
-      </Box>
+
       <Footer />
     </>
   );

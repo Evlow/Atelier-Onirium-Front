@@ -39,6 +39,7 @@ export default function ExpoGallery() {
               <Link to={`/creations/${creation.id}`} style={{ textDecoration: "none" }}>
                 <Card
                   sx={{
+                    marginTop:"30px",
                     borderRadius: 0,
                     backgroundColor: "#e7e2e1",
                     overflow: "hidden",

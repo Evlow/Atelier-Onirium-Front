@@ -61,7 +61,7 @@ export default function HomePageCarrousel() {
                     }}
                   />
                   {/* Titre qui apparaît au survol */}
-                  <Typography className="carousel-title" >
+                  <Typography fontFamily='Lovers' fontSize='2.5rem' color='white' className="carousel-title" >
                     {creation.name}
                   </Typography>
                 </CardActionArea>

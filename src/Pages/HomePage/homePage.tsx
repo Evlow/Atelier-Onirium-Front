@@ -223,23 +223,38 @@ export default function HomePage() {
         direction={{ xs: "column", md: "row" }}
         sx={{ marginTop: "70px", marginBottom: "70px" }}
       >
-        <Box>
-          <img src={Arabesque1} alt="Arabesque 1" height="40px" />
-        </Box>
+         <Box
+    component="img"
+    src={Arabesque1}
+    alt="Arabesque 1"
+    sx={{
+      height: { xs: "70px", sm: "50px" }, 
+    }}
+  />
+
+
         <Typography
           variant="h3"
           sx={{
             fontFamily: "Alice",
             textAlign: "center",
-            fontSize: { xs: "1rem", md: "2rem" },
+            fontSize: { xs: "1.5rem", md: "2rem" },
           }}
         >
           Créer quelque chose d'unique, c'est donner vie à une idée qui
           n'existait nulle part ailleurs.
         </Typography>
         <Box>
-          <img src={Arabesque2} alt="Arabesque 2" height="40px" />
-        </Box>
+  <Box
+    component="img"
+    src={Arabesque2}
+    alt="Arabesque 2"
+    sx={{
+      height: { xs: "70px", sm: "50px" },
+    }}
+  />
+</Box>
+
       </Stack>
 
       {/* Section Création Unique */}
@@ -296,12 +311,12 @@ export default function HomePage() {
                 component={Link}
                 to="/creations-atelier"
                 sx={{
-                  width: "25%",
+                  width: { xs: "70%", sm: "25%" }, // Ajuste la taille du bouton sur mobile et bureau
                   backgroundColor: "#E7E2E1",
                   color: "black",
                   margin: "5px",
                   fontFamily: "Alice",
-                  fontSize: "1.2rem",
+                  fontSize: { xs: "1rem", sm: "1.2rem" },
                   textTransform: "none",
                   display: "flex",
                   alignItems: "center",
@@ -372,12 +387,12 @@ export default function HomePage() {
                 component={Link}
                 to="/galerie-exposition"
                 sx={{
-                  width: "25%",
+                  width: { xs: "70%", sm: "25%" }, // Ajuste la taille du bouton sur mobile et bureau
                   backgroundColor: "#E7E2E1",
                   color: "black",
                   margin: "5px",
                   fontFamily: "Alice",
-                  fontSize: "1.2rem",
+                  fontSize: { xs: "1rem", sm: "1.2rem" },
                   textTransform: "none",
                   display: "flex",
                   alignItems: "center",

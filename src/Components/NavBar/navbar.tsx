@@ -79,6 +79,7 @@ export default function NavBar() {
           sx={{
             paddingTop: "80px",
             position: "fixed",
+            paddingBottom: { xs: "50px", sm: "30px", md: "20px" }, // Padding spécifique pour mobile, tablette et bureau
             top: 0,
             left: 0,
             width: "100vw",
