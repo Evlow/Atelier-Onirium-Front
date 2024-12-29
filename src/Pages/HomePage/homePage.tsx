@@ -3,7 +3,14 @@ import NavBar from "../../Components/NavBar/navbar";
 import imgBanners from "../../Assets/Banniere.webp";
 import Footer from "../../Components/Footer/footer";
 import { useEffect } from "react";
-import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Home from "../../Assets/home.jpg";
 import Arabesque1 from "../../Assets/Arabesque1.svg";
 import Arabesque2 from "../../Assets/Arabesque2.svg";
@@ -14,6 +21,7 @@ import creation from "../../Assets/creation.jpg";
 import HomePageCarrousel from "../../Components/Carrousel/HomePageCarrousel";
 import { useAppDispatch, useAppSelector } from "../../App/Store/configureStore";
 import { fetchCreationsAsync } from "../../Components/Creations/creationSlice";
+import { Link } from "react-router-dom"; // Importer Link de react-router-dom
 
 export default function HomePage() {
   const { creationsLoaded } = useAppSelector((state) => state.creation);
@@ -55,7 +63,7 @@ export default function HomePage() {
           variant="h2"
           sx={{
             textAlign: "center",
-            padding:"20px",
+            padding: "20px",
             fontSize: { xs: "3rem", md: "5rem" },
           }}
         >
@@ -70,7 +78,7 @@ export default function HomePage() {
           justifyContent="space-between"
         >
           <Typography variant="body1" sx={{ flex: 1, textAlign: "justify" }}>
-          L'Atelier d'Onirium est avant tout un lieu où l'imagination prend
+            L'Atelier d'Onirium est avant tout un lieu où l'imagination prend
             vie à travers des projets variés et originaux. Mon approche repose
             sur un mélange d'artisanat traditionnel et de technologies modernes
             pour créer des expériences qui marquent les esprits.
@@ -105,95 +113,105 @@ export default function HomePage() {
           </Box>
         </Stack>
       </Box>
-      <Box sx={{ backgroundColor: "#E7E2E1", position: "relative", overflow: "hidden" }}>
-  <Box sx={{ width:{xs:"100%", sm:"80%", md:"45%"} , m: "50px auto", textAlign: "center" }}>
-    {/* Engrenage image */}
-    <Box
-      component="img"
-      src={Engrenage1}
-      alt="Engrenage gauche"
-      sx={{
-        position: "absolute",  // Position it within the container
-        top: "-120px",
-        left: "-115px",  // Move it to the left side (use negative value to position it outside)
-        width: { xs: "400px", sm: "450px", md: "550px" },  // Make width responsive
-        height: { xs: "400px", sm: "450px", md: "550px" }, // Make height responsive
-        opacity: 0.2,
-        overflow: "hidden",  // Ensure no overflow
-        transform: "rotate(33deg)",  // Optional rotation
-      }}
-    />
-
-    <Typography 
-      variant="h3" 
-      sx={{ 
-        fontSize: { xs: "5rem", sm: "6rem", md: "7rem" },  // Adjusts the font size based on screen size
-        color: "black",
-      }}
-    >
-      Ne manquez rien
-    </Typography>
-    
-    <Typography variant="body1" sx={{ padding: "10px", color: "black" }}>
-      Suivez L'Atelier d'Onirium sur les réseaux sociaux pour plonger dans
-      l'univers de mes créations et ainsi ne rien manquer de mes dernières
-      nouveautés !
-    </Typography>
-  </Box>
-
-  <Grid container justifyContent="center" spacing={2} >
-    {socialLinks.map((link) => (
-      <Grid item key={link.name}>
-        <IconButton
-          component="a"
-          href={link.url}
-          target="_blank"
-          aria-label={link.name}
+      <Box
+        sx={{
+          backgroundColor: "#E7E2E1",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <Box
           sx={{
-            color: "black",
-            width: 65,
-            height: 65,
-            zIndex: 2, // Ensure the icons are on top
-            position: "relative",
-            backgroundColor: "transparent",
-            "&:hover": {
-              backgroundColor: "transparent",
-            },
+            width: { xs: "100%", sm: "80%", md: "45%" },
+            m: "50px auto",
+            textAlign: "center",
           }}
         >
+          {/* Engrenage image */}
           <Box
             component="img"
-            src={link.icon}
-            alt={link.name}
+            src={Engrenage1}
+            alt="Engrenage gauche"
             sx={{
-              width: "100%",
-              height: "100%",
+              position: "absolute", // Position it within the container
+              top: "-120px",
+              left: "-115px", // Move it to the left side (use negative value to position it outside)
+              width: { xs: "400px", sm: "450px", md: "550px" }, // Make width responsive
+              height: { xs: "400px", sm: "450px", md: "550px" }, // Make height responsive
+              opacity: 0.2,
+              overflow: "hidden", // Ensure no overflow
+              transform: "rotate(33deg)", // Optional rotation
             }}
           />
-        </IconButton>
-      </Grid>
-    ))}
-  </Grid>
 
-  {/* Engrenage image */}
-  <Box
-    component="img"
-    src={Engrenage}
-    alt="Engrenage droit"
-    sx={{
-      position: "absolute",  // Position it within the container
-      bottom: "-115px",
-      right: "-115px", // Move it to the left side (use negative value to position it outside)
-      width: { xs: "400px", sm: "450px", md: "600px" },  // Make width responsive
-      height: { xs: "450px", sm: "450px", md: "650px" }, // Make height responsive
-      opacity: 0.2,
-      overflow: "hidden",  // Ensure no overflow
-      transform: "rotate(-60deg)",  // Optional rotation
-    }}
-  />
-</Box>
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: { xs: "5rem", sm: "6rem", md: "7rem" }, // Adjusts the font size based on screen size
+              color: "black",
+            }}
+          >
+            Ne manquez rien
+          </Typography>
 
+          <Typography variant="body1" sx={{ padding: "10px", color: "black" }}>
+            Suivez L'Atelier d'Onirium sur les réseaux sociaux pour plonger dans
+            l'univers de mes créations et ainsi ne rien manquer de mes dernières
+            nouveautés !
+          </Typography>
+        </Box>
 
+        <Grid container justifyContent="center" spacing={2}>
+          {socialLinks.map((link) => (
+            <Grid item key={link.name}>
+              <IconButton
+                component="a"
+                href={link.url}
+                target="_blank"
+                aria-label={link.name}
+                sx={{
+                  color: "black",
+                  width: 65,
+                  height: 65,
+                  zIndex: 2, // Ensure the icons are on top
+                  position: "relative",
+                  backgroundColor: "transparent",
+                  "&:hover": {
+                    backgroundColor: "transparent",
+                  },
+                }}
+              >
+                <Box
+                  component="img"
+                  src={link.icon}
+                  alt={link.name}
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </IconButton>
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Engrenage image */}
+        <Box
+          component="img"
+          src={Engrenage}
+          alt="Engrenage droit"
+          sx={{
+            position: "absolute", // Position it within the container
+            bottom: "-115px",
+            right: "-115px", // Move it to the left side (use negative value to position it outside)
+            width: { xs: "400px", sm: "450px", md: "600px" }, // Make width responsive
+            height: { xs: "450px", sm: "450px", md: "650px" }, // Make height responsive
+            opacity: 0.2,
+            overflow: "hidden", // Ensure no overflow
+            transform: "rotate(-60deg)", // Optional rotation
+          }}
+        />
+      </Box>
 
       {/* Carrousel */}
       <HomePageCarrousel />
@@ -202,28 +220,43 @@ export default function HomePage() {
         component="article"
         justifyContent="center"
         alignItems="center"
-        direction="row"
-        spacing={2}
+        direction={{ xs: "column", md: "row" }}
         sx={{ marginTop: "70px", marginBottom: "70px" }}
       >
-        <Box>
-          <img src={Arabesque1} alt="Arabesque 1" height="40px" />
-        </Box>
+         <Box
+    component="img"
+    src={Arabesque1}
+    alt="Arabesque 1"
+    sx={{
+      height: { xs: "70px", sm: "50px" }, 
+    }}
+  />
+
+
         <Typography
           variant="h3"
           sx={{
             fontFamily: "Alice",
             textAlign: "center",
-            fontSize: { xs: "1rem", md: "2rem" },
+            fontSize: { xs: "1.5rem", md: "2rem" },
           }}
         >
           Créer quelque chose d'unique, c'est donner vie à une idée qui
           n'existait nulle part ailleurs.
         </Typography>
         <Box>
-          <img src={Arabesque2} alt="Arabesque 2" height="50px" />
-        </Box>
+  <Box
+    component="img"
+    src={Arabesque2}
+    alt="Arabesque 2"
+    sx={{
+      height: { xs: "70px", sm: "50px" },
+    }}
+  />
+</Box>
+
       </Stack>
+
       {/* Section Création Unique */}
       <Box component="main" sx={{ width: "80%", margin: "0 auto", mt: 4 }}>
         <Stack
@@ -254,7 +287,7 @@ export default function HomePage() {
             </Typography>
 
             <Typography variant="body1" sx={{ textAlign: "center" }}>
-            Mon univers est atypique, influencé par le fantastique, et j'aime
+              Mon univers est atypique, influencé par le fantastique, et j'aime
               repousser les limites de ce qui est possible. Chaque création,
               qu'il s'agisse de décors grandeur nature, d'impressions 3D, ou
               d'éléments sur mesure comme des mugs personnalisés, est conçue
@@ -266,10 +299,40 @@ export default function HomePage() {
               nouveaux, tout en redéfinissant les codes de la créativité et de
               l'innovation.
             </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Button
+                component={Link}
+                to="/creations-atelier"
+                sx={{
+                  width: { xs: "70%", sm: "25%" }, // Ajuste la taille du bouton sur mobile et bureau
+                  backgroundColor: "#E7E2E1",
+                  color: "black",
+                  margin: "5px",
+                  fontFamily: "Alice",
+                  fontSize: { xs: "1rem", sm: "1.2rem" },
+                  textTransform: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "50px",
+                }}
+              >
+                Découvrir{" "}
+                <span style={{ color: "#640a02", marginLeft: "5px" }}>
+                  &gt;
+                </span>
+              </Button>
+            </Box>
           </Box>
         </Stack>
 
-              {/* Section gallerie expo */}
+        {/* Section gallerie expo */}
         <Stack
           component="article"
           direction={{ xs: "column", md: "row" }}
@@ -312,6 +375,36 @@ export default function HomePage() {
               nouveaux, tout en redéfinissant les codes de la créativité et de
               l'innovation.
             </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Button
+                component={Link}
+                to="/galerie-exposition"
+                sx={{
+                  width: { xs: "70%", sm: "25%" }, // Ajuste la taille du bouton sur mobile et bureau
+                  backgroundColor: "#E7E2E1",
+                  color: "black",
+                  margin: "5px",
+                  fontFamily: "Alice",
+                  fontSize: { xs: "1rem", sm: "1.2rem" },
+                  textTransform: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "50px",
+                }}
+              >
+                Découvrir
+                <span style={{ color: "#640a02", marginLeft: "5px" }}>
+                  &gt;
+                </span>
+              </Button>
+            </Box>
           </Box>
           {/* Image galerie expo */}
           <Box
