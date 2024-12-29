@@ -35,6 +35,7 @@ export default function Footer() {
           backgroundColor: "#E7E2E1",
           padding: "20px 0",
           width: "100%",
+          marginTop:"20px",
         }}
       >
         <Grid

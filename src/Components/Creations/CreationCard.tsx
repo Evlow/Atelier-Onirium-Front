@@ -13,10 +13,10 @@ interface Props {
 }
 
 export default function CreationCard({ creation }: Props) {
-  // If `creation.pictureUrls` is an array, we get the first image URL
+  // Si `creation.pictureUrls` est un tableau, on récupère la première URL
   const firstImage = Array.isArray(creation.pictureUrls) 
-    ? creation.pictureUrls[0] // Get the first image URL from the array
-    : creation.pictureUrls; // If it's not an array, use it as it is
+    ? creation.pictureUrls[0] // Prendre la première image dans le tableau
+    : creation.pictureUrls; // Si ce n'est pas un tableau, utiliser directement l'URL
 
   return (
     <Card
@@ -24,7 +24,6 @@ export default function CreationCard({ creation }: Props) {
         maxWidth: 300,
         margin: "auto",
         backgroundColor: "#e7e2e1",
-        overflow: "hidden",
         transition: "transform 0.3s ease",
         "&:hover": {
           transform: "scale(1.05)",
@@ -35,37 +34,28 @@ export default function CreationCard({ creation }: Props) {
         <CardMedia
           component="img"
           height="300" // Hauteur explicite de l'image
-          image={firstImage} // Use the first image from pictureUrls or the single URL
+          image={firstImage} // Utiliser la première image ou l'unique URL
           alt={creation.name}
           sx={{
             objectFit: "cover", // L'image couvre l'espace disponible sans déformation
           }}
         />
-        <CardContent sx={{ padding: 1 }}>
+        <CardContent sx={{ padding: "0" }}> {/* Réduction du padding */}
           <Typography
             gutterBottom
-            variant="h6"
+            variant="h4" // Taille de police ajustée pour réduire l'impact du titre
             component="div"
             sx={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
+              padding:"10px",
               whiteSpace: "nowrap",
-              fontSize: "1.1rem",
-              fontWeight: "bold",
-              color: "white",
+              fontSize: "2.5rem", // Réduire la taille du texte du titre
+              fontFamily: "Lovers",
+              textAlign: "center",
+              overflow: "hidden", // Empêcher le texte de déborder
+              textOverflow: "ellipsis", // Ajout d'un effet de coupure si 
             }}
           >
             {creation.name}
-          </Typography>
-          <Typography
-            component="div"
-            sx={{
-              fontSize: "1rem",
-              fontWeight: "lighter",
-              color: "white",
-            }}
-          >
-            {/* Add more information here if needed */}
           </Typography>
         </CardContent>
       </CardActionArea>
